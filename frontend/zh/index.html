@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171828">
+  <meta name="description" content="玩局：用几个简单问题，找到今晚想玩的游戏。互动网页原型。">
+  <title>玩局 · 找到今晚的游戏</title>
+  <link rel="stylesheet" href="/shared/styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="#home" id="brand-home" aria-label="玩局，返回首页"><span class="brand-mark">✳</span><span>玩局<span class="brand-dot">.</span></span></a>
+      <div class="header-right"><a class="language-switch" href="/en/" lang="en" aria-label="切换到英文">English</a><span class="prototype-pill"><span class="live-dot"></span> 桌游推荐</span><button class="header-link" id="header-start" type="button">开始探索 <span aria-hidden="true">↗</span></button></div>
+    </header>
+
+    <main id="app">
+      <section class="screen hero-screen active" id="home-screen" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="sparkle">✦</span> 今晚，来点不一样的</div>
+          <h1 id="hero-title">感到<span class="highlight-word">无聊<span class="scribble" aria-hidden="true"></span></span>？<br>在这里找到<br>你需要的<span class="highlight-game">游戏<span class="asterisk" aria-hidden="true">✳</span></span>！</h1>
+          <p class="hero-description">不用翻来翻去，不用纠结玩什么。回答几个小问题，让今晚的游戏从这里开始。</p>
+          <div class="hero-actions"><button class="primary-button" id="hero-start" type="button">帮我找游戏 <span class="button-arrow" aria-hidden="true">↗</span></button><span class="hero-note">约 30 秒 · 轻松选择</span></div>
+          <div class="hero-bottom"><div class="avatar-stack" aria-hidden="true"><span>☺</span><span>✦</span><span>☻</span></div><span>朋友聚会 · 情侣约会 · 周末闲聊</span></div>
+        </div>
+        <div class="hero-art" aria-label="几张色彩鲜艳的桌游卡片" role="img">
+          <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+          <div class="art-card card-back"><span class="card-topline">THE GAME NIGHT CLUB</span><span class="card-symbol">✹</span><span class="card-caption">LET'S PLAY</span></div>
+          <div class="art-card card-mid"><span class="card-corner">WJ / 02</span><span class="card-mid-icon">✳</span><span class="card-mid-label">好玩<br>发生中</span></div>
+          <div class="art-card card-front"><span class="card-corner">WJ / 01</span><span class="card-front-face">☺</span><span class="card-front-title">今晚<br>玩什么？</span><span class="card-front-footer">PICK A GAME, MAKE A MEMORY <span>↗</span></span></div>
+          <div class="floating-sticker sticker-top">PLAY<br>MORE <span>✦</span></div><div class="floating-sticker sticker-bottom">你的快乐<br>已就位 ↗</div>
+          <div class="doodle star-one">✧</div><div class="doodle star-two">✳</div>
+        </div>
+        <div class="hero-side-label">SCROLL LESS. PLAY MORE. — 001</div>
+      </section>
+
+      <section class="screen quiz-screen" id="quiz-screen" aria-labelledby="quiz-title" hidden>
+        <div class="quiz-layout">
+          <aside class="quiz-aside"><span class="aside-kicker">THE GAME FINDER</span><div class="aside-illustration"><span class="aside-sun">✳</span><span class="aside-big">一起<br>玩吧<span>!</span></span><span class="aside-small">GOOD TIMES START HERE</span></div><p>好游戏不一定复杂，<br>适合你们的才最重要。</p><button type="button" class="text-button aside-home" id="quiz-home">← 返回首页</button></aside>
+          <div class="quiz-main"><div class="quiz-top"><span>找到你的游戏</span><span id="step-count">01 / 05</span></div><div class="progress-track" aria-label="答题进度"><div class="progress-fill" id="progress-fill"></div></div><div class="quiz-content"><div class="question-kicker" id="question-kicker">问题 01 · 人数</div><h2 id="quiz-title">今晚有多少人一起玩？</h2><p id="question-description">人数刚刚好，游戏才更有趣。</p><div class="option-grid" id="option-grid"></div><p class="question-helper" id="question-helper"></p><p id="recommend-error" class="recommend-error" role="alert"></p></div><div class="quiz-footer"><button type="button" class="text-button" id="quiz-back">← 上一步</button><button type="button" class="primary-button next-button" id="quiz-next" disabled>下一步 <span class="button-arrow" aria-hidden="true">→</span></button></div></div>
+        </div>
+      </section>
+
+      <section class="screen loading-screen" id="loading-screen" aria-live="polite" hidden><div class="loading-symbol">✳</div><div class="loading-kicker">正在为你准备</div><h2 id="loading-title">好玩的事情<br>马上发生<span class="loading-dots">...</span></h2><p>正在整理你的选择</p><div class="loading-bar"><span></span></div></section>
+
+      <section class="screen results-screen" id="results-screen" aria-labelledby="results-title" hidden><div class="results-wrap"><div class="results-header"><button type="button" class="text-button" id="results-home">← 返回首页</button><span class="section-index" id="results-count"></span></div><div class="results-heading"><div><span class="eyebrow dark-eyebrow">✦ 你的游戏清单</span><h2 id="results-title">今晚，<br>就玩这些<span class="heading-period">.</span></h2></div><p id="results-intro"></p></div><div class="demo-notice"><span>✳</span><span><span id="recommend-method"></span></span></div><div class="answer-summary" id="answer-summary"></div><div class="game-grid" id="game-grid"></div><div class="results-footer"><span>想换个条件？可以回去调整你的选择。</span><button type="button" class="outline-button" id="restart-quiz">调整偏好 ↗</button></div></div></section>
+
+      <section class="screen detail-screen" id="detail-screen" aria-labelledby="detail-title" hidden><div class="detail-wrap"><div class="detail-nav"><button type="button" class="text-button" id="detail-back">← 返回推荐</button><span class="section-index">GAME DETAILS / 01</span></div><div class="detail-grid"><div class="detail-visual" id="detail-visual"><div class="detail-visual-top">THE GAME NIGHT CLUB <span>✳</span></div><div class="detail-symbol" id="detail-symbol">✦</div><div class="detail-visual-bottom"><span id="detail-visual-name">游戏名称</span><span>↗</span></div></div><div class="detail-copy"><span class="eyebrow dark-eyebrow" id="detail-kicker">今晚的游戏</span><h2 id="detail-title">游戏名称</h2><p class="detail-tagline" id="detail-tagline"></p><div class="detail-tags" id="detail-tags"></div><div class="detail-rule"></div><h3>AI 新手讲解</h3><p class="detail-description" id="detail-ai-explanation" role="status"></p><h3>核心规则</h3><p class="detail-description" id="detail-description"></p><h3>详细规则</h3><p class="detail-description" id="detail-scenario"></p><h3>推荐理由</h3><p class="detail-description" id="detail-reason"></p></div></div></div></section>
+    </main>
+
+    <footer class="site-footer"><span class="footer-brand">玩局<span>.</span></span><span>让好玩的事，自然发生。</span><span>BOARD GAME FINDER · 2026</span></footer>
+  </div>
+
+  <script src="/shared/app.js" defer></script>
+</body>
+</html>
+

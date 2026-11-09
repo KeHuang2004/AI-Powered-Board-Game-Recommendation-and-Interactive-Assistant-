@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171828">
+  <meta name="description" content="Find a board game for your group in five quick questions.">
+  <title>Game Night · Find Your Game</title>
+  <link rel="stylesheet" href="/shared/styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="#home" id="brand-home" aria-label="Game Night, back to home"><span class="brand-mark">✳</span><span>Game Night<span class="brand-dot">.</span></span></a>
+      <div class="header-right"><a class="language-switch" href="/zh/" lang="zh-CN" aria-label="Switch to Chinese">中文</a><span class="prototype-pill"><span class="live-dot"></span> Board Game Finder</span><button class="header-link" id="header-start" type="button">Explore <span aria-hidden="true">↗</span></button></div>
+    </header>
+
+    <main id="app">
+      <section class="screen hero-screen active" id="home-screen" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="sparkle">✦</span> Try something different tonight</div>
+          <h1 id="hero-title">Feeling <span class="highlight-word">bored<span class="scribble" aria-hidden="true"></span></span>?<br>Find your<br>next <span class="highlight-game">game<span class="asterisk" aria-hidden="true">✳</span></span>.</h1>
+          <p class="hero-description">Answer a few quick questions and find a game that fits your group.</p>
+          <div class="hero-actions"><button class="primary-button" id="hero-start" type="button">Find a game <span class="button-arrow" aria-hidden="true">↗</span></button><span class="hero-note">About 30 seconds</span></div>
+          <div class="hero-bottom"><div class="avatar-stack" aria-hidden="true"><span>☺</span><span>✦</span><span>☻</span></div><span>Friends · Date night · Family time</span></div>
+        </div>
+        <div class="hero-art" aria-label="A stack of colorful board game cards" role="img">
+          <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+          <div class="art-card card-back"><span class="card-topline">THE GAME NIGHT CLUB</span><span class="card-symbol">✹</span><span class="card-caption">LET'S PLAY</span></div>
+          <div class="art-card card-mid"><span class="card-corner">WJ / 02</span><span class="card-mid-icon">✳</span><span class="card-mid-label">Let’s<br>play</span></div>
+          <div class="art-card card-front"><span class="card-corner">WJ / 01</span><span class="card-front-face">☺</span><span class="card-front-title">Game<br>night?</span><span class="card-front-footer">PICK A GAME, MAKE A MEMORY <span>↗</span></span></div>
+          <div class="floating-sticker sticker-top">PLAY<br>MORE <span>✦</span></div><div class="floating-sticker sticker-bottom">Ready<br>to play ↗</div>
+          <div class="doodle star-one">✧</div><div class="doodle star-two">✳</div>
+        </div>
+        <div class="hero-side-label">SCROLL LESS. PLAY MORE. — 001</div>
+      </section>
+
+      <section class="screen quiz-screen" id="quiz-screen" aria-labelledby="quiz-title" hidden>
+        <div class="quiz-layout">
+          <aside class="quiz-aside"><span class="aside-kicker">THE GAME FINDER</span><div class="aside-illustration"><span class="aside-sun">✳</span><span class="aside-big">Let’s<br>play<span>!</span></span><span class="aside-small">GOOD TIMES START HERE</span></div><p>Find something everyone at the table can enjoy.</p><button type="button" class="text-button aside-home" id="quiz-home">← Home</button></aside>
+          <div class="quiz-main"><div class="quiz-top"><span>Find your game</span><span id="step-count">01 / 05</span></div><div class="progress-track" aria-label="Quiz progress"><div class="progress-fill" id="progress-fill"></div></div><div class="quiz-content"><div class="question-kicker" id="question-kicker">Question 01 · Players</div><h2 id="quiz-title">How many people are coming?</h2><p id="question-description">Include anyone who might host the game.</p><div class="option-grid" id="option-grid"></div><p class="question-helper" id="question-helper"></p><p id="recommend-error" class="recommend-error" role="alert"></p></div><div class="quiz-footer"><button type="button" class="text-button" id="quiz-back">← Back</button><button type="button" class="primary-button next-button" id="quiz-next" disabled>Next <span class="button-arrow" aria-hidden="true">→</span></button></div></div>
+        </div>
+      </section>
+
+      <section class="screen loading-screen" id="loading-screen" aria-live="polite" hidden><div class="loading-symbol">✳</div><div class="loading-kicker">Finding your games</div><h2 id="loading-title">Good times<br>ahead<span class="loading-dots">...</span></h2><p>Matching games to your preferences</p><div class="loading-bar"><span></span></div></section>
+
+      <section class="screen results-screen" id="results-screen" aria-labelledby="results-title" hidden><div class="results-wrap"><div class="results-header"><button type="button" class="text-button" id="results-home">← Home</button><span class="section-index" id="results-count"></span></div><div class="results-heading"><div><span class="eyebrow dark-eyebrow">✦ Your shortlist</span><h2 id="results-title">Tonight’s<br>picks<span class="heading-period">.</span></h2></div><p id="results-intro"></p></div><div class="demo-notice"><span>✳</span><span><span id="recommend-method"></span></span></div><div class="answer-summary" id="answer-summary"></div><div class="game-grid" id="game-grid"></div><div class="results-footer"><span>Want different results? Adjust your preferences.</span><button type="button" class="outline-button" id="restart-quiz">Edit preferences ↗</button></div></div></section>
+
+      <section class="screen detail-screen" id="detail-screen" aria-labelledby="detail-title" hidden><div class="detail-wrap"><div class="detail-nav"><button type="button" class="text-button" id="detail-back">← Back to results</button><span class="section-index">GAME DETAILS / 01</span></div><div class="detail-grid"><div class="detail-visual" id="detail-visual"><div class="detail-visual-top">THE GAME NIGHT CLUB <span>✳</span></div><div class="detail-symbol" id="detail-symbol">✦</div><div class="detail-visual-bottom"><span id="detail-visual-name">Game name</span><span>↗</span></div></div><div class="detail-copy"><span class="eyebrow dark-eyebrow" id="detail-kicker">Tonight’s game</span><h2 id="detail-title">Game name</h2><p class="detail-tagline" id="detail-tagline"></p><div class="detail-tags" id="detail-tags"></div><div class="detail-rule"></div><h3>AI beginner guide</h3><p class="detail-description" id="detail-ai-explanation" role="status"></p><h3>Core rules</h3><p class="detail-description" id="detail-description"></p><h3>Detailed rules</h3><p class="detail-description" id="detail-scenario"></p><h3>Why it fits</h3><p class="detail-description" id="detail-reason"></p></div></div></div></section>
+    </main>
+
+    <footer class="site-footer"><span class="footer-brand">Game Night<span>.</span></span><span>Find a game worth playing together.</span><span>BOARD GAME FINDER · 2026</span></footer>
+  </div>
+
+  <script src="/shared/app.js" defer></script>
+</body>
+</html>
+

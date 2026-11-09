@@ -1,0 +1,877 @@
+[
+  {
+    "game_id": "500-rummy",
+    "en": "500 Rummy",
+    "zh": "五百拉米"
+  },
+  {
+    "game_id": "6-nimmt",
+    "en": "6 nimmt!",
+    "zh": "谁是牛头王"
+  },
+  {
+    "game_id": "7-wonders",
+    "en": "7 Wonders",
+    "zh": "七大奇迹"
+  },
+  {
+    "game_id": "7-wonders-duel",
+    "en": "7 Wonders Duel",
+    "zh": "七大奇迹：对决"
+  },
+  {
+    "game_id": "a-feast-for-odin",
+    "en": "A Feast for Odin",
+    "zh": "奥丁的盛宴"
+  },
+  {
+    "game_id": "agricola",
+    "en": "Agricola",
+    "zh": "农场主"
+  },
+  {
+    "game_id": "alphabet-categories",
+    "en": "Alphabet Categories",
+    "zh": "字母分类"
+  },
+  {
+    "game_id": "arkham-horror-the-card-game",
+    "en": "Arkham Horror: The Card Game",
+    "zh": "诡镇奇谈：卡牌版"
+  },
+  {
+    "game_id": "azul",
+    "en": "Azul",
+    "zh": "花砖物语"
+  },
+  {
+    "game_id": "battleship",
+    "en": "Battleship",
+    "zh": "海战棋（纸笔版）"
+  },
+  {
+    "game_id": "beat-that",
+    "en": "Beat That!",
+    "zh": "骰子比大"
+  },
+  {
+    "game_id": "beggar-my-neighbour",
+    "en": "Beggar-My-Neighbour",
+    "zh": "乞丐打邻家"
+  },
+  {
+    "game_id": "betrayal-at-house-on-the-hill",
+    "en": "Betrayal at House on the Hill",
+    "zh": "山屋惊魂"
+  },
+  {
+    "game_id": "blackjack",
+    "en": "Blackjack",
+    "zh": "二十一点（轮庄）"
+  },
+  {
+    "game_id": "blades-rose",
+    "en": "Blades & Rose",
+    "zh": "血与刃的白蔷薇"
+  },
+  {
+    "game_id": "blood-on-the-clocktower",
+    "en": "Blood on the Clocktower",
+    "zh": "血染钟楼"
+  },
+  {
+    "game_id": "bomb-busters",
+    "en": "Bomb Busters",
+    "zh": "炸弹克星"
+  },
+  {
+    "game_id": "brass-birmingham",
+    "en": "Brass: Birmingham",
+    "zh": "工业革命：伯明翰"
+  },
+  {
+    "game_id": "bulls-and-cows",
+    "en": "Bulls and Cows",
+    "zh": "公牛与奶牛（四位数）"
+  },
+  {
+    "game_id": "bunco",
+    "en": "Bunco",
+    "zh": "邦科骰"
+  },
+  {
+    "game_id": "camel-up",
+    "en": "Camel Up",
+    "zh": "骆驼大赛"
+  },
+  {
+    "game_id": "captain-sonar",
+    "en": "Captain Sonar",
+    "zh": "深海谍影"
+  },
+  {
+    "game_id": "carcassonne",
+    "en": "Carcassonne",
+    "zh": "卡卡颂"
+  },
+  {
+    "game_id": "cartographers",
+    "en": "Cartographers",
+    "zh": "王国制图师"
+  },
+  {
+    "game_id": "cascadia",
+    "en": "Cascadia",
+    "zh": "卡斯卡迪亚之旅"
+  },
+  {
+    "game_id": "the-castles-of-burgundy",
+    "en": "The Castles of Burgundy",
+    "zh": "勃艮第城堡"
+  },
+  {
+    "game_id": "catan",
+    "en": "CATAN",
+    "zh": "卡坦岛"
+  },
+  {
+    "game_id": "categories",
+    "en": "Categories",
+    "zh": "限字母类别赛"
+  },
+  {
+    "game_id": "challengers",
+    "en": "Challengers!",
+    "zh": "冠军挑战者"
+  },
+  {
+    "game_id": "charades",
+    "en": "Charades",
+    "zh": "比手画脚"
+  },
+  {
+    "game_id": "chase-the-ace",
+    "en": "Chase the Ace",
+    "zh": "追逐王牌"
+  },
+  {
+    "game_id": "cheat",
+    "en": "Cheat",
+    "zh": "吹牛（扑克牌）"
+  },
+  {
+    "game_id": "chicago",
+    "en": "Chicago",
+    "zh": "芝加哥（双骰目标）"
+  },
+  {
+    "game_id": "chopsticks",
+    "en": "Chopsticks",
+    "zh": "手指筷子"
+  },
+  {
+    "game_id": "citadels",
+    "en": "Citadels",
+    "zh": "富饶之城"
+  },
+  {
+    "game_id": "clank-catacombs",
+    "en": "Clank! Catacombs",
+    "zh": "噤声寻宝记：地下墓穴"
+  },
+  {
+    "game_id": "codenames",
+    "en": "Codenames",
+    "zh": "行动代号"
+  },
+  {
+    "game_id": "colt-express",
+    "en": "Colt Express",
+    "zh": "科尔特快车"
+  },
+  {
+    "game_id": "concentration",
+    "en": "Concentration",
+    "zh": "翻牌配对"
+  },
+  {
+    "game_id": "connect-four",
+    "en": "Connect Four",
+    "zh": "四子连线（纸笔版）"
+  },
+  {
+    "game_id": "contact",
+    "en": "Contact",
+    "zh": "接头猜词"
+  },
+  {
+    "game_id": "crazy-eights",
+    "en": "Crazy Eights",
+    "zh": "疯狂八点"
+  },
+  {
+    "game_id": "the-crew-mission-deep-sea",
+    "en": "The Crew: Mission Deep Sea",
+    "zh": "星际探险队：深海任务"
+  },
+  {
+    "game_id": "cthulhu-death-may-die",
+    "en": "Cthulhu: Death May Die",
+    "zh": "克苏鲁：死亡湮灭"
+  },
+  {
+    "game_id": "deception-murder-in-hong-kong",
+    "en": "Deception: Murder in Hong Kong",
+    "zh": "犯罪现场"
+  },
+  {
+    "game_id": "detective-city-of-angels",
+    "en": "Detective: City of Angels",
+    "zh": "罪案疑云：天使之城"
+  },
+  {
+    "game_id": "dig-your-way-out",
+    "en": "Dig Your Way Out",
+    "zh": "绝地出笼"
+  },
+  {
+    "game_id": "dito-jinxo",
+    "en": "Dito! (JinxO)",
+    "zh": "缘来就是你"
+  },
+  {
+    "game_id": "dixit",
+    "en": "Dixit",
+    "zh": "妙语说书人"
+  },
+  {
+    "game_id": "dominion",
+    "en": "Dominion",
+    "zh": "皇舆争霸"
+  },
+  {
+    "game_id": "doodle-dash",
+    "en": "Doodle Dash",
+    "zh": "秒懂·心领神绘"
+  },
+  {
+    "game_id": "dots-and-boxes",
+    "en": "Dots and Boxes",
+    "zh": "点格棋"
+  },
+  {
+    "game_id": "drop-dead",
+    "en": "Drop Dead",
+    "zh": "出局骰"
+  },
+  {
+    "game_id": "dune-imperium",
+    "en": "Dune: Imperium",
+    "zh": "沙丘：帝国"
+  },
+  {
+    "game_id": "dune-imperium-uprising",
+    "en": "Dune: Imperium – Uprising",
+    "zh": "沙丘：帝国起义"
+  },
+  {
+    "game_id": "durak",
+    "en": "Durak",
+    "zh": "杜拉克"
+  },
+  {
+    "game_id": "egyptian-ratscrew",
+    "en": "Egyptian Ratscrew",
+    "zh": "埃及拍牌"
+  },
+  {
+    "game_id": "euchre",
+    "en": "Euchre",
+    "zh": "尤克（Euchre）"
+  },
+  {
+    "game_id": "exploding-kittens",
+    "en": "Exploding Kittens",
+    "zh": "炸弹猫咪"
+  },
+  {
+    "game_id": "exquisite-corpse",
+    "en": "Exquisite Corpse",
+    "zh": "折纸接句"
+  },
+  {
+    "game_id": "farkle",
+    "en": "Farkle",
+    "zh": "法克尔骰子"
+  },
+  {
+    "game_id": "fictionary",
+    "en": "Fictionary",
+    "zh": "词典唬人"
+  },
+  {
+    "game_id": "fishbowl",
+    "en": "Fishbowl",
+    "zh": "鱼缸猜名人"
+  },
+  {
+    "game_id": "five-card-draw",
+    "en": "Five-Card Draw",
+    "zh": "五张换牌扑克"
+  },
+  {
+    "game_id": "flip-7",
+    "en": "Flip 7",
+    "zh": "七连翻"
+  },
+  {
+    "game_id": "flip-7-with-a-vengeance",
+    "en": "Flip 7: With a Vengeance",
+    "zh": "七连翻：复仇版"
+  },
+  {
+    "game_id": "forehead-poker",
+    "en": "Forehead Poker",
+    "zh": "额头扑克"
+  },
+  {
+    "game_id": "fortunately-unfortunately",
+    "en": "Fortunately, Unfortunately",
+    "zh": "幸运的是／不幸的是"
+  },
+  {
+    "game_id": "freeze-dance",
+    "en": "Freeze Dance",
+    "zh": "音乐木头人"
+  },
+  {
+    "game_id": "gaia-project",
+    "en": "Gaia Project",
+    "zh": "盖亚计划"
+  },
+  {
+    "game_id": "the-gang",
+    "en": "The Gang",
+    "zh": "纸牌帮"
+  },
+  {
+    "game_id": "garbage",
+    "en": "Garbage",
+    "zh": "垃圾牌"
+  },
+  {
+    "game_id": "ghost",
+    "en": "Ghost",
+    "zh": "幽灵拼字"
+  },
+  {
+    "game_id": "gin-rummy",
+    "en": "Gin Rummy",
+    "zh": "金拉米"
+  },
+  {
+    "game_id": "gloomhaven-jaws-of-the-lion",
+    "en": "Gloomhaven: Jaws of the Lion",
+    "zh": "幽港迷城：雄狮之颚"
+  },
+  {
+    "game_id": "go-fish",
+    "en": "Go Fish",
+    "zh": "钓鱼（凑四张）"
+  },
+  {
+    "game_id": "going-to-boston",
+    "en": "Going to Boston",
+    "zh": "去波士顿"
+  },
+  {
+    "game_id": "hadrians-wall",
+    "en": "Hadrian’s Wall",
+    "zh": "哈德良长城"
+  },
+  {
+    "game_id": "hangman",
+    "en": "Hangman",
+    "zh": "吊小人猜词"
+  },
+  {
+    "game_id": "heads-up",
+    "en": "Heads Up!",
+    "zh": "额头猜词（自制版）"
+  },
+  {
+    "game_id": "hearts",
+    "en": "Hearts",
+    "zh": "红心大战"
+  },
+  {
+    "game_id": "heat-pedal-to-the-metal",
+    "en": "Heat: Pedal to the Metal",
+    "zh": "热力狂飙"
+  },
+  {
+    "game_id": "herd-mentality",
+    "en": "Herd Mentality",
+    "zh": "Herd Mentality"
+  },
+  {
+    "game_id": "heredity-the-book-of-swan",
+    "en": "Heredity: The Book of Swan",
+    "zh": "末世亲缘"
+  },
+  {
+    "game_id": "hot-seat",
+    "en": "Hot Seat",
+    "zh": "热座问答"
+  },
+  {
+    "game_id": "human-knot",
+    "en": "Human Knot",
+    "zh": "解人结"
+  },
+  {
+    "game_id": "i-spy",
+    "en": "I Spy",
+    "zh": "我看见"
+  },
+  {
+    "game_id": "incan-gold-diamant",
+    "en": "Incan Gold (Diamant)",
+    "zh": "印加宝藏"
+  },
+  {
+    "game_id": "just-a-minute",
+    "en": "Just a Minute",
+    "zh": "一分钟不重复"
+  },
+  {
+    "game_id": "just-one",
+    "en": "Just One",
+    "zh": "独家暗语"
+  },
+  {
+    "game_id": "kemps",
+    "en": "Kemps",
+    "zh": "搭档暗号（Kemps）"
+  },
+  {
+    "game_id": "king-of-tokyo",
+    "en": "King of Tokyo",
+    "zh": "东京之王"
+  },
+  {
+    "game_id": "kings-in-the-corner",
+    "en": "Kings in the Corner",
+    "zh": "角落国王"
+  },
+  {
+    "game_id": "knockout-whist",
+    "en": "Knockout Whist",
+    "zh": "淘汰惠斯特"
+  },
+  {
+    "game_id": "left-center-right",
+    "en": "Left Center Right",
+    "zh": "左中右（普通骰子）"
+  },
+  {
+    "game_id": "legends-of-the-three-kingdoms-fight-the-landlord",
+    "en": "Legends of the Three Kingdoms: Fight the Landlord",
+    "zh": "三国杀：欢乐斗地主"
+  },
+  {
+    "game_id": "liars-dice",
+    "en": "Liar’s Dice",
+    "zh": "吹牛骰"
+  },
+  {
+    "game_id": "lifeboat",
+    "en": "Lifeboat",
+    "zh": "骇浪求生"
+  },
+  {
+    "game_id": "the-message",
+    "en": "The Message",
+    "zh": "风声"
+  },
+  {
+    "game_id": "midnight",
+    "en": "Midnight",
+    "zh": "午夜骰（1–4–24）"
+  },
+  {
+    "game_id": "modern-art",
+    "en": "Modern Art",
+    "zh": "现代艺术"
+  },
+  {
+    "game_id": "most-likely-to",
+    "en": "Most Likely To",
+    "zh": "谁最有可能"
+  },
+  {
+    "game_id": "never-have-i-ever",
+    "en": "Never Have I Ever",
+    "zh": "我从来没有（不饮酒版）"
+  },
+  {
+    "game_id": "night-of-the-ninja",
+    "en": "Night of the Ninja",
+    "zh": "忍者之夜"
+  },
+  {
+    "game_id": "nim",
+    "en": "Nim",
+    "zh": "尼姆（三堆）"
+  },
+  {
+    "game_id": "oh-hell",
+    "en": "Oh Hell",
+    "zh": "预估墩数"
+  },
+  {
+    "game_id": "old-maid",
+    "en": "Old Maid",
+    "zh": "抽鬼牌（单皇后）"
+  },
+  {
+    "game_id": "one-word-story",
+    "en": "One-Word Story",
+    "zh": "一人一词讲故事"
+  },
+  {
+    "game_id": "palace",
+    "en": "Palace",
+    "zh": "宫殿牌"
+  },
+  {
+    "game_id": "pandemic",
+    "en": "Pandemic",
+    "zh": "瘟疫危机"
+  },
+  {
+    "game_id": "password",
+    "en": "Password",
+    "zh": "单词密码"
+  },
+  {
+    "game_id": "pictionary",
+    "en": "Pictionary",
+    "zh": "你画我猜（自制版）"
+  },
+  {
+    "game_id": "pig",
+    "en": "Pig",
+    "zh": "小猪掷骰（单骰）"
+  },
+  {
+    "game_id": "poker-dice",
+    "en": "Poker Dice",
+    "zh": "骰子扑克"
+  },
+  {
+    "game_id": "power-grid",
+    "en": "Power Grid",
+    "zh": "电力公司"
+  },
+  {
+    "game_id": "president",
+    "en": "President",
+    "zh": "大总统"
+  },
+  {
+    "game_id": "the-resistance-avalon",
+    "en": "The Resistance: Avalon",
+    "zh": "抵抗组织：阿瓦隆"
+  },
+  {
+    "game_id": "reverse-charades",
+    "en": "Reverse Charades",
+    "zh": "反向比手画脚"
+  },
+  {
+    "game_id": "rock-paper-scissors-tournament",
+    "en": "Rock Paper Scissors Tournament",
+    "zh": "石头剪刀布淘汰赛"
+  },
+  {
+    "game_id": "root",
+    "en": "Root",
+    "zh": "茂林源记"
+  },
+  {
+    "game_id": "rummy",
+    "en": "Rummy",
+    "zh": "基础拉米"
+  },
+  {
+    "game_id": "the-search-for-lost-species",
+    "en": "The Search for Lost Species",
+    "zh": "X物种之谜"
+  },
+  {
+    "game_id": "seti-search-for-extraterrestrial-intelligence",
+    "en": "SETI: Search for Extraterrestrial Intelligence",
+    "zh": "星空觅迹"
+  },
+  {
+    "game_id": "sevens-dice",
+    "en": "Sevens (Dice)",
+    "zh": "七点消除（六骰）"
+  },
+  {
+    "game_id": "sevens-fan-tan",
+    "en": "Sevens (Fan Tan)",
+    "zh": "排七（纸牌）"
+  },
+  {
+    "game_id": "ship-captain-and-crew",
+    "en": "Ship, Captain and Crew",
+    "zh": "船、船长与船员"
+  },
+  {
+    "game_id": "shut-the-box",
+    "en": "Shut the Box",
+    "zh": "关盒子（纸笔版）"
+  },
+  {
+    "game_id": "six-card-golf",
+    "en": "Six-Card Golf",
+    "zh": "六张高尔夫"
+  },
+  {
+    "game_id": "skull",
+    "en": "Skull",
+    "zh": "骷髅牌"
+  },
+  {
+    "game_id": "sky-team",
+    "en": "Sky Team",
+    "zh": "天合小队"
+  },
+  {
+    "game_id": "slapjack",
+    "en": "Slapjack",
+    "zh": "拍杰克"
+  },
+  {
+    "game_id": "snap",
+    "en": "Snap",
+    "zh": "拍对（Snap）"
+  },
+  {
+    "game_id": "sos",
+    "en": "SOS",
+    "zh": "SOS 字母棋"
+  },
+  {
+    "game_id": "spades",
+    "en": "Spades",
+    "zh": "黑桃搭档"
+  },
+  {
+    "game_id": "speed",
+    "en": "Speed",
+    "zh": "速度（Speed）"
+  },
+  {
+    "game_id": "spirit-island",
+    "en": "Spirit Island",
+    "zh": "灵迹岛"
+  },
+  {
+    "game_id": "spit",
+    "en": "Spit",
+    "zh": "闪电出牌（Spit）"
+  },
+  {
+    "game_id": "splendor",
+    "en": "Splendor",
+    "zh": "璀璨宝石"
+  },
+  {
+    "game_id": "spoons",
+    "en": "Spoons",
+    "zh": "抢勺子"
+  },
+  {
+    "game_id": "sprouts",
+    "en": "Sprouts",
+    "zh": "萌芽棋"
+  },
+  {
+    "game_id": "spyfall",
+    "en": "Spyfall",
+    "zh": "谍报风云（地点版）"
+  },
+  {
+    "game_id": "sushi-go-party",
+    "en": "Sushi Go Party!",
+    "zh": "回转寿司：派对版"
+  },
+  {
+    "game_id": "taboo",
+    "en": "Taboo",
+    "zh": "禁忌词（自制版）"
+  },
+  {
+    "game_id": "tag-team",
+    "en": "Tag Team",
+    "zh": "双侠小队"
+  },
+  {
+    "game_id": "telephone",
+    "en": "Telephone",
+    "zh": "传悄悄话"
+  },
+  {
+    "game_id": "telephone-pictionary",
+    "en": "Telephone Pictionary",
+    "zh": "纸上传话（画图接力）"
+  },
+  {
+    "game_id": "terraforming-mars",
+    "en": "Terraforming Mars",
+    "zh": "殖民火星"
+  },
+  {
+    "game_id": "terrorscape",
+    "en": "Terrorscape",
+    "zh": "恶夜杀机"
+  },
+  {
+    "game_id": "texas-holdem",
+    "en": "Texas Hold’em",
+    "zh": "德州扑克（筹码版）"
+  },
+  {
+    "game_id": "thirty-one",
+    "en": "Thirty-One",
+    "zh": "三十一点"
+  },
+  {
+    "game_id": "three-or-more",
+    "en": "Three or More",
+    "zh": "三个以上"
+  },
+  {
+    "game_id": "ticket-to-ride",
+    "en": "Ticket to Ride",
+    "zh": "车票之旅"
+  },
+  {
+    "game_id": "tic-tac-toe",
+    "en": "Tic-Tac-Toe",
+    "zh": "井字棋"
+  },
+  {
+    "game_id": "time-bomb",
+    "en": "Time Bomb",
+    "zh": "惊爆伦敦"
+  },
+  {
+    "game_id": "top-ten",
+    "en": "Top Ten",
+    "zh": "脑洞量表"
+  },
+  {
+    "game_id": "toy-battle",
+    "en": "Toy Battle",
+    "zh": "玩具大乱斗"
+  },
+  {
+    "game_id": "truth-or-dare",
+    "en": "Truth or Dare",
+    "zh": "真心话大冒险"
+  },
+  {
+    "game_id": "twenty-questions",
+    "en": "Twenty Questions",
+    "zh": "二十问"
+  },
+  {
+    "game_id": "two-truths-and-a-lie",
+    "en": "Two Truths and a Lie",
+    "zh": "两真一假"
+  },
+  {
+    "game_id": "two-dice-pig",
+    "en": "Two-Dice Pig",
+    "zh": "双骰小猪"
+  },
+  {
+    "game_id": "ultimate-tic-tac-toe",
+    "en": "Ultimate Tic-Tac-Toe",
+    "zh": "终极井字棋"
+  },
+  {
+    "game_id": "unlock",
+    "en": "Unlock!",
+    "zh": "大搜查！"
+  },
+  {
+    "game_id": "uno",
+    "en": "UNO",
+    "zh": "UNO"
+  },
+  {
+    "game_id": "war",
+    "en": "War",
+    "zh": "战争（双人比大小）"
+  },
+  {
+    "game_id": "wavelength",
+    "en": "Wavelength",
+    "zh": "电波同步"
+  },
+  {
+    "game_id": "welcome-to-the-moon",
+    "en": "Welcome to the Moon",
+    "zh": "欢迎来到月球"
+  },
+  {
+    "game_id": "werewolf",
+    "en": "Werewolf",
+    "zh": "狼人杀"
+  },
+  {
+    "game_id": "werewords",
+    "en": "Werewords",
+    "zh": "狼人真言"
+  },
+  {
+    "game_id": "who-am-i",
+    "en": "Who Am I?",
+    "zh": "我是谁（额头贴名）"
+  },
+  {
+    "game_id": "wingspan",
+    "en": "Wingspan",
+    "zh": "展翅翱翔"
+  },
+  {
+    "game_id": "wink-murder",
+    "en": "Wink Murder",
+    "zh": "眨眼杀手"
+  },
+  {
+    "game_id": "word-association-chain",
+    "en": "Word Association Chain",
+    "zh": "词语联想接龙"
+  },
+  {
+    "game_id": "would-you-rather",
+    "en": "Would You Rather?",
+    "zh": "二选一"
+  },
+  {
+    "game_id": "yacht",
+    "en": "Yacht",
+    "zh": "游艇骰子"
+  },
+  {
+    "game_id": "yahtzee",
+    "en": "Yahtzee",
+    "zh": "快艇骰子"
+  }
+]
