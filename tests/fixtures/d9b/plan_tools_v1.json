@@ -1,0 +1,117 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "submit_lesson_plan",
+      "description": "Submit the complete lesson plan. Call exactly once. Write your brief reasoning in \"analysis\" first.",
+      "parameters": {
+        "$defs": {
+          "Step": {
+            "properties": {
+              "id": {
+                "title": "Id",
+                "type": "string"
+              },
+              "text": {
+                "title": "Text",
+                "type": "string"
+              },
+              "src": {
+                "enum": [
+                  "rulebook",
+                  "dataset",
+                  "general"
+                ],
+                "title": "Src",
+                "type": "string"
+              },
+              "tool_hint": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Tool Hint"
+              }
+            },
+            "required": [
+              "id",
+              "text",
+              "src"
+            ],
+            "title": "Step",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "analysis": {
+            "title": "Analysis",
+            "type": "string"
+          },
+          "goal": {
+            "title": "Goal",
+            "type": "string"
+          },
+          "setup": {
+            "items": {
+              "$ref": "#/$defs/Step"
+            },
+            "title": "Setup",
+            "type": "array"
+          },
+          "turn_structure": {
+            "items": {
+              "$ref": "#/$defs/Step"
+            },
+            "title": "Turn Structure",
+            "type": "array"
+          },
+          "first_round": {
+            "items": {
+              "$ref": "#/$defs/Step"
+            },
+            "title": "First Round",
+            "type": "array"
+          },
+          "ending": {
+            "items": {
+              "$ref": "#/$defs/Step"
+            },
+            "title": "Ending",
+            "type": "array"
+          },
+          "pitfalls": {
+            "items": {
+              "$ref": "#/$defs/Step"
+            },
+            "title": "Pitfalls",
+            "type": "array"
+          },
+          "unknowns": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unknowns",
+            "type": "array"
+          }
+        },
+        "required": [
+          "analysis",
+          "goal",
+          "setup",
+          "turn_structure",
+          "first_round",
+          "ending",
+          "pitfalls",
+          "unknowns"
+        ],
+        "title": "LessonPlan",
+        "type": "object"
+      }
+    }
+  }
+]

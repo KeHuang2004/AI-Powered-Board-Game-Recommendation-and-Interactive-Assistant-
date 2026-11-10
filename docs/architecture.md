@@ -25,7 +25,7 @@
 2. 结果同时返回 `rid`，推荐记录保存在 `app.db`。换一批或补充偏好调用 `/recommend/refine`，沿用问卷并排除已展示 ID。
 3. 打开卡片进入详情，立即显示目录规则，再调用 `/rules/explain` 生成当前语言的讲解。该调用使用迁移后的团队提示词并记录 trace；失败时目录资料仍可读。
 4. 点「开始带玩」，填或跳过名字，`POST /api/sessions` 建立会话。`t1` 先查相同游戏、语言、人数、profile 与提示词指纹的 plan 缓存，未命中才生成。模型通过 `submit_lesson_plan` 提交结构化计划，Pydantic 与业务校验通过后保存。
-5. 对没有本地规则书的游戏，开启搜索时，plan 阶段可以调用 `web_search` → `fetch_page`。harness 执行工具，网页内容按游戏写入 `web_cache`；模型获得工具结果，再提交计划。后续可通过 `lookup_rulebook` 检索缓存。浏览器收到 SSE 工具事件并展示来源。离线演示用 `SEARCH_PROVIDER=mock` 走同一条路径，但不会联网，示例页面不是实际游戏规则证据。
+5. 对没有本地规则书的游戏，开启搜索时，plan 阶段可以调用 `web_search` → `fetch_page`。harness 执行工具，网页内容按游戏写入 `web_cache`；模型获得工具结果，再提交计划。这些调用写入 plan trace；后续问答可通过 `lookup_rulebook` 检索缓存，并将工具事件、网络来源通过 SSE 展示在页面。离线演示用 `SEARCH_PROVIDER=mock` 走同一条路径，但不会联网，示例页面不是实际游戏规则证据。
 6. 带玩页展示当前步骤及 `[[dataset]]`、`[[rulebook]]`、`[[general]]`、`[[web]]` 标签。`t1` 的「下一步」和阶段跳转由代码推进；骰子、记分、玩家名单等也由代码维护。自由提问才进入对话循环，工具结果作为 `tool` 消息交回模型。
 7. 会话状态、消息和工具结果持久化到 `app.db`，刷新后可以恢复；模型调用 trace 写入 `data/traces/`。两者均为本地运行数据，不纳入产品源码提交。
 
