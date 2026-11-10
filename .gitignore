@@ -2,3 +2,11 @@
 .venv/
 .runtime/
 __pycache__/
+data/app.db
+data/app.db.limits*
+data/eval_runtime/
+data/traces/
+accounts.yaml
+*.local.json
+.pytest_cache/
+.ruff_cache/

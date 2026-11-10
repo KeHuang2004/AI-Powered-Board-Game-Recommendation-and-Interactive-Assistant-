@@ -1,4 +1,4 @@
-PRAGMA user_version = 1;
+PRAGMA user_version = 2;
 
 CREATE TABLE games (
     game_id TEXT PRIMARY KEY NOT NULL,
@@ -36,4 +36,25 @@ CREATE TABLE game_tags (
     PRIMARY KEY (game_id, locale, position),
     UNIQUE (game_id, locale, tag),
     FOREIGN KEY (game_id, locale) REFERENCES game_text(game_id, locale) ON DELETE CASCADE
+);
+
+CREATE TABLE game_extra (
+    game_id TEXT NOT NULL,
+    locale TEXT NOT NULL CHECK (locale IN ('en', 'zh')),
+    setup_items TEXT NOT NULL,
+    conditions TEXT NOT NULL,
+    win_relation TEXT NOT NULL,
+    interaction TEXT NOT NULL,
+    rules_version TEXT NOT NULL,
+    aliases TEXT NOT NULL,
+    translated INTEGER NOT NULL CHECK (translated IN (0, 1)),
+    PRIMARY KEY (game_id, locale),
+    FOREIGN KEY (game_id, locale) REFERENCES game_text(game_id, locale) ON DELETE CASCADE
+);
+
+CREATE TABLE rulebooks (
+    game_id TEXT PRIMARY KEY NOT NULL REFERENCES games(game_id) ON DELETE CASCADE,
+    filename TEXT NOT NULL,
+    text TEXT NOT NULL,
+    est_tokens INTEGER NOT NULL
 );

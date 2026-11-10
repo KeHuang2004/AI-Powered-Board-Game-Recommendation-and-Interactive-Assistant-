@@ -1,0 +1,19 @@
+# version: v2
+# 固定文本：前端快捷按钮和 harness 的提醒消息。
+didnt_get_it:
+  zh: 刚才这一步我没听懂，能换个说法吗？
+  en: I didn't get that step — can you explain it differently?
+next_t0:            # 仅 T0：「下一步」按钮发送给模型的文本
+  zh: 下一步
+  en: Next step
+submit_reminder:    # require_submit 时模型没有调用提交工具，harness 追加的提醒
+  en: "Please call {tool} now to submit your result."
+tool_event_line: "[{name} {args} → {result}]"   # history 中压缩工具事件的格式；args 和 result 使用紧凑 JSON
+phase_labels:
+  setup: {zh: 准备, en: Setup}
+  first_round: {zh: 第一轮, en: First round}
+  ending: {zh: 结算, en: Scoring}
+  qa: {zh: 自由答疑, en: Q&A}
+default_player:
+  zh: "玩家{index}"
+  en: "P{index}"

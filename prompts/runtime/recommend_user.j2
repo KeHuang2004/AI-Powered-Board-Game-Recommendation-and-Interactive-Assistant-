@@ -1,0 +1,11 @@
+{# version: v1 #}
+{# 用于 S0 / S1。变量：catalog_lines（CatalogView JSON 行，每行一款）、request_block（已渲染的需求）、n_picks #}
+<catalog>
+{{ catalog_lines }}
+</catalog>
+
+<request>
+{{ request_block }}
+</request>
+
+Choose {{ n_picks }} game{{ "s" if n_picks != 1 else "" }} from the catalog for this group. Think briefly about what they need in "analysis", then call submit_recommendations exactly once.

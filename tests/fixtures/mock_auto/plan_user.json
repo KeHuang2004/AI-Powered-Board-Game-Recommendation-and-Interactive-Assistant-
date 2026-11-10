@@ -1,0 +1,44 @@
+{
+  "analysis": "mock",
+  "goal": "Play a first game",
+  "setup": [
+    {
+      "id": "1",
+      "text": "Step 1",
+      "src": "dataset",
+      "tool_hint": null
+    },
+    {
+      "id": "2",
+      "text": "Step 2",
+      "src": "dataset",
+      "tool_hint": null
+    }
+  ],
+  "turn_structure": [
+    {
+      "id": "3",
+      "text": "Step 3",
+      "src": "dataset",
+      "tool_hint": null
+    }
+  ],
+  "first_round": [
+    {
+      "id": "4",
+      "text": "Step 4",
+      "src": "dataset",
+      "tool_hint": null
+    }
+  ],
+  "ending": [
+    {
+      "id": "5",
+      "text": "Step 5",
+      "src": "dataset",
+      "tool_hint": null
+    }
+  ],
+  "pitfalls": [],
+  "unknowns": []
+}

@@ -1,0 +1,122 @@
+{
+  "request": {
+    "players": 8,
+    "has_dedicated_components": true,
+    "has_host": true,
+    "scene": "friends",
+    "mood": "thinking",
+    "language": "en"
+  },
+  "response": {
+    "method": "catalog",
+    "eligible_count": 87,
+    "recommendations": [
+      {
+        "game_id": "citadels",
+        "requires_host": false,
+        "requires_dedicated_components": true,
+        "tier": "T0",
+        "players": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "recommended_players": [
+          5
+        ],
+        "name": "Citadels",
+        "summary": "Knowing that the Assassin was available is not the same as knowing who took it. Every city plan comes with a guess about somebody else’s role.",
+        "core_rules": "Secretly choose new roles each round. Called in rank order, characters collect resources, build districts and use their abilities. A completed city triggers the last round; highest city score wins.",
+        "detailed_rules": "On a normal turn take two gold or draw two district cards and keep one. Pay the building cost and usually build at most one district with a name you do not already own. Roles can change these limits or interfere with others. In the five-player game described here, seven built districts complete a city; finish the whole round. Score district values and bonuses, including city completion and colour diversity. A tie goes to the higher-ranked role revealed in the final round.",
+        "catalog_reason": "At five, the role selection gives everyone a plausible suspect. The fun is deciding whom to interfere with without letting a third player build unchecked.",
+        "categories": [
+          "Strategy",
+          "Card game",
+          "Card drafting",
+          "Hidden information",
+          "Resource management",
+          "Social gathering"
+        ],
+        "english_name": "Citadels",
+        "reason": "At five, the role selection gives everyone a plausible suspect. The fun is deciding whom to interfere with without letting a third player build unchecked."
+      },
+      {
+        "game_id": "blades-rose",
+        "requires_host": false,
+        "requires_dedicated_components": true,
+        "tier": "T0",
+        "players": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "recommended_players": [
+          8
+        ],
+        "name": "Blades & Rose",
+        "summary": "The table sees the cards that appeared, but not who put each one in. A single weapon among the offerings can change what everybody thought happened.",
+        "core_rules": "The White Rose faction must protect the Rose and make enough sacrifices. The Blood Blades aim to kill the Rose or enough Buds. Secret contributions are shuffled, revealed together and resolved by their combination.",
+        "detailed_rules": "Use the player-count chart for roles, weapons and Bud thresholds. Follow the initial night procedure for who recognises whom. Players may discuss a hand but may not show it as proof. Placing a crystal activates its effect when possible. Playing a faction card does not switch its owner’s allegiance. If all crystals are used without an earlier victory, finish the round and check the White Rose side’s hands: any unplayed Rose or Bud gives victory to Blood Blades; otherwise White Rose wins.",
+        "catalog_reason": "At eight, actions carry more of the deduction than sustained speeches do. It suits a group that wants hidden identities without a long debate every round.",
+        "categories": [
+          "Social deduction",
+          "Card game",
+          "Hidden roles",
+          "Direct interaction",
+          "Logical deduction",
+          "Party"
+        ],
+        "english_name": "Blades & Rose",
+        "reason": "At eight, actions carry more of the deduction than sustained speeches do. It suits a group that wants hidden identities without a long debate every round."
+      },
+      {
+        "game_id": "contact",
+        "requires_host": false,
+        "requires_dedicated_components": false,
+        "tier": "T2",
+        "players": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "recommended_players": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "name": "Contact",
+        "summary": "Two guessers are trying to think of the same word just before the one person who can stop them does.",
+        "core_rules": "A word keeper reveals a prefix. Guessers try to connect on a different word starting with it; an unblocked match earns another letter. Guess the keeper's full word to win.",
+        "detailed_rules": "Choose a common word of at least six letters and reveal its first letter. A guesser clues a different word with that prefix. Another signals contact; the keeper has about five seconds to block by naming the clue word. If not blocked, both guessers count down and speak together. Matching answers reveal the next letter, mismatches reveal nothing. A correct direct guess ends the round.",
+        "catalog_reason": "It rewards the pleasure of a shared association, with an opponent racing to spot it too. Every extra letter makes the contest meaningfully different.",
+        "categories": [
+          "Word game",
+          "Clue giving",
+          "Logical deduction",
+          "Travel"
+        ],
+        "english_name": "Contact",
+        "reason": "It rewards the pleasure of a shared association, with an opponent racing to spot it too. Every extra letter makes the contest meaningfully different."
+      }
+    ]
+  }
+}

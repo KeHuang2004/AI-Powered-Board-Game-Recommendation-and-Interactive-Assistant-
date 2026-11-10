@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import re
 import sqlite3
 from contextlib import closing
@@ -12,6 +13,15 @@ DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 SOURCE_FILES = {"en": "boardgame_dataset.json", "zh": "桌游数据集_中文版.json"}
 SHARED_TAGS = ("Players", "Recommended players", "Requires DM", "Requires dedicated components")
 TEXT_FIELDS = ("Name", "Conclusion", "Core rules", "Detailed rules", "Recommendation reasons")
+EXTRA_COLUMNS = {
+    "setup_items": "开局用品",
+    "conditions": "适用条件",
+    "win_relation": "胜负关系",
+    "interaction": "玩家互动",
+    "rules_version": "规则版本",
+}
+RULEBOOK_FILES = {"blackjack": "blackjack.pdf", "texas-holdem": "texas_holdem.pdf", "uno": "uno.pdf"}
+logger = logging.getLogger(__name__)
 
 
 def read_json(path: Path):
@@ -88,6 +98,94 @@ def import_games(connection: sqlite3.Connection, source_dir: Path) -> int:
     return len(mapping)
 
 
+def validate_baseline_facts(connection: sqlite3.Connection) -> None:
+    """Reject source drift before replacing the live catalog."""
+    tiers = dict(connection.execute("SELECT tier, count(*) FROM games GROUP BY tier"))
+    if tiers != {"T0": 46, "T1": 44, "T2": 85}:
+        raise ValueError(f"Unexpected tier counts: {tiers}")
+    requirements = connection.execute(
+        "SELECT count(*), sum(requires_host), sum(requires_dedicated_components) FROM games"
+    ).fetchone()
+    if requirements != (175, 5, 64):
+        raise ValueError(f"Unexpected game or requirement counts: {requirements}")
+    tag_count = connection.execute(
+        "SELECT count(DISTINCT tag) FROM game_tags WHERE locale = 'zh'"
+    ).fetchone()[0]
+    max_players = connection.execute("SELECT max(players) FROM game_player_counts").fetchone()[0]
+    if (tag_count, max_players) != (85, 100):
+        raise ValueError(f"Unexpected tag count or maximum players: {tag_count}, {max_players}")
+
+
+def split_values(value: object, separator: str) -> list[str]:
+    return [part.strip() for part in str(value or "").split(separator) if part.strip()]
+
+
+def import_extra(connection: sqlite3.Connection, source_dir: Path) -> None:
+    from openpyxl import load_workbook
+
+    workbook = load_workbook(source_dir / "桌游推荐_合并版.xlsx", read_only=True, data_only=True)
+    try:
+        rows = iter(workbook["标签筛选"].iter_rows(min_row=4, values_only=True))
+        headings = next(rows)
+        records = [dict(zip(headings, row, strict=True)) for row in rows if row[0] is not None]
+    finally:
+        workbook.close()
+    by_name = {row["英文名称"]: row for row in records}
+    names = dict(connection.execute("SELECT name, game_id FROM game_text WHERE locale = 'en'"))
+    if len(records) != 175 or len(by_name) != 175 or set(by_name) != set(names):
+        raise ValueError("Excel English names must match all 175 catalog games exactly")
+
+    translation_path = source_dir / "translations.en.json"
+    if translation_path.exists():
+        translations = read_json(translation_path)
+        if not isinstance(translations, dict):
+            raise ValueError("English translations must be an object keyed by game ID")
+    else:
+        translations = {}
+        logger.warning("English translations missing; English extra fields will be empty")
+    for name, game_id in names.items():
+        row = by_name[name]
+        excel_tags = {tag for column in ("类型", "机制", "场景") for tag in split_values(row[column], "、")}
+        source_tags = {item[0] for item in connection.execute(
+            "SELECT tag FROM game_tags WHERE game_id = ? AND locale = 'zh'", (game_id,)
+        )}
+        if excel_tags != source_tags:
+            raise ValueError(f"Excel categories do not match Chinese categories: {game_id}")
+        zh = {key: str(row[column] or "").strip() for key, column in EXTRA_COLUMNS.items()}
+        zh["aliases"] = split_values(row["其他检索名"], "、")
+        en_raw = translations.get(game_id)
+        if en_raw is not None and (
+            not isinstance(en_raw, dict)
+            or any(not isinstance(en_raw.get(key), str) for key in (*EXTRA_COLUMNS, "aliases"))
+        ):
+            raise ValueError(f"Invalid English translation fields: {game_id}")
+        en = {key: en_raw[key].strip() if en_raw else "" for key in EXTRA_COLUMNS}
+        en["aliases"] = split_values(en_raw["aliases"], ",") if en_raw else []
+        for locale, values, translated in (("zh", zh, 1), ("en", en, int(en_raw is not None))):
+            connection.execute(
+                "INSERT INTO game_extra VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (game_id, locale, *(values[key] for key in EXTRA_COLUMNS),
+                 json.dumps(values["aliases"], ensure_ascii=False), translated),
+            )
+
+
+def import_rulebooks(connection: sqlite3.Connection, source_dir: Path) -> None:
+    from pypdf import PdfReader
+
+    from .rulebook import estimate_tokens
+
+    ids = {row[0] for row in connection.execute("SELECT game_id FROM games")}
+    if not set(RULEBOOK_FILES).issubset(ids):
+        raise ValueError("A rulebook game ID is missing from the catalog")
+    for game_id, filename in RULEBOOK_FILES.items():
+        reader = PdfReader(source_dir / "rulebooks" / filename)
+        text = "\n\n".join(page.extract_text() or "" for page in reader.pages).strip()
+        if not text:
+            raise ValueError(f"Rulebook has no extractable text: {filename}")
+        connection.execute("INSERT INTO rulebooks VALUES (?, ?, ?, ?)",
+                           (game_id, filename, text, estimate_tokens(text)))
+
+
 def build_catalog(data_dir: Path = DATA_DIR) -> int:
     db_dir = data_dir / "database"
     target = db_dir / "boardgames.sqlite3"
@@ -98,6 +196,9 @@ def build_catalog(data_dir: Path = DATA_DIR) -> int:
             connection.executescript((db_dir / "schema.sql").read_text(encoding="utf-8"))
             with connection:
                 count = import_games(connection, data_dir / "sourcedata")
+                validate_baseline_facts(connection)
+                import_extra(connection, data_dir / "sourcedata")
+                import_rulebooks(connection, data_dir / "sourcedata")
                 if connection.execute("PRAGMA foreign_key_check").fetchone() is not None:
                     raise ValueError("Foreign key check failed")
             if connection.execute("PRAGMA integrity_check").fetchone() != ("ok",):

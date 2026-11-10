@@ -1,6 +1,7 @@
 """Read a consistent catalog snapshot from SQLite at application startup."""
 from __future__ import annotations
 
+import json
 import sqlite3
 from contextlib import closing
 from pathlib import Path
@@ -14,7 +15,8 @@ def load_games(path: Path = DATABASE_PATH) -> list[dict]:
     with closing(sqlite3.connect(path.resolve().as_uri() + "?mode=ro", uri=True)) as connection:
         connection.row_factory = sqlite3.Row
         connection.execute("BEGIN")
-        if connection.execute("PRAGMA user_version").fetchone()[0] != 1:
+        version = connection.execute("PRAGMA user_version").fetchone()[0]
+        if version not in (1, 2):
             raise ValueError("Unsupported catalog schema. Run python -m backend.build_catalog.")
         games = {}
         for row in connection.execute("SELECT * FROM games ORDER BY game_id"):
@@ -39,6 +41,20 @@ def load_games(path: Path = DATABASE_PATH) -> list[dict]:
                 game["recommended_players"].append(row["players"])
         for row in connection.execute("SELECT * FROM game_tags ORDER BY game_id, locale, position"):
             games[row["game_id"]]["text"][row["locale"]]["categories"].append(row["tag"])
+        if version == 2:
+            for game in games.values():
+                game["rulebook"] = None
+            for row in connection.execute("SELECT * FROM game_extra"):
+                extra = {key: row[key] for key in (
+                    "setup_items", "conditions", "win_relation", "interaction", "rules_version"
+                )}
+                extra["aliases"] = json.loads(row["aliases"])
+                extra["translated"] = bool(row["translated"])
+                games[row["game_id"]]["text"][row["locale"]]["extra"] = extra
+            for row in connection.execute("SELECT game_id, filename, est_tokens FROM rulebooks"):
+                games[row["game_id"]]["rulebook"] = {
+                    "filename": row["filename"], "est_tokens": row["est_tokens"]
+                }
     if not games or any(set(g["text"]) != {"en", "zh"} or not g["players"] for g in games.values()):
         raise ValueError("Incomplete SQLite catalog. Run python -m backend.build_catalog.")
     return list(games.values())

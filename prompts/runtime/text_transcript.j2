@@ -1,0 +1,30 @@
+{# version: v1 #}
+{# 文本工具协议的 user 部分：把 system 之后的全部消息序列化为对话记录。
+   变量：messages（每条为 {role, content, tool_calls_json?, tool_name?}；role ∈ user | assistant | tool）、force_no_tool（bool） #}
+Below is the conversation so far. Write the assistant's next reply.
+
+{% for m in messages %}
+{% if m.role == "user" %}
+[user]
+{{ m.content }}
+
+{% elif m.role == "assistant" %}
+[assistant]
+{% if m.content %}{{ m.content }}
+{% endif %}
+{% if m.tool_calls_json %}
+```tool_calls
+{{ m.tool_calls_json }}
+```
+{% endif %}
+
+{% elif m.role == "tool" %}
+[tool result: {{ m.tool_name }}]
+{{ m.content }}
+
+{% endif %}
+{% endfor %}
+{% if force_no_tool %}
+(For this reply, answer directly in text. Do not call any tools.)
+{% endif %}
+[assistant]

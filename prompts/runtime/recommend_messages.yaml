@@ -1,0 +1,5 @@
+# version: v1
+wrong_count: "Expected {expected} picks; received {actual}."
+invalid_id: "Unknown or ineligible game ID: {game_id}."
+duplicate_id: "Game IDs must be distinct."
+empty_reason: "Each pick needs a nonempty fit reason."

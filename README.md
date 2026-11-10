@@ -1,76 +1,126 @@
 # 玩局 桌游推荐集成版
 
+EE6405 课程项目。在团队已有的双语问卷、推荐、规则讲解与 SQLite 目录上，增加可追踪的模型调用、补充偏好与换一批、第一局带玩、来源标注和模型设置页。本次交付在本地使用，打开网页即可操作，无需账号。网页和 API 使用一个 Python 服务，无需前端构建或 Docker。默认策略由负责人指定为 `s_team / t1 / g2`。
+
 ## 项目结构
 
 ```text
-backend/   推荐、规则 API、模型调用、SQLite 读取与数据导入
+backend/          兼容团队 API；模型配置、harness、推荐、带玩、问答与用量
 frontend/
-  en/      英文页面
-  zh/      中文页面
-  shared/  两种语言共用的 JavaScript 和 CSS
-data/      SQLite 数据库、表结构和原始 JSON
-start.py   启动前端和后端
+  en/、zh/        双语页面，扩展问卷、带玩与设置
+  shared/         原生 JavaScript 和 CSS
+data/
+  database/       已构建的目录 SQLite 与 schema.sql（提交）
+  sourcedata/     原始 JSON、Excel 扩展、英文补充翻译与规则书（提交）
+  app.db          会话、缓存、登录令牌与用量（运行时生成，不提交）
+  traces/         调用记录（不提交）
+prompts/runtime/  产品运行时提示词与工具说明
+tests/            产品回归测试；fixtures/mock_auto 也是离线演示必需资源
+scripts/          账号添加与数据维护
+docs/             架构、决策、演示与冷启动验收
+start.py          启动前端和后端
+.env.example      产品配置模板，无真实密钥
 ```
-
-模型配置 `.env` 和依赖清单 `requirements.txt` 位于项目根目录。
 
 ## 启动
 
-在本目录打开终端并运行：
+需要 Python 3.11–3.14。以下命令均在仓库根目录执行，首次在自己的虚拟环境中安装依赖：
+
+```sh
+git clone https://github.com/KeHuang2004/AI-Powered-Board-Game-Recommendation-and-Interactive-Assistant-.git
+cd AI-Powered-Board-Game-Recommendation-and-Interactive-Assistant-
+# 产品改动合入 main 前，切换到收到的产品交付分支或 v1.0 tag。
+python -m venv .venv
+```
+
+macOS / Linux：
+
+```sh
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+cp .env.example .env
+```
+
+Windows PowerShell：
 
 ```powershell
+.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+Copy-Item .env.example .env
+```
+
+如果 PowerShell 不允许激活，可直接用 `.venv\Scripts\python.exe` 执行上述 pip 及后续 Python 命令。团队原有 Windows Python 3.14 的 `.runtime` 离线依赖查找逻辑保留；新的克隆请先按上面安装依赖。
+
+### 本地使用
+
+保持 `.env` 中 `DEPLOY_MODE=local`，填入模型配置，执行：
+
+```sh
 python start.py
 ```
 
-打开 <http://127.0.0.1:8001/>。网页与 API 在同一个地址，接口文档在 <http://127.0.0.1:8001/docs>。
-访问首页会进入 <http://127.0.0.1:8001/en/>，点击页头「中文」可进入 <http://127.0.0.1:8001/zh/>。两种语言共用同一个服务和数据库。
-在这台 Windows 电脑上，Python 3.14 可以使用本目录里预先准备的离线依赖。把源码复制到其他电脑时，可在自己的虚拟环境中运行 `python -m pip install -r requirements.txt`，然后启动。
+服务就绪后会自动打开 <http://127.0.0.1:8001/>，也可手动访问。首页进入 `/en/`，页头「中文」切换到 `/zh/`。可在页头设置中填写 provider、模型名、API key 和兼容接口地址，保存后点「测试连接」；真实模型测试会产生实际请求。模型名留空时可以看目录推荐和规则，带玩需模型配置就绪。设置和密钥保存在运行服务的这台机器上。
+
+**无需密钥的离线演示**：把 `.env` 中 `MODEL_PROVIDER` 改为 `mock`，其余模型字段留空，启动即可完成问卷、推荐、详情和带玩。如需展示搜索工具和来源卡片，同时设置 `SEARCH_PROVIDER=mock`，它只用固定示例页面，完全不访问外网。不要操作设置页的搜索开关，该开关启用的是真实搜索服务。离线输出用于演示流程，不代表具体游戏的规则质量。
+
+```sh
+python start.py --port 8002 --no-browser
+```
+
+上例更换端口且不自动开浏览器。缺少 `data/database/boardgames.sqlite3` 时会提示 `python -m backend.build_catalog`；仓库已提交该目录库，正常克隆无需重建。接口文档在 `/docs`，`/health` 显示模式和配置状态，实际连接可用性以测试结果为准。
 
 ## 全局模型配置
 
-推荐排序和 AI 规则讲解共用项目目录中的 `.env`。用 `notepad .env` 打开，DeepSeek 配置如下，密钥填在等号后。修改后重启 `python start.py`。
+推荐排序、AI 规则讲解与带玩共用根目录 `.env`。所有产品配置及中文注释见 [.env.example](.env.example)。模型名不设默认值，由使用者按已开通的服务填写：
 
 ```dotenv
-MODEL_PROVIDER=deepseek
-MODEL_NAME=deepseek-flash
-DEEPSEEK_API_KEY=
+MODEL_PROVIDER=compatible
+MODEL_NAME=
+MODEL_API_KEY=
+MODEL_BASE_URL=
 ```
 
 | `MODEL_PROVIDER` | 配置 |
-| --- | --- |
-| `deepseek` | 使用官方 DeepSeek API，填写 `DEEPSEEK_API_KEY`，可通过 `MODEL_NAME` 换模型。 |
-| `compatible` | 使用支持 Chat Completions 和 JSON 对象输出的服务，填写 `MODEL_BASE_URL`、`MODEL_API_KEY`、`MODEL_NAME`。基础地址保留服务要求的路径前缀，例如 `/v1`。 |
-| `gemini` | 填写 `GEMINI_API_KEY`，通过 `MODEL_NAME` 选择模型。 |
-| `catalog` | 使用本地推荐和资料库规则。 |
+|---|---|
+| `deepseek` | 填 `MODEL_API_KEY`、`MODEL_NAME`，使用官方接口地址。 |
+| `compatible` | 填 `MODEL_API_KEY`、`MODEL_NAME`、`MODEL_BASE_URL`；地址保留服务要求的前缀，例如 `/v1`。须支持 Chat Completions 工具调用。 |
+| `gemini` | 填 `MODEL_API_KEY`、`MODEL_NAME`，经官方 OpenAI 兼容接口调用。 |
+| `catalog` | 仅使用目录推荐和资料库规则，不支持带玩。 |
+| `mock` | 固定离线响应，无密钥，无外网模型调用，可演示完整流程。 |
 
-旧的 `RECOMMEND_*` 配置仍可读取。填写全局字段后以全局配置为准。密钥只保存在本地服务端。访问 `/health` 可查看共用模型配置是否就绪，实际调用结果以推荐来源和详情页讲解为准。
+`MODEL_REASONING_EFFORT`、`MODEL_EXTRA_BODY` 依服务支持选填。旧的 `RECOMMEND_*`、`GEMINI_MODEL`、`GEMINI_API_KEY`、`DEEPSEEK_API_KEY` 仍兼容；新配置建议只使用 `MODEL_*`，显式存在的全局字段（即使为空）优先于旧字段。手工修改 `.env` 后重启。
+
+搜索默认关闭。`SEARCH_PROVIDER=deepseek` 时，优先用 `SEARCH_API_KEY`，其次尝试模型密钥或旧 `DEEPSEEK_API_KEY`。搜索用于带玩中缺少规则书的游戏，由 harness 调用搜索和取网页工具。本次冷启动只验证 mock 搜索；真实搜索服务可用性未经本次验收。
 
 ## 推荐和规则
 
-- 问卷收集实际到场人数、是否有主持人、可用道具、场合和氛围。
-- `POST /recommend` 先筛选可玩人数和主持、组件条件，再按氛围、场合、推荐人数和等级排序。配置的模型可以在前 12 个合格候选中重排，最多选 3 款。
-- 结果中的游戏名、标签、规则和预写推荐理由按页面语言从数据库读取，模型生成的理由也使用该语言。打开详情后自动生成当前语言的分步讲解。资料库规则会立即显示，模型请求失败时仍可阅读。
-- `POST /recommend` 接受 `language: "en" | "zh"`，旧客户端省略时仍返回中文。两种语言使用相同的硬条件和本地初排。
-- KK 的 `GET /games`、`GET /games/{game_id}/core-rules` 和 `POST /rules/explain` 可继续使用。
+- 问卷沿用团队的实际人数、主持、道具、场合与氛围，新增第 6 项选填补充偏好。
+- `POST /recommend` 默认使用保留团队排序与提示词的 `s_team`，先过滤人数、主持及专用道具，再在合格候选中推荐最多 3 款；模型出错可回落到目录推荐。
+- 双语名称、标签与规则按页面语言读取；详情保留目录规则，同时经 harness 生成 AI 新手讲解。资料库规则在请求失败时仍可阅读。
+- `POST /recommend` 仍接受 `language: "en" | "zh"`，省略时返回中文。新增 `/recommend/refine` 支持补充偏好并排除已展示游戏。
+- KK 的 `GET /games`、`GET /games/{game_id}/core-rules` 和 `POST /rules/explain` 继续保留。
+- 详情中「开始带玩」→ 填或跳过名字 → 分步推进第一局；计划、对话、来源标签、骰子、计分和计时工具共用会话状态。`t1` 的「下一步」由代码推进，不调用模型。
 
 ## 数据目录与更新
 
 ```text
-data/
-  database/
-    boardgames.sqlite3         应用运行时读取的 SQLite 数据库
-    schema.sql                 数据表定义和约束
-  sourcedata/
-    boardgame_dataset.json     英文原始数据
-    桌游数据集_中文版.json        中文原始数据
-    game_ids.json              固定的游戏 ID 和中英文名称映射
+data/database/boardgames.sqlite3       目录数据库，与用户运行数据分开
+data/database/schema.sql              保留团队原表与字段，增加 extra_fields、rulebooks
+data/sourcedata/boardgame_dataset.json 英文原始数据
+data/sourcedata/桌游数据集_中文版.json   中文原始数据
+data/sourcedata/game_ids.json          固定中英文游戏 ID
+data/sourcedata/translations.en.json   扩展字段的英文翻译
+data/sourcedata/rulebooks/             已导入的规则书 PDF
 ```
 
-应用启动时从 SQLite 加载目录到内存，推荐和规则讲解使用同一份快照。原始 JSON 只用于导入，运行时不读取。SQLite 由 Python 标准库支持，无需启动独立数据库服务。
+应用启动时从 SQLite 加载目录快照。团队的 `games`、`game_text`、`game_player_counts`、`game_tags` 保留；扩展字段和规则书来自补充资料。用户会话及缓存写入另一个自动创建的 `data/app.db`，无需独立数据库服务。
 
-- `games` 保存共享的游戏 ID、主持人要求、道具要求和推荐等级。
-- `game_text` 按游戏和语言保存名称、介绍、规则和预写推荐理由。
-- `game_player_counts` 按实际人数保存可玩和推荐条件，支持不连续的人数。
-- `game_tags` 按游戏和语言保存标签及其展示顺序。
+更新源数据时保留已有游戏 ID、双语配对与字段约束，在项目根目录执行 `python -m backend.build_catalog` 并重启。构建器校验双语、人数、唯一键、外键和扩展字段；校验失败保留上次成功的目录库。Excel 补充文件、规则书 PDF 和 `translations.en.json` 也应随产品源码一起保留。
 
-更新资料时，编辑 `sourcedata` 里的 JSON。新增或改名时同步更新 `game_ids.json`，已有游戏保留原 ID。两份原始 JSON 可以独立排序。然后在项目根目录执行 `python -m backend.build_catalog`，导入成功后重启 `python start.py`。导入会校验双语配对、人数、唯一键和外键。校验失败时保留上一次成功生成的数据库。
+## Agent harness branch
+
+产品改动直接基于[团队仓库](https://github.com/KeHuang2004/AI-Powered-Board-Game-Recommendation-and-Interactive-Assistant-)的 `main`（基点 `fe1084d`）开发，保留原页面、接口和团队推荐基线。`backend/model_api.py` 原文件保留，新调用走 harness。合入时需要完整的产品改动，包含运行时模板、mock fixtures、数据扩展及文档，无需另建应用。
+
+产品测试：`python -m pip install -r requirements-dev.txt`，然后 `python -m pytest` 和 `ruff check backend tests`。测试使用 mock，不消耗真实模型额度。交付验收见 [coldstart.md](docs/coldstart.md)，实现说明见 [architecture.md](docs/architecture.md)、[decisions.md](docs/decisions.md)，演示步骤见 [demo_flow.md](docs/demo_flow.md)。
+
+不要提交 `.env`、`accounts.yaml`、`data/app.db`、`data/traces/` 或虚拟环境。

@@ -1,0 +1,115 @@
+{
+  "request": {
+    "players": 2,
+    "has_dedicated_components": true,
+    "has_host": false,
+    "scene": "date",
+    "mood": "relaxed",
+    "language": "en"
+  },
+  "response": {
+    "method": "catalog",
+    "eligible_count": 97,
+    "recommendations": [
+      {
+        "game_id": "captain-sonar",
+        "requires_host": false,
+        "requires_dedicated_components": true,
+        "tier": "T0",
+        "players": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "recommended_players": [
+          8
+        ],
+        "name": "Captain Sonar",
+        "summary": "Someone must listen to the enemy captain while everyone else keeps your submarine moving. A missed direction can matter more than a missed shot.",
+        "core_rules": "Two teams command hidden submarines. Navigate, charge systems, manage breakdowns and track enemy orders to find a firing position. Inflict four damage to sink the enemy submarine.",
+        "detailed_rules": "At eight, each boat has a captain, first mate, engineer and radio operator. Each reported move advances the crew’s tasks. A captain cannot cross an island or revisit the boat’s current underwater trail. The operator fits enemy directions to the map; weapons and detection systems depend on charge and working equipment. Surfacing allows repairs and clears the route but reveals the sector. Two or three players must play turn by turn; groups of four or more may choose real time.",
+        "catalog_reason": "At four against four, everyone has a distinct job and a shared target. The pleasure is in the two crews trying to outguess each other while keeping their own boat operational.",
+        "categories": [
+          "Tactical combat",
+          "Deduction",
+          "Team competition",
+          "Simultaneous play",
+          "Hidden movement",
+          "Listening and communication",
+          "Cooperation",
+          "Regular group",
+          "Team building"
+        ],
+        "english_name": "Captain Sonar",
+        "reason": "At four against four, everyone has a distinct job and a shared target. The pleasure is in the two crews trying to outguess each other while keeping their own boat operational."
+      },
+      {
+        "game_id": "the-crew-mission-deep-sea",
+        "requires_host": false,
+        "requires_dedicated_components": true,
+        "tier": "T1",
+        "players": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "recommended_players": [
+          3,
+          4,
+          5
+        ],
+        "name": "The Crew: Mission Deep Sea",
+        "summary": "Sometimes the winning play is to lose a trick on purpose, because the only person allowed to take it is sitting across the table.",
+        "core_rules": "The crew share a mission made up of card-play tasks. Follow the led suit when possible; the highest trump, or highest card of the led suit if no trump is played, wins the trick. Complete every task together without openly discussing your hands.",
+        "detailed_rules": "Deal the coloured cards and four submarine trumps. The highest submarine makes its holder captain and opening leader. Assign mission tasks: some specify who must win a card, others how many tricks someone must take or avoid. Unless the mission restricts it, each player may once reveal a non-trump card and mark it as the highest, lowest or only card of its colour in their hand. A failed task means a failed mission. At two, the captain plays an additional partly visible hand.",
+        "catalog_reason": "Winning the trick is not enough: the right teammate has to win it. One carefully chosen hint can make a previously failed mission achievable.",
+        "categories": [
+          "Card game",
+          "Trick taking",
+          "Cooperation",
+          "Listening and communication",
+          "Regular group"
+        ],
+        "english_name": "The Crew: Mission Deep Sea",
+        "reason": "Winning the trick is not enough: the right teammate has to win it. One carefully chosen hint can make a previously failed mission achievable."
+      },
+      {
+        "game_id": "arkham-horror-the-card-game",
+        "requires_host": false,
+        "requires_dedicated_components": true,
+        "tier": "T0",
+        "players": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "recommended_players": [
+          2
+        ],
+        "name": "Arkham Horror: The Card Game",
+        "summary": "Every lead costs time, and the investigation does not wait until you feel ready. Even an imperfect ending can become part of your campaign.",
+        "core_rules": "Choose investigators and play through a scenario together. Collect clues to advance the act while the agenda and encounter cards push the threat forward. The scenario determines the resolution and what carries into the campaign.",
+        "detailed_rules": "Each investigator normally takes three actions per investigation phase and may repeat actions such as moving, investigating or fighting. A ready enemy engaged with you can make an attack of opportunity when you perform many ordinary actions. For a skill test, commit cards with matching icons, draw a chaos token and apply modifiers. Meeting the difficulty normally succeeds; the automatic failure token overrides the total. Damage and horror have separate limits. This core set supports one to four investigators.",
+        "catalog_reason": "Two investigators make a good pair: the story stays involving, waits are shorter than at a larger table, and someone can help untangle a particularly wordy card.",
+        "categories": [
+          "Cooperative adventure",
+          "Card game",
+          "Campaign play",
+          "Deck building",
+          "Cooperation",
+          "Regular group",
+          "Two-player night",
+          "American-style thematic game"
+        ],
+        "english_name": "Arkham Horror: The Card Game",
+        "reason": "Two investigators make a good pair: the story stays involving, waits are shorter than at a larger table, and someone can help untangle a particularly wordy card."
+      }
+    ]
+  }
+}

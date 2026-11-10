@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="760" viewBox="0 0 1160 760" role="img" aria-labelledby="title desc">
+  <title id="title">玩局本地应用架构</title>
+  <desc id="desc">浏览器请求 FastAPI，由领域模块通过 harness 使用模型与工具。目录库只读，会话、计划与网页缓存写入独立的本地数据库。</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#526273"/></marker></defs>
+  <style>text{font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172b3d} .title{font-size:28px;font-weight:700}.head{font-size:20px;font-weight:700}.body{font-size:16px}.small{font-size:14px;fill:#526273}.box{fill:white;stroke:#7690a3;stroke-width:1.5;rx:14}.line{fill:none;stroke:#526273;stroke-width:2;marker-end:url(#arrow)}</style>
+  <rect width="1160" height="760" fill="#f3f6f8"/>
+  <text x="42" y="51" class="title">玩局 · 本地应用</text><text x="42" y="80" class="small">一个 Python 服务 · 原生双语页面 · 本机模型设置 · 无需账号</text>
+  <rect x="42" y="116" width="306" height="132" class="box"/><text x="64" y="151" class="head">浏览器 /en/ · /zh/</text><text x="64" y="182" class="body">问卷 → 推荐 → 详情 → 带玩</text><text x="64" y="211" class="small">模型设置；HTTP 请求 / SSE 事件</text>
+  <rect x="426" y="116" width="306" height="132" class="box"/><text x="448" y="151" class="head">FastAPI / uvicorn</text><text x="448" y="182" class="body">保留团队 API，扩展会话接口</text><text x="448" y="211" class="small">start.py · 127.0.0.1:8001</text>
+  <rect x="810" y="116" width="306" height="132" class="box"/><text x="832" y="151" class="head">领域模块</text><text x="832" y="182" class="body">推荐 · lesson plan · 对话 · QA</text><text x="832" y="211" class="small">s_team / t1 / g2</text>
+  <path d="M348 181 H416" class="line"/><path d="M732 181 H800" class="line"/>
+  <rect x="810" y="327" width="306" height="142" class="box"/><text x="832" y="362" class="head">Harness</text><text x="832" y="393" class="body">工具范围 · 参数与提交校验</text><text x="832" y="422" class="body">状态推进 · 限次修正 · trace</text><text x="832" y="450" class="small">prompts/runtime：版本化模板</text>
+  <path d="M963 248 V317" class="line"/>
+  <rect x="426" y="327" width="306" height="142" class="box"/><text x="448" y="362" class="head">本地工具与检索</text><text x="448" y="393" class="body">骰子 · 计分 · 名单 · 规则检索</text><text x="448" y="422" class="body">可选搜索 → 取网页 → 缓存</text><text x="448" y="450" class="small">联网关闭 / 真实接口 / 离线 mock</text>
+  <path d="M810 398 H742" class="line"/>
+  <rect x="42" y="327" width="306" height="142" class="box"/><text x="64" y="362" class="head">目录与规则书</text><text x="64" y="393" class="body">boardgames.sqlite3 · 只读快照</text><text x="64" y="422" class="body">双语资料 · 扩展字段 · PDF 文本</text><text x="64" y="450" class="small">沿用团队原表，增加补充资料</text>
+  <path d="M426 398 H358" class="line"/>
+  <rect x="42" y="559" width="690" height="130" class="box"/><text x="64" y="594" class="head">本地运行数据（不提交源码）</text><text x="64" y="625" class="body">app.db：推荐 · 会话 · plan 缓存 · 网页缓存 · 用量</text><text x="64" y="656" class="body">data/traces/：调用、工具事件与干预记录</text>
+  <path d="M579 469 V549" class="line"/><path d="M963 469 V512 H680 V549" class="line"/>
+  <rect x="810" y="559" width="306" height="130" class="box"/><text x="832" y="594" class="head">LLM 适配器</text><text x="832" y="625" class="body">使用者配置的模型接口</text><text x="832" y="656" class="small">mock：固定响应，不访问真实模型</text>
+  <path d="M1086 469 V549" class="line"/>
+  <text x="42" y="730" class="small">t1 下一步、状态变更和直接工具操作由代码执行；自由对话经 harness 调用模型。</text>
+</svg>

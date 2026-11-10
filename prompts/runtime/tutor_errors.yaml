@@ -1,0 +1,12 @@
+# version: v2
+setup_short: "A lesson needs at least two setup steps."
+step_empty: "Every step needs nonempty text."
+step_count: "A lesson needs between 4 and 30 steps in total."
+unknown_player: "Player not found: {player}."
+invalid_players: "Player names must be unique and nonempty."
+wrong_game: "Only the current game can be retrieved."
+missing_rulebook: "No rulebook is available for this game."
+search_unavailable: "Web search is not available."
+invalid_web_query: "Search query must not be blank."
+invalid_web_url: "Page URL must be an HTTP or HTTPS URL without credentials."
+web_disabled_source: "Web sources are unavailable for this lesson."

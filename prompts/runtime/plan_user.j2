@@ -1,0 +1,16 @@
+{# version: v1 #}
+{# 变量：game_view（GameView JSON）、rulebook（字符串或 None）、players。plan 只依据人数生成，不使用玩家名字（名字不进入缓存键）。 #}
+<game>
+{{ game_view }}
+</game>
+{% if rulebook %}
+<rulebook>
+{{ rulebook }}
+</rulebook>
+{% endif %}
+
+<group>
+players: {{ players }}
+</group>
+
+Create the lesson plan for this group, then call submit_lesson_plan exactly once.

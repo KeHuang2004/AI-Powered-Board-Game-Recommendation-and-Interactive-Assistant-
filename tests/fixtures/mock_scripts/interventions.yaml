@@ -1,0 +1,29 @@
+no_submit:
+  - {content: "No submission"}
+unknown_tool:
+  - tool_calls: [{id: a, name: missing_tool, arguments: '{}'}]
+  - tool_calls: [{id: b, name: submit_test, arguments: '{"analysis":"test","value":1}'}]
+parse_fail:
+  - tool_calls: [{id: a, name: submit_test, arguments: '{'}]
+  - tool_calls: [{id: b, name: submit_test, arguments: '{"analysis":"test","value":1}'}]
+schema_fail:
+  - tool_calls: [{id: a, name: submit_test, arguments: '{"analysis":"test"}'}]
+  - tool_calls: [{id: b, name: submit_test, arguments: '{"analysis":"test","value":1}'}]
+tool_error:
+  - tool_calls: [{id: a, name: submit_test, arguments: '{"analysis":"test","value":8}'}]
+  - tool_calls: [{id: b, name: submit_test, arguments: '{"analysis":"test","value":1}'}]
+validation_fail:
+  - tool_calls: [{id: a, name: submit_test, arguments: '{"analysis":"test","value":9}'}]
+  - tool_calls: [{id: b, name: submit_test, arguments: '{"analysis":"test","value":1}'}]
+truncated:
+  - {content: "partial", finish_reason: length}
+  - tool_calls: [{id: b, name: submit_test, arguments: '{"analysis":"test","value":1}'}]
+audit:
+  - tool_calls: [{id: a, name: submit_test, arguments: '{"analysis":"test","value":9}'}]
+mixed:
+  - tool_calls:
+      - {id: a, name: regular_test, arguments: '{"value":2}'}
+      - {id: b, name: submit_test, arguments: '{"analysis":"test","value":1}'}
+regular_then_text:
+  - tool_calls: [{id: a, name: regular_test, arguments: '{"value":2}'}]
+  - {content: "Finished"}

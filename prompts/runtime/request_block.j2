@@ -1,0 +1,11 @@
+{# version: v2 #}
+{# 把 RecommendRequest（docs/03 第 1 节）渲染成给模型看的需求块。字段名和固定描述一律用英文，保证中英两版 prompt 只有「值」不同，便于做跨语言一致性实验；
+   scene 和 mood 使用团队问卷中的英文选项原文，不映射成任何标签；自由文本和游戏名使用当前语言。变量：r（exclude_names 已转换为当前语言的游戏名） #}
+players: {{ r.players }}
+dedicated host available: {{ "yes" if r.has_host else "no" }}
+components: {{ "game-specific equipment is available" if r.has_dedicated_components else "basic supplies only (playing cards, ordinary dice, pen and paper)" }}
+occasion: {{ {"friends": "Friends' get-together", "date": "Date night", "family": "Family time", "new_people": "Meeting new people"}[r.scene] }}
+mood: {{ {"relaxed": "Relaxed conversation", "lively": "Lively icebreakers", "thinking": "Quiet brain teasers", "competitive": "Friendly competition"}[r.mood] }}
+note from the group: {{ r.free_text or "(none)" }}
+{% if r.exclude_names %}already shown, do not pick again: {{ r.exclude_names | join(", ") }}
+{% endif %}

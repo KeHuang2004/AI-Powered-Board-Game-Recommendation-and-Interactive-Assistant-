@@ -1,0 +1,11 @@
+{
+  "analysis": "mock",
+  "picks": [
+    {
+      "game_id": "",
+      "fit_reason": "Mock reason",
+      "caveat": null
+    }
+  ],
+  "note": null
+}

@@ -1,0 +1,10 @@
+{# version: v1 #}
+{# 仅 T1：附加在用户最新一条消息之后。变量：s（SessionState）、current_text、phase_label #}
+
+<state>
+phase: {{ phase_label }}{% if s.phase != "qa" %} (step {{ s.index + 1 }} of {{ s.total_steps }}){% endif %}
+{% if current_text %}current step: {{ current_text }}
+{% endif %}players: {{ s.players | join(", ") }}
+scores: {% for p, v in s.scores.items() %}{{ p }}={{ v }}{% if not loop.last %}, {% endif %}{% endfor %}
+{% if s.dice_log %}last roll: {{ s.dice_log[-1].spec }} → {{ s.dice_log[-1]["values"] | join(", ") }}
+{% endif %}</state>

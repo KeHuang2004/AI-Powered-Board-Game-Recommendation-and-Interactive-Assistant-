@@ -1,0 +1,38 @@
+# version: v5
+# Product tools only.
+submit_recommendations: Submit your final recommendations for this group. Call exactly
+  once, after you have decided. Write your brief reasoning in "analysis" first. Each
+  pick must use a game id from the catalog.
+search_games: Search the game catalog. All filters are optional; combine them to narrow
+  down. "text" matches names, descriptions and tags. Returns compact catalog entries.
+get_game: Get the full record of one game by id, including core rules, detailed rules
+  and setup items.
+submit_lesson_plan: Submit the complete lesson plan. Call exactly once. Write your
+  brief reasoning in "analysis" first.
+advance_step: Mark the current lesson step as finished and move to the next one. Call
+  only when the group has clearly completed the current step. Answering a question
+  does not finish a step.
+roll_dice: Roll physical-style dice for the table and return the results. Use this
+  whenever the game calls for a die roll; never make up dice results.
+update_score: Add points to a player's score (use a negative delta to subtract) and
+  return the full scoreboard. Use this for every score change; never do score arithmetic
+  yourself.
+set_players: Replace the list of player names at the table, e.g. when someone joins
+  or leaves. Returns the updated player list and scoreboard.
+lookup_rulebook: Search the official rulebook of the current game and return the most
+  relevant passages.
+_lookup_rulebook_with_web: Search the current game's rulebook and previously fetched
+  web pages for relevant passages. Cached web passages include their source URL and
+  title.
+web_search: Search the web for relevant game rules and return result titles, URLs,
+  and snippets.
+fetch_page: Fetch a web page as Markdown and cache it for the current game. The result
+  includes its URL and title.
+submit_answer: Submit your answer to the rules question. Call exactly once. Write
+  your brief reasoning in "analysis" first.
+_params_by_template:
+  recommend_user: backend.recommend.common:SubmitRecommendations
+  recommend_user_s3: backend.recommend.common:SubmitRecommendations
+  plan_user: backend.tutor.plan:LessonPlan
+  qa_user: backend.qa.answer:QAAnswer
+probe_echo: Return the exact supplied value so the assistant can repeat it.

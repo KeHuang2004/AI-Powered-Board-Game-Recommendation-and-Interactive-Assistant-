@@ -1,0 +1,9 @@
+# version: v1
+quick: "Explain the game's basic idea and available rules in at most 5 short sentences."
+beginner: >-
+  Explain simply for a first-time player. Cover the goal, what a player
+  does on their turn, and how someone wins, only if documented.
+  If an important detail is not provided, state that briefly.
+step_by_step: >-
+  Explain in ordered steps: starting the game, taking a turn, and finishing.
+  For every missing step, clearly state that it is not specified.

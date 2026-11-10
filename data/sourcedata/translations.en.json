@@ -1,0 +1,1402 @@
+{
+  "500-rummy": {
+    "setup_items": "Standard playing cards",
+    "conditions": "A table for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns playing cards and observing opponents",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "6-nimmt": {
+    "setup_items": "Cards numbered 1–104, pen and paper or a scorekeeper",
+    "conditions": "A table with space to lay out the shared cards",
+    "win_relation": "Individual competition",
+    "interaction": "Watching opponents and judging risk",
+    "rules_version": "Base game",
+    "aliases": "Take 5!, Take 6!"
+  },
+  "7-wonders": {
+    "setup_items": "Wonder boards, three Age decks, coins, military conflict tokens",
+    "conditions": "Space for each player's city cards",
+    "win_relation": "Individual competition",
+    "interaction": "Simultaneous card selection, trading with neighbours, and comparing military strength",
+    "rules_version": "Multiplayer base game (2nd Edition)",
+    "aliases": "7 Wonders (multiplayer)"
+  },
+  "7-wonders-duel": {
+    "setup_items": "Age cards, conflict board, wonders, progress tokens",
+    "conditions": "Needs table space for a shared card layout",
+    "win_relation": "Two-player head-to-head",
+    "interaction": "Competing for shared cards",
+    "rules_version": "Base game",
+    "aliases": ""
+  },
+  "a-feast-for-odin": {
+    "setup_items": "Central action board, Vikings, goods tiles, personal home board",
+    "conditions": "Requires a longer play time and ample table space",
+    "win_relation": "Competitive, solo challenge",
+    "interaction": "Competing for shared resources",
+    "rules_version": "Standard seven-round version",
+    "aliases": ""
+  },
+  "agricola": {
+    "setup_items": "Farm board, family members, fields, livestock, occupation and improvement cards",
+    "conditions": "Requires a long play time and ample table space",
+    "win_relation": "Individual competition, solo challenge",
+    "interaction": "Competing for shared resources",
+    "rules_version": "Revised base edition",
+    "aliases": "Farm Life"
+  },
+  "alphabet-categories": {
+    "setup_items": "No components needed",
+    "conditions": "Players share the same alphabet and vocabulary",
+    "win_relation": "Individual competition",
+    "interaction": "Timed speaking and responses",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "arkham-horror-the-card-game": {
+    "setup_items": "Investigator decks, scenario cards, chaos bag, locations, and clues",
+    "conditions": "Best for a regular group that can play through scenarios in sequence",
+    "win_relation": "Full co-op; solo challenge",
+    "interaction": "Shared actions and discussion",
+    "rules_version": "Revised Core Set",
+    "aliases": "Arkham Horror LCG, Arkham Horror: The Card Game"
+  },
+  "azul": {
+    "setup_items": "Tiles, factory discs, player boards, bag, and first-player marker",
+    "conditions": "Each player needs one player board",
+    "win_relation": "Individual competition",
+    "interaction": "Compete for colours from the same tiles, leaving leftovers for opponents",
+    "rules_version": "Base game, coloured wall",
+    "aliases": "Azul"
+  },
+  "battleship": {
+    "setup_items": "Two sheets of grid paper, pens",
+    "conditions": "Requires a flat writing surface",
+    "win_relation": "Two-player head-to-head",
+    "interaction": "Observe your opponent and respond to their moves",
+    "rules_version": "Paper-and-pencil version",
+    "aliases": ""
+  },
+  "beat-that": {
+    "setup_items": "Two six-sided dice",
+    "conditions": "A flat surface for rolling dice",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns rolling dice and comparing scores",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "beggar-my-neighbour": {
+    "setup_items": "Standard playing cards",
+    "conditions": "A table suitable for dealing and playing cards",
+    "win_relation": "Two-player competitive",
+    "interaction": "Take turns playing cards and observing the opponent",
+    "rules_version": "Traditional rules",
+    "aliases": "Beggar My Neighbor"
+  },
+  "betrayal-at-house-on-the-hill": {
+    "setup_items": "Room tiles, explorer cards and figures, event and omen cards, dice, scenario cards and scenario book",
+    "conditions": "After the haunt, players may split into groups to read their own secret scenarios",
+    "win_relation": "Cooperative or team-versus-team play, depending on the haunt scenario",
+    "interaction": "Explore rooms together; after the haunt, act according to your own scenario",
+    "rules_version": "Third Edition base game",
+    "aliases": ""
+  },
+  "blackjack": {
+    "setup_items": "Standard playing cards, score sheet, and pen",
+    "conditions": "A table where cards can be dealt and played",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns playing cards and observe opponents",
+    "rules_version": "Scoring version",
+    "aliases": ""
+  },
+  "blades-rose": {
+    "setup_items": "Faction cards, Bud and weapon cards, crystals, main board",
+    "conditions": "Great for group discussion",
+    "win_relation": "Hidden factions, team battle",
+    "interaction": "Hidden information and faction deduction",
+    "rules_version": "Base game",
+    "aliases": "Blades & Rose"
+  },
+  "blood-on-the-clocktower": {
+    "setup_items": "Character sheets, night order sheets, identity slips, vote tokens and a seating chart, or a digital grimoire",
+    "conditions": "Suited to seated discussion",
+    "win_relation": "Hidden factions, asymmetric conflict",
+    "interaction": "Hidden information and faction deduction",
+    "rules_version": "Base script: Trouble Brewing",
+    "aliases": ""
+  },
+  "bomb-busters": {
+    "setup_items": "Colored wires, wire racks, info markers, detonator track, equipment and mission cards",
+    "conditions": "Teammates cannot see the numbers facing inward on each other's wire racks",
+    "win_relation": "Full cooperative",
+    "interaction": "Attempt cuts on teammates' wires without directly naming values",
+    "rules_version": "Base game mission series",
+    "aliases": "Bomb Busters, Bomb Squad"
+  },
+  "brass-birmingham": {
+    "setup_items": "England map, industry and transport tiles, cards, resources, money and income markers",
+    "conditions": "For groups willing to track resource transport and connectivity restrictions",
+    "win_relation": "Individual competition",
+    "interaction": "Use others' coal, iron and beer on the market, and share transport links",
+    "rules_version": "Birmingham base game",
+    "aliases": "Brass: Birmingham, Brass Birmingham, Birmingham"
+  },
+  "bulls-and-cows": {
+    "setup_items": "Paper and pencil",
+    "conditions": "Requires a flat writing surface",
+    "win_relation": "Individual competition",
+    "interaction": "Observe opponents and respond to their actions",
+    "rules_version": "Basic rules",
+    "aliases": "Guess the Number, A's and B's"
+  },
+  "bunco": {
+    "setup_items": "Three six-sided dice, a score sheet, and a pen",
+    "conditions": "A flat surface for stable dice rolling",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns rolling dice and comparing scores",
+    "rules_version": "Individual version",
+    "aliases": "Bunco (Individual Edition); Bunco"
+  },
+  "camel-up": {
+    "setup_items": "Pyramid dice cup, camels, betting and spectator tiles",
+    "conditions": "Requires a table with room for a shared board or model",
+    "win_relation": "Individual competition",
+    "interaction": "Open betting and valuation",
+    "rules_version": "Second edition",
+    "aliases": "Camel Race"
+  },
+  "captain-sonar": {
+    "setup_items": "Two screens, role boards, transparent sheets and dry-erase markers",
+    "conditions": "Requires screens and ample table space",
+    "win_relation": "Team vs. team",
+    "interaction": "Team cooperation and competition",
+    "rules_version": "Base game: turn-based or real-time",
+    "aliases": ""
+  },
+  "carcassonne": {
+    "setup_items": "Landscape tiles, colored followers, and a scoreboard",
+    "conditions": "Requires table space to expand the shared map",
+    "win_relation": "Individual competition",
+    "interaction": "Can co-build the same city while competing for follower majority",
+    "rules_version": "Base game, including optional farmer rules",
+    "aliases": ""
+  },
+  "cartographers": {
+    "setup_items": "Map sheets, explore and ambush cards, season and scoring cards, pencils",
+    "conditions": "Each player needs a map sheet and a pencil; larger tables need extra map sheets",
+    "win_relation": "Solo challenge or competitive play",
+    "interaction": "Shared card reveals and scoring goals; ambushes have you draw on someone else's map",
+    "rules_version": "Base game",
+    "aliases": "Cartographers"
+  },
+  "cascadia": {
+    "setup_items": "Habitat tiles, wildlife tokens, wildlife scoring cards, nature tokens",
+    "conditions": "A table large enough to spread out personal maps",
+    "win_relation": "Solo challenge or competitive play",
+    "interaction": "Take turns choosing tiles and animals from the shared area",
+    "rules_version": "Base game",
+    "aliases": "Cascadia"
+  },
+  "catan": {
+    "setup_items": "Terrain hexes, number tokens and ports, roads and buildings, resources and development cards, robber, dice",
+    "conditions": "For players who like to propose trades face to face",
+    "win_relation": "Individual competition",
+    "interaction": "Voluntary resource trading and competing for intersections on a shared map",
+    "rules_version": "Base game, excluding the 5–6 player expansion",
+    "aliases": "Catan, The Settlers of Catan"
+  },
+  "categories": {
+    "setup_items": "Paper, pencils, timer",
+    "conditions": "All players know the same letters and vocabulary",
+    "win_relation": "Individual competition",
+    "interaction": "Simultaneous answers and answer comparison",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "challengers": {
+    "setup_items": "Park mats, tournament schedule, decks, flags, and trophy",
+    "conditions": "Space for multiple two-player games at the same time",
+    "win_relation": "Head-to-head, individual competition, solo challenge",
+    "interaction": "Pairing competition",
+    "rules_version": "Base tournament version",
+    "aliases": "Challengers!"
+  },
+  "charades": {
+    "setup_items": "Prompt slips, timer",
+    "conditions": "Clear some space to move",
+    "win_relation": "Team competition",
+    "interaction": "Giving clues and guessing",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "chase-the-ace": {
+    "setup_items": "Standard playing cards",
+    "conditions": "A table for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Probing opponents and reading bluffs",
+    "rules_version": "Traditional rules",
+    "aliases": "Cuckoo"
+  },
+  "cheat": {
+    "setup_items": "Standard playing cards",
+    "conditions": "A table for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Probing opponents and judging bluffs",
+    "rules_version": "Traditional rules",
+    "aliases": "I Doubt It, Bullshit"
+  },
+  "chicago": {
+    "setup_items": "Two six-sided dice, a score sheet, and a pencil",
+    "conditions": "A flat surface for stable dice rolling",
+    "win_relation": "Individual competition",
+    "interaction": "Players take turns rolling dice and comparing scores",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "chopsticks": {
+    "setup_items": "No components required",
+    "conditions": "",
+    "win_relation": "Two-player competitive",
+    "interaction": "Observe and respond to your opponent's actions",
+    "rules_version": "Basic rules",
+    "aliases": "Finger Chess"
+  },
+  "citadels": {
+    "setup_items": "Character cards, district cards, gold, and the crown",
+    "conditions": "A table with room for public cards",
+    "win_relation": "Individual competition",
+    "interaction": "Competing for shared resources",
+    "rules_version": "New edition base game",
+    "aliases": "Citadels"
+  },
+  "clank-catacombs": {
+    "setup_items": "Catacomb tiles, Clank! cubes, dragon bag, artifacts and face-up card row",
+    "conditions": "A table with room for the shared map or miniatures",
+    "win_relation": "Individual competition",
+    "interaction": "Area control and direct conflict",
+    "rules_version": "Catacombs base multiplayer edition",
+    "aliases": "Clank! Catacombs"
+  },
+  "codenames": {
+    "setup_items": "25 word cards, key card, team and assassin markers; handwritten slips can substitute",
+    "conditions": "Use words familiar to everyone at the table",
+    "win_relation": "Team vs. team; 2–3 players can use a fewer-player variant",
+    "interaction": "The spymaster gives clues; teammates discuss guesses together",
+    "rules_version": "Classic base game",
+    "aliases": ""
+  },
+  "colt-express": {
+    "setup_items": "3D train, bandit action cards, bullet cards and loot",
+    "conditions": "Requires a table with room for a shared board or models",
+    "win_relation": "Individual competition",
+    "interaction": "Area competition and direct confrontation",
+    "rules_version": "Base game",
+    "aliases": "Colt Express"
+  },
+  "concentration": {
+    "setup_items": "Standard playing cards",
+    "conditions": "Requires a table for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns playing cards and observing opponents",
+    "rules_version": "Traditional rules",
+    "aliases": "Memory, Matching Pairs"
+  },
+  "connect-four": {
+    "setup_items": "Grid paper, two pens",
+    "conditions": "Requires a flat writing surface",
+    "win_relation": "Two-player competitive",
+    "interaction": "Observe and respond to your opponent's moves",
+    "rules_version": "Paper-and-pencil version",
+    "aliases": "Four in a Row"
+  },
+  "contact": {
+    "setup_items": "No components required",
+    "conditions": "Players share the same alphabet and vocabulary",
+    "win_relation": "Word keeper vs. guessers",
+    "interaction": "Giving clues and guessing",
+    "rules_version": "Basic game",
+    "aliases": ""
+  },
+  "crazy-eights": {
+    "setup_items": "Standard playing cards",
+    "conditions": "Table space to deal and play cards",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns playing cards and watching opponents",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "cthulhu-death-may-die": {
+    "setup_items": "Investigators, Elder One and episode modules, dice and map board",
+    "conditions": "Horror theme required",
+    "win_relation": "Fully cooperative, solo challenge",
+    "interaction": "Shared actions and discussion",
+    "rules_version": "Season 1 base game",
+    "aliases": "Cthulhu: Death May Die"
+  },
+  "deception-murder-in-hong-kong": {
+    "setup_items": "Role cards, Means cards, Clue cards, Scene tiles, clue markers, and badges",
+    "conditions": "The Forensic Scientist can win or lose; everyone must be able to see the cards on the table",
+    "win_relation": "Team vs. team",
+    "interaction": "The Forensic Scientist cannot explain clues freely; the murderer hides among the discussers",
+    "rules_version": "Hong Kong Case base edition",
+    "aliases": "Crime Scene, CS Files"
+  },
+  "detective-city-of-angels": {
+    "setup_items": "Case book, suspect and evidence cards, calendar, investigation log",
+    "conditions": "Requires reading case text",
+    "win_relation": "Individual competition, asymmetric, full co-op, solo challenge",
+    "interaction": "Questioning and deduction",
+    "rules_version": "Base game: Classic and Solo modes",
+    "aliases": ""
+  },
+  "dig-your-way-out": {
+    "setup_items": "Prison map, prisoner boards, search cards, cigarettes and tools",
+    "conditions": "Requires a table with space for the shared map or models",
+    "win_relation": "Individual competition",
+    "interaction": "Area control and direct confrontation",
+    "rules_version": "Base individual competition version",
+    "aliases": ""
+  },
+  "dito-jinxo": {
+    "setup_items": "Prompts, one 3×3 grid with row/column bonuses per player, and pens",
+    "conditions": "Everyone can write short answers in the same language",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns calling out words; everyone checks which answers match",
+    "rules_version": "Dito! base game (JinxO is an alternate title for the same game)",
+    "aliases": "JinxO, Dito!"
+  },
+  "dixit": {
+    "setup_items": "Illustrated cards, voting dials, card-position markers, and scoring pawns",
+    "conditions": "Everyone can see card details and hear the clue clearly",
+    "win_relation": "Individual competition",
+    "interaction": "Others play similar cards to mislead; vote to find the storyteller's card",
+    "rules_version": "2021 new edition base game",
+    "aliases": "Dixit"
+  },
+  "dominion": {
+    "setup_items": "Basic Treasure, Victory, and Curse cards; ten Kingdom card piles; Trash pile",
+    "conditions": "Each player can see the shared Supply piles",
+    "win_relation": "Individual competition",
+    "interaction": "Race to buy from limited piles; Attack cards can affect opponents' hands or decks",
+    "rules_version": "Second Edition base set",
+    "aliases": ""
+  },
+  "doodle-dash": {
+    "setup_items": "Paper, pens, your own prompts, dice and finish markers",
+    "conditions": "Requires a flat drawing surface",
+    "win_relation": "Individual competition",
+    "interaction": "Simultaneous drawing and guessing",
+    "rules_version": "Base game",
+    "aliases": ""
+  },
+  "dots-and-boxes": {
+    "setup_items": "Paper and pencil",
+    "conditions": "Requires a flat writing surface",
+    "win_relation": "Individual or partner play",
+    "interaction": "Observe opponents and respond to their moves",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "drop-dead": {
+    "setup_items": "Five six-sided dice",
+    "conditions": "A flat, stable rolling surface",
+    "win_relation": "Individual competition",
+    "interaction": "Players take turns rolling dice and comparing scores",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "dune-imperium": {
+    "setup_items": "Original board, envoys, leader cards, conflict cards, and troops",
+    "conditions": "Requires longer playtime and ample table space",
+    "win_relation": "Competitive, solo challenge",
+    "interaction": "Competing for shared resources",
+    "rules_version": "Original base game",
+    "aliases": "Dune: Imperium"
+  },
+  "dune-imperium-uprising": {
+    "setup_items": "Base box, six-player board, two commanders, and ally components",
+    "conditions": "Requires a long playtime and ample table space",
+    "win_relation": "Individual competition, team conflict, solo challenge",
+    "interaction": "Team cooperation and conflict",
+    "rules_version": "Uprising base game and included six-player mode",
+    "aliases": ""
+  },
+  "durak": {
+    "setup_items": "36 standard playing cards (6 to Ace)",
+    "conditions": "A table for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns playing cards and watching opponents",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "egyptian-ratscrew": {
+    "setup_items": "Standard playing cards",
+    "conditions": "Table center within everyone's reach",
+    "win_relation": "Individual competition",
+    "interaction": "Simultaneous grabbing or racing to act",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "euchre": {
+    "setup_items": "24 cards from a standard deck (9–A)",
+    "conditions": "A table for dealing and playing cards",
+    "win_relation": "Fixed partnerships",
+    "interaction": "Take turns following suit and competing for tricks",
+    "rules_version": "Four-player turn-up trump variant",
+    "aliases": "Euchre"
+  },
+  "exploding-kittens": {
+    "setup_items": "Original Cat cards, Defuse cards, and Action cards",
+    "conditions": "Eliminated players sit out until the next game",
+    "win_relation": "Individual competition; last player standing wins",
+    "interaction": "Can force the next player to take extra turns and choose where Defused Exploding Kittens return to the deck",
+    "rules_version": "Original Edition (Base Game)",
+    "aliases": "Exploding Kittens"
+  },
+  "exquisite-corpse": {
+    "setup_items": "Paper and pens",
+    "conditions": "Requires a flat writing surface",
+    "win_relation": "Shared participation, no scoring needed",
+    "interaction": "Pass around in turns, create together",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "farkle": {
+    "setup_items": "Six six-sided dice, a score sheet, and a pen",
+    "conditions": "A flat surface for stable dice rolling",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns rolling dice and comparing scores",
+    "rules_version": "Fixed-scoring version",
+    "aliases": ""
+  },
+  "fictionary": {
+    "setup_items": "Dictionary or word list, matching slips of paper, pens",
+    "conditions": "",
+    "win_relation": "Individual competition",
+    "interaction": "Probing opponents and spotting bluffs",
+    "rules_version": "Base game",
+    "aliases": ""
+  },
+  "fishbowl": {
+    "setup_items": "Slips of paper, bowl, timer",
+    "conditions": "",
+    "win_relation": "Team versus team",
+    "interaction": "Giving clues and guessing",
+    "rules_version": "Basic rules",
+    "aliases": "Celebrity, The Name Game"
+  },
+  "five-card-draw": {
+    "setup_items": "Standard playing cards, chips or substitutes",
+    "conditions": "A table suitable for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Probe opponents and read bluffs",
+    "rules_version": "Play-chip edition",
+    "aliases": ""
+  },
+  "flip-7": {
+    "setup_items": "Dedicated number cards, action cards, score sheet or scorekeeper",
+    "conditions": "A table with room for shared cards",
+    "win_relation": "Individual competition",
+    "interaction": "Observe opponents and judge risk",
+    "rules_version": "Base game",
+    "aliases": "Flip Seven"
+  },
+  "flip-7-with-a-vengeance": {
+    "setup_items": "Standalone Vengeance deck, scoring tool",
+    "conditions": "A table with room for shared cards",
+    "win_relation": "Individual competition",
+    "interaction": "Observing opponents and assessing risk",
+    "rules_version": "Standalone Vengeance edition",
+    "aliases": "7 Flips: Rivals Meet"
+  },
+  "forehead-poker": {
+    "setup_items": "Standard playing cards, scoring chips",
+    "conditions": "A table suitable for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Probe opponents and judge bluffs",
+    "rules_version": "Traditional rules",
+    "aliases": "Indian Poker"
+  },
+  "fortunately-unfortunately": {
+    "setup_items": "No props needed",
+    "conditions": "",
+    "win_relation": "Cooperative; scoring optional",
+    "interaction": "Turn-taking and collaborative storytelling",
+    "rules_version": "Base rules",
+    "aliases": ""
+  },
+  "freeze-dance": {
+    "setup_items": "Phone or music player with play/pause",
+    "conditions": "Clear space to move",
+    "win_relation": "Individual competition",
+    "interaction": "Movement and reaction",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "gaia-project": {
+    "setup_items": "Modular star map, faction boards, buildings and power tokens",
+    "conditions": "Long playtime and ample table space",
+    "win_relation": "Competitive play, solo challenge",
+    "interaction": "Competing for shared resources",
+    "rules_version": "Base game",
+    "aliases": ""
+  },
+  "garbage": {
+    "setup_items": "Standard playing cards",
+    "conditions": "A table suitable for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns playing cards and observing opponents",
+    "rules_version": "Traditional rules",
+    "aliases": "Trash"
+  },
+  "ghost": {
+    "setup_items": "No components needed",
+    "conditions": "Players share the same alphabet and vocabulary",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns playing and observing opponents",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "gin-rummy": {
+    "setup_items": "Standard playing cards",
+    "conditions": "A table for dealing and playing cards",
+    "win_relation": "Two-player competitive",
+    "interaction": "Take turns playing cards and observing your opponent",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "gloomhaven-jaws-of-the-lion": {
+    "aliases": "Gloomhaven: Jaws of the Lion, Jaws of the Lion",
+    "conditions": "Solo play requires controlling two characters at once; campaign progress must be saved",
+    "interaction": "Act in initiative order, coordinating positioning, attacks, and objective control",
+    "rules_version": "Jaws of the Lion standalone base game",
+    "setup_items": "Scenario book, character and ability cards, monster standees, attack modifier cards, and status tokens",
+    "win_relation": "Fully cooperative"
+  },
+  "go-fish": {
+    "setup_items": "Standard playing cards",
+    "conditions": "Requires a table for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Taking turns playing cards and watching opponents",
+    "rules_version": "Traditional rules",
+    "aliases": "Fish"
+  },
+  "going-to-boston": {
+    "setup_items": "Three six-sided dice",
+    "conditions": "Requires a flat, stable rolling surface",
+    "win_relation": "Individual competition",
+    "interaction": "Players take turns rolling dice and comparing scores",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "hadrians-wall": {
+    "setup_items": "Personal sheets, pen, workers and resources, Fate cards",
+    "conditions": "Requires a flat writing surface",
+    "win_relation": "Solo challenge, individual competition",
+    "interaction": "Individual planning and score comparison",
+    "rules_version": "Base game",
+    "aliases": ""
+  },
+  "hangman": {
+    "setup_items": "Paper and pencil",
+    "conditions": "Players know the same alphabet and vocabulary",
+    "win_relation": "Word setter versus guessers",
+    "interaction": "Giving clues and guessing",
+    "rules_version": "Basic rules",
+    "aliases": "Guess the Word"
+  },
+  "heads-up": {
+    "setup_items": "Prompt slips, timer",
+    "conditions": "",
+    "win_relation": "Individual competition",
+    "interaction": "Giving clues and guessing",
+    "rules_version": "Custom prompt edition",
+    "aliases": ""
+  },
+  "hearts": {
+    "setup_items": "Standard playing cards",
+    "conditions": "A table suitable for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns following suit and competing for tricks",
+    "rules_version": "Basic 4-player version",
+    "aliases": ""
+  },
+  "heat-pedal-to-the-metal": {
+    "setup_items": "Track board, race cars, gear pawns, speed cards, and Heat cards",
+    "conditions": "A table with room for a shared board or miniatures",
+    "win_relation": "Individual race, solo challenge",
+    "interaction": "Racing and fighting for position",
+    "rules_version": "Base game, standard racing",
+    "aliases": "Heat: Pedal to the Metal, HEAT"
+  },
+  "herd-mentality": {
+    "setup_items": "Questions, paper and pencils, scoring tokens, and a pink cow token",
+    "conditions": "Players secretly write answers; questions use everyday things everyone at the table understands",
+    "win_relation": "Individual competition",
+    "interaction": "Everyone answers the same question; after the reveal, see who matched the most common answer",
+    "rules_version": "Base game",
+    "aliases": "Herd Mentality"
+  },
+  "heredity-the-book-of-swan": {
+    "setup_items": "Chapter cards, map cards, action tokens, karma cards",
+    "conditions": "Best for a consistent group that can play the campaign continuously",
+    "win_relation": "Full co-op, solo challenge",
+    "interaction": "Shared actions and discussion",
+    "rules_version": "The Book of Swan — Base Edition",
+    "aliases": ""
+  },
+  "hot-seat": {
+    "setup_items": "Timer",
+    "conditions": "Best for tablemates willing to converse",
+    "win_relation": "Shared participation; no scoring",
+    "interaction": "Taking turns speaking and listening",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "human-knot": {
+    "setup_items": "No props needed",
+    "conditions": "Clear space to move",
+    "win_relation": "Cooperative",
+    "interaction": "Physical coordination or reaction",
+    "rules_version": "Base rules",
+    "aliases": ""
+  },
+  "i-spy": {
+    "setup_items": "No props needed",
+    "conditions": "Can see objects in a shared space",
+    "win_relation": "Cooperative",
+    "interaction": "Giving clues and guessing",
+    "rules_version": "Basic game",
+    "aliases": ""
+  },
+  "incan-gold-diamant": {
+    "setup_items": "Cave cards, gems, camp, and personal chests",
+    "conditions": "Requires table space for shared cards",
+    "win_relation": "Individual competition",
+    "interaction": "Observe opponents and assess risk",
+    "rules_version": "Base cave exploration version",
+    "aliases": "Diamant, Incan Gold"
+  },
+  "just-a-minute": {
+    "setup_items": "Timer",
+    "conditions": "",
+    "win_relation": "Individual competition",
+    "interaction": "Timed speaking and responses",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "just-one": {
+    "setup_items": "Paper and pen with your own clues, or game cards",
+    "conditions": "Requires a flat writing surface",
+    "win_relation": "Fully cooperative",
+    "interaction": "Shared action and discussion",
+    "rules_version": "Classic 13-card version",
+    "aliases": ""
+  },
+  "kemps": {
+    "setup_items": "Standard playing cards; two decks for eight to ten players",
+    "conditions": "The table center should be within everyone's reach",
+    "win_relation": "Fixed-partner teams compete",
+    "interaction": "Simultaneous card-grabbing or racing to act",
+    "rules_version": "Traditional rules",
+    "aliases": "Kemps"
+  },
+  "king-of-tokyo": {
+    "setup_items": "Monster boards and standees, Tokyo board, six basic dice, energy cubes, and power cards",
+    "conditions": "Direct attacks and player elimination",
+    "win_relation": "Individual competition; win by victory points or knocking out opponents",
+    "interaction": "Inside Tokyo, hit every monster outside, but also take their counterattacks",
+    "rules_version": "Multiplayer base game",
+    "aliases": "King of Tokyo, Tokyo Monsters"
+  },
+  "kings-in-the-corner": {
+    "setup_items": "Standard playing cards",
+    "conditions": "A table suitable for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns playing cards and observing opponents",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "knockout-whist": {
+    "setup_items": "Standard playing cards",
+    "conditions": "Requires a table for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Taking turns following suit and competing for tricks",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "left-center-right": {
+    "setup_items": "Three six-sided dice; three chips or beans per player",
+    "conditions": "A flat surface suitable for rolling dice",
+    "win_relation": "Individual competition",
+    "interaction": "Passing chips",
+    "rules_version": "Standard dice version",
+    "aliases": "LCR"
+  },
+  "legends-of-the-three-kingdoms-fight-the-landlord": {
+    "setup_items": "A Legends of the Three Kingdoms Online client with the corresponding mode, or cards and generals matching that version",
+    "conditions": "Use the corresponding-mode client or matching deck",
+    "win_relation": "Asymmetric confrontation",
+    "interaction": "Contested areas and direct confrontation",
+    "rules_version": "Legends of the Three Kingdoms Online: Fight the Landlord mode",
+    "aliases": "Fight the Landlord (Legends of the Three Kingdoms)"
+  },
+  "liars-dice": {
+    "setup_items": "Five six-sided dice per player; cup for hiding dice",
+    "conditions": "Secret information; easy seating around a table",
+    "win_relation": "Individual competition",
+    "interaction": "Probe opponents and judge bluffs",
+    "rules_version": "Ones are not wild",
+    "aliases": ""
+  },
+  "lifeboat": {
+    "setup_items": "Character and seat cards, Love/Hate cards, provision cards, navigation cards, injury and bird markers",
+    "conditions": "Open conflict and player elimination; suits groups comfortable with direct confrontation",
+    "win_relation": "Individual scoring; eliminated players can still score",
+    "interaction": "Compete for provisions, recruit allies in fights, secretly protect loved ones or target enemies",
+    "rules_version": "Jeff Siadek's original base game",
+    "aliases": "Lifeboat"
+  },
+  "midnight": {
+    "setup_items": "Six six-sided dice",
+    "conditions": "A flat surface for stable dice rolling",
+    "win_relation": "Individual competition",
+    "interaction": "Players take turns rolling dice and comparing scores",
+    "rules_version": "Traditional",
+    "aliases": "1-4-24"
+  },
+  "modern-art": {
+    "setup_items": "Painting cards, cash, screens, and market board",
+    "conditions": "A table with room for public cards",
+    "win_relation": "Individual competition",
+    "interaction": "Open bidding and valuation",
+    "rules_version": "Classic base version",
+    "aliases": ""
+  },
+  "most-likely-to": {
+    "setup_items": "No props needed",
+    "conditions": "Best with players willing to talk",
+    "win_relation": "Shared participation; scoring optional",
+    "interaction": "Take turns speaking and listening",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "never-have-i-ever": {
+    "setup_items": "No props required",
+    "conditions": "Best with players willing to talk",
+    "win_relation": "Shared participation; scoring optional",
+    "interaction": "Take turns speaking and listening",
+    "rules_version": "Non-alcoholic version",
+    "aliases": "I Have Never"
+  },
+  "night-of-the-ninja": {
+    "setup_items": "House rank cards, ninja cards, honour tokens",
+    "conditions": "Seated group discussion",
+    "win_relation": "Hidden factions, individual competition",
+    "interaction": "Hidden information and faction deduction",
+    "rules_version": "Base game",
+    "aliases": ""
+  },
+  "nim": {
+    "setup_items": "Fifteen coins or beans, or mark them on paper",
+    "conditions": "",
+    "win_relation": "Two-player competitive",
+    "interaction": "Observe your opponent and respond to their moves",
+    "rules_version": "Normal play",
+    "aliases": ""
+  },
+  "oh-hell": {
+    "setup_items": "Standard playing cards",
+    "conditions": "A table surface for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Taking turns following suit and competing for tricks",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "old-maid": {
+    "setup_items": "Standard playing cards",
+    "conditions": "A table for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Taking turns playing cards and observing opponents",
+    "rules_version": "Single Queen version",
+    "aliases": ""
+  },
+  "one-word-story": {
+    "setup_items": "No props needed",
+    "conditions": "",
+    "win_relation": "Cooperative; optional scoring",
+    "interaction": "Turn-taking and collaborative storytelling",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "palace": {
+    "setup_items": "Standard playing cards",
+    "conditions": "Requires a table for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns playing cards and watching opponents",
+    "rules_version": "Traditional rules",
+    "aliases": "Shithead"
+  },
+  "pandemic": {
+    "setup_items": "World map, role pawns and role cards, disease cubes, card decks, and research stations",
+    "conditions": "Whole table discusses routes and assignments together",
+    "win_relation": "All players cooperate",
+    "interaction": "Split disease treatment, exchange city cards, and coordinate turns",
+    "rules_version": "Base game",
+    "aliases": "Pandemic, original Pandemic"
+  },
+  "password": {
+    "setup_items": "Word slips",
+    "conditions": "",
+    "win_relation": "Team competition",
+    "interaction": "Give clues and guess",
+    "rules_version": "Base game",
+    "aliases": ""
+  },
+  "pictionary": {
+    "setup_items": "Paper, pencil, timer",
+    "conditions": "Requires a flat drawing surface",
+    "win_relation": "Team vs. team",
+    "interaction": "Give clues and guess",
+    "rules_version": "Custom prompt version",
+    "aliases": "Draw and Guess"
+  },
+  "pig": {
+    "setup_items": "One six-sided die, a score sheet, and a pencil",
+    "conditions": "A flat, stable surface for rolling",
+    "win_relation": "Individual competition",
+    "interaction": "Players take turns rolling and comparing scores",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "poker-dice": {
+    "setup_items": "Five six-sided dice",
+    "conditions": "Requires a flat surface for stable dice rolling",
+    "win_relation": "Individual competition",
+    "interaction": "Players take turns rolling dice and comparing scores",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "power-grid": {
+    "setup_items": "Map, power plant cards, fuel market, Elektro and houses",
+    "conditions": "Requires a longer play time and ample table space",
+    "win_relation": "Individual competition",
+    "interaction": "Open auctions and valuation",
+    "rules_version": "Recharged edition: USA or Germany map",
+    "aliases": ""
+  },
+  "president": {
+    "setup_items": "Standard playing cards",
+    "conditions": "Requires a table for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns playing cards and observing opponents",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "reverse-charades": {
+    "aliases": "",
+    "conditions": "Open play space",
+    "interaction": "Give clues and guess",
+    "rules_version": "Basic rules",
+    "setup_items": "Prompt slips, timer",
+    "win_relation": "Team vs. team"
+  },
+  "rock-paper-scissors-tournament": {
+    "setup_items": "No components needed; paper can track the bracket",
+    "conditions": "",
+    "win_relation": "Individual competition",
+    "interaction": "Physical coordination or reaction",
+    "rules_version": "Basic gameplay",
+    "aliases": ""
+  },
+  "root": {
+    "setup_items": "Woodland map, four faction boards and pieces, shared deck",
+    "conditions": "Long play time; ample table space needed",
+    "win_relation": "Competitive, asymmetric",
+    "interaction": "Area control and direct conflict",
+    "rules_version": "Base game with four factions",
+    "aliases": ""
+  },
+  "rummy": {
+    "setup_items": "Standard playing cards",
+    "conditions": "Requires a table to deal and play cards",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns playing cards and watching opponents",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "seti-search-for-extraterrestrial-intelligence": {
+    "setup_items": "Rotating solar system, probes, data markers, personal computer boards",
+    "conditions": "Requires a longer play time and ample table space",
+    "win_relation": "Competitive, solo challenge",
+    "interaction": "Competition for shared resources",
+    "rules_version": "Base game",
+    "aliases": "SETI: Search for Extraterrestrial Intelligence"
+  },
+  "sevens-dice": {
+    "setup_items": "Six six-sided dice",
+    "conditions": "Requires a flat surface for rolling dice",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns rolling dice and comparing scores",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "sevens-fan-tan": {
+    "setup_items": "Standard playing cards",
+    "conditions": "A table suitable for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns playing cards and observing opponents",
+    "rules_version": "Traditional rules",
+    "aliases": "Fan Tan, Sevens"
+  },
+  "ship-captain-and-crew": {
+    "setup_items": "Five six-sided dice",
+    "conditions": "A flat, stable surface for rolling dice",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns rolling dice and comparing scores",
+    "rules_version": "Traditional rules",
+    "aliases": "Captain and Crew"
+  },
+  "shut-the-box": {
+    "setup_items": "Two six-sided dice, paper and pencil",
+    "conditions": "Requires a flat, stable rolling surface",
+    "win_relation": "Solo challenge or competitive play",
+    "interaction": "Take turns rolling dice and compare scores",
+    "rules_version": "Paper-and-pencil version",
+    "aliases": ""
+  },
+  "six-card-golf": {
+    "setup_items": "Standard playing cards",
+    "conditions": "A table for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns playing cards and watching opponents",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "skull": {
+    "setup_items": "3 flowers and 1 skull per player; homemade discs with identical backs work; plus win markers.",
+    "conditions": "Each player needs space to stack opaque-backed discs face down in front of them.",
+    "win_relation": "Individual competition.",
+    "interaction": "You must also reveal your own discs to fulfill a bid; opponents can raise or drop out.",
+    "rules_version": "Classic base rules.",
+    "aliases": "Skull, Skull & Roses, Skull and Roses"
+  },
+  "sky-team": {
+    "setup_items": "Cockpit panel, approach and altitude tracks, dice, screens, airplane and instrument markers",
+    "conditions": "Each player needs to conceal their dice",
+    "win_relation": "Full cooperation",
+    "interaction": "Roll dice secretly, then take turns placing dice to control the same aircraft",
+    "rules_version": "Base game",
+    "aliases": ""
+  },
+  "slapjack": {
+    "setup_items": "Standard playing cards",
+    "conditions": "The center of the table should be within reach of all players",
+    "win_relation": "Individual competition",
+    "interaction": "Simultaneous grabbing or racing to act first",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "snap": {
+    "setup_items": "Standard playing cards",
+    "conditions": "Table center within everyone's reach",
+    "win_relation": "Individual competition",
+    "interaction": "Simultaneous grabbing or first to act",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "sos": {
+    "setup_items": "Paper and pencil",
+    "conditions": "Requires a flat writing surface",
+    "win_relation": "Individual competition",
+    "interaction": "Observe opponents and respond to their moves",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "spades": {
+    "setup_items": "Standard playing cards",
+    "conditions": "A table suitable for dealing and playing cards",
+    "win_relation": "Fixed partnerships compete",
+    "interaction": "Players take turns following suit and competing for tricks",
+    "rules_version": "Fixed-partnership edition",
+    "aliases": ""
+  },
+  "speed": {
+    "setup_items": "Standard playing cards",
+    "conditions": "Table center within reach of all players",
+    "win_relation": "Two-player head-to-head",
+    "interaction": "Simultaneous play or racing to act first",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "spirit-island": {
+    "setup_items": "Island boards, Spirit panels, Presence tokens, Power and Fear cards, Invader pieces, Blight tokens, and Dahan",
+    "conditions": "Track the Invaders' action order together",
+    "win_relation": "Fully cooperative",
+    "interaction": "Spirits divide up the lands, moving enemies where allies can handle them",
+    "rules_version": "Base game",
+    "aliases": "Spirit Island"
+  },
+  "spit": {
+    "setup_items": "Standard playing cards",
+    "conditions": "The center of the table must be within easy reach of all players",
+    "win_relation": "Two-player competitive",
+    "interaction": "Simultaneous grabbing or racing to act first",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "splendor": {
+    "setup_items": "Development cards, noble tiles, gem and gold tokens",
+    "conditions": "Everyone can clearly see the cards on the table and the tokens",
+    "win_relation": "Individual competition",
+    "interaction": "Competing for the same development card, gem tokens, or noble",
+    "rules_version": "Classic multiplayer base game",
+    "aliases": "Splendor"
+  },
+  "spoons": {
+    "setup_items": "Standard playing cards, spoons (one fewer than players)",
+    "conditions": "Center of the table must be within everyone's reach",
+    "win_relation": "Individual competition",
+    "interaction": "Simultaneous grabbing or racing to act first",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "sprouts": {
+    "setup_items": "Paper and pen",
+    "conditions": "Needs a flat writing surface",
+    "win_relation": "Individual competition",
+    "interaction": "Observe opponents and respond to their moves",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "spyfall": {
+    "setup_items": "Location slips, spy slips, timer",
+    "conditions": "Space to sit in a circle and keep identities or information secret",
+    "win_relation": "Hidden-team competition",
+    "interaction": "Observation, discussion, and identity deduction",
+    "rules_version": "Custom Location Edition",
+    "aliases": "Spyfall (Custom Location Edition), Spy Crisis"
+  },
+  "sushi-go-party": {
+    "setup_items": "Sushi cards, menu boards, score board, and pawns",
+    "conditions": "Everyone can see the menu and played cards on the table",
+    "win_relation": "Individual competition",
+    "interaction": "Each player keeps one card and passes the rest of their hand to the neighbor",
+    "rules_version": "Party! edition",
+    "aliases": "Sushi Party; Conveyor Belt Sushi Party"
+  },
+  "taboo": {
+    "setup_items": "Target slips, timer",
+    "conditions": "",
+    "win_relation": "Team competition",
+    "interaction": "Giving clues and guessing",
+    "rules_version": "Custom-prompt version",
+    "aliases": ""
+  },
+  "tag-team": {
+    "setup_items": "Fighter boards, fight and build decks, health and ability tokens",
+    "conditions": "A table with space for public cards",
+    "win_relation": "Two-player competitive",
+    "interaction": "Area control and head-to-head combat",
+    "rules_version": "Base game",
+    "aliases": "Partner Squad"
+  },
+  "telephone": {
+    "setup_items": "No components required",
+    "conditions": "",
+    "win_relation": "Everyone plays together; scoring optional",
+    "interaction": "Turn-based passing and collaborative creation",
+    "rules_version": "Basic game",
+    "aliases": "Chinese Whispers"
+  },
+  "telephone-pictionary": {
+    "setup_items": "Each player gets a small paper packet and a pen",
+    "conditions": "Requires a flat writing surface",
+    "win_relation": "Participatory; scoring optional",
+    "interaction": "Pass in turns and create together",
+    "rules_version": "Paper-and-pencil version",
+    "aliases": "Paper Telephone"
+  },
+  "terraforming-mars": {
+    "setup_items": "Mars map, corporation and project cards, player boards, resource cubes, city, ocean, and greenery tiles",
+    "conditions": "Requires corporation boards and many project cards",
+    "win_relation": "Solo timed challenge or competitive play",
+    "interaction": "Shared global parameters and map; competing for good spots and milestones",
+    "rules_version": "Base game; solo mode uses the base solo goals",
+    "aliases": ""
+  },
+  "terrorscape": {
+    "setup_items": "Screen, two maps, keys, noise and repair tokens",
+    "conditions": "Requires a screen and ample table space",
+    "win_relation": "Asymmetric confrontation",
+    "interaction": "Hidden positions and tracking",
+    "rules_version": "Base game",
+    "aliases": ""
+  },
+  "texas-holdem": {
+    "setup_items": "Standard playing cards, chips or substitutes",
+    "conditions": "A table suitable for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Probing opponents and judging bluffs",
+    "rules_version": "No-limit play-chip version",
+    "aliases": ""
+  },
+  "the-castles-of-burgundy": {
+    "setup_items": "Estate boards, six-sided dice, workers, silver coins, hex tiles",
+    "conditions": "Needs a long playtime and plenty of table space",
+    "win_relation": "Individual competition",
+    "interaction": "Competing for shared resources",
+    "rules_version": "Base multiplayer edition",
+    "aliases": "The Castles of Burgundy"
+  },
+  "the-crew-mission-deep-sea": {
+    "setup_items": "Four-color cards, four submarine trump cards, task cards, sonar markers, mission log",
+    "conditions": "Hands must be kept secret from other players",
+    "win_relation": "Fully cooperative",
+    "interaction": "Limited communication; work with teammates to win specific tricks",
+    "rules_version": "Mission Deep Sea base game",
+    "aliases": "Mission Deep Sea"
+  },
+  "the-gang": {
+    "setup_items": "Standard playing cards, four sets of numbered chips, success/failure markers",
+    "conditions": "A table with space for community cards",
+    "win_relation": "Full cooperation",
+    "interaction": "Joint actions and discussion",
+    "rules_version": "Basic co-op mode",
+    "aliases": ""
+  },
+  "the-message": {
+    "setup_items": "Identity cards, role cards, intelligence and function cards",
+    "conditions": "Seated group discussion",
+    "win_relation": "Hidden factions, asymmetric conflict",
+    "interaction": "Hidden information and faction deduction",
+    "rules_version": "The Message: Reborn Base Game",
+    "aliases": "The Message: Reborn"
+  },
+  "the-resistance-avalon": {
+    "setup_items": "Identity and quest cards, approve/reject tokens, round tracker",
+    "conditions": "Good for table discussion",
+    "win_relation": "Hidden factions, team vs. team",
+    "interaction": "Hidden information and faction deduction",
+    "rules_version": "Classic base version",
+    "aliases": "Avalon; King of Avalon"
+  },
+  "the-search-for-lost-species": {
+    "setup_items": "Island map, record sheets, device running the official app",
+    "conditions": "Phone or tablet that can run the companion app",
+    "win_relation": "Competitive; solo challenge",
+    "interaction": "Individual planning and comparing scores",
+    "rules_version": "Base game",
+    "aliases": "The Search for Lost Species"
+  },
+  "thirty-one": {
+    "setup_items": "Standard playing cards",
+    "conditions": "A table for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns playing cards and watching opponents",
+    "rules_version": "Traditional rules",
+    "aliases": "Scat"
+  },
+  "three-or-more": {
+    "setup_items": "Five six-sided dice, a score sheet, and a pen",
+    "conditions": "Needs a flat surface for stable dice rolling",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns rolling dice and comparing scores",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "tic-tac-toe": {
+    "setup_items": "Paper and pencil",
+    "conditions": "Requires a flat writing surface",
+    "win_relation": "Two-player competitive",
+    "interaction": "Observe your opponent and respond to their moves",
+    "rules_version": "Basic gameplay",
+    "aliases": ""
+  },
+  "ticket-to-ride": {
+    "setup_items": "North America map, train pieces, train cards, destination tickets, scoring markers",
+    "conditions": "A table large enough for the shared map",
+    "win_relation": "Individual competition",
+    "interaction": "Compete for shared routes; may force opponents to detour",
+    "rules_version": "North America base game",
+    "aliases": ""
+  },
+  "time-bomb": {
+    "setup_items": "Team slips, three types of wire cards, any wire cutter marker",
+    "conditions": "Good for seated group discussion",
+    "win_relation": "Hidden teams, team versus team",
+    "interaction": "Hidden information and team deduction",
+    "rules_version": "London base edition",
+    "aliases": "Bomb Defusal Thriller"
+  },
+  "top-ten": {
+    "setup_items": "Bring your own prompts, number slips 1–10, and scoring markers",
+    "conditions": "For seated group discussion",
+    "win_relation": "All players cooperate",
+    "interaction": "Shared actions and discussion",
+    "rules_version": "Base game",
+    "aliases": ""
+  },
+  "toy-battle": {
+    "setup_items": "Map, toy troops for each side, troop racks, and medals",
+    "conditions": "A table with room to set up the shared map or models",
+    "win_relation": "Two-player competitive",
+    "interaction": "Fighting over regions and head-on combat",
+    "rules_version": "Base game",
+    "aliases": ""
+  },
+  "truth-or-dare": {
+    "setup_items": "No props needed",
+    "conditions": "For players willing to talk",
+    "win_relation": "Shared participation; scoring optional",
+    "interaction": "Take turns speaking and listening",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "twenty-questions": {
+    "setup_items": "No components required",
+    "conditions": "",
+    "win_relation": "Thinker vs. guessers",
+    "interaction": "Giving clues and guessing",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "two-dice-pig": {
+    "setup_items": "Two six-sided dice, a score sheet, and a pencil",
+    "conditions": "A flat surface for rolling dice",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns rolling dice and comparing scores",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "two-truths-and-a-lie": {
+    "setup_items": "No props needed",
+    "conditions": "For players who enjoy conversation",
+    "win_relation": "Everyone participates; scoring optional",
+    "interaction": "Take turns speaking and listening",
+    "rules_version": "Base game",
+    "aliases": ""
+  },
+  "ultimate-tic-tac-toe": {
+    "setup_items": "Paper and pencil",
+    "conditions": "Requires a flat writing surface",
+    "win_relation": "Two-player competitive",
+    "interaction": "Observe your opponent and respond to their moves",
+    "rules_version": "Base game",
+    "aliases": ""
+  },
+  "unlock": {
+    "setup_items": "Scenario cards and a device with the matching free app installed",
+    "conditions": "Phone or tablet that can run the companion app",
+    "win_relation": "All players cooperate; solo challenge",
+    "interaction": "Shared actions and discussion",
+    "rules_version": "Series core rules",
+    "aliases": "Escape Room: Unlock!"
+  },
+  "uno": {
+    "setup_items": "UNO deck",
+    "conditions": "Tabletop space for dealing and playing cards",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns playing cards and observing opponents",
+    "rules_version": "Classic",
+    "aliases": "UNO Classic"
+  },
+  "war": {
+    "setup_items": "Standard playing cards",
+    "conditions": "Table space for dealing and playing cards",
+    "win_relation": "Two-player head-to-head",
+    "interaction": "Take turns playing cards and watch your opponent",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "wavelength": {
+    "setup_items": "Spectrum cards, dial with target cover, movable pointer, score markers; can be homemade from paper",
+    "conditions": "Everyone must be able to see the same dial",
+    "win_relation": "Team competitive or cooperative",
+    "interaction": "Teammates discuss the pointer position; opponents guess which side of the pointer the target is on",
+    "rules_version": "Base tabletop version",
+    "aliases": "Wavelength"
+  },
+  "welcome-to-the-moon": {
+    "setup_items": "Double-sided adventure boards, number-and-action cards, erasable markers, mission cards",
+    "conditions": "Requires a flat writing surface",
+    "win_relation": "Personal competition, solo challenge",
+    "interaction": "Personal planning and score comparison",
+    "rules_version": "Base game",
+    "aliases": ""
+  },
+  "werewolf": {
+    "setup_items": "Handwritten role slips, dealt by chosen role set",
+    "conditions": "Space to keep roles or information secret and sit in a circle",
+    "win_relation": "Hidden-faction conflict",
+    "interaction": "Observation, discussion, and role deduction",
+    "rules_version": "Werewolf (Seer, Hunter) or Mafia (Detective, Doctor)",
+    "aliases": "Mafia, Werewolf (Seer and Hunter)"
+  },
+  "werewords": {
+    "setup_items": "Phone with the game app, DIY role slips and answer tokens",
+    "conditions": "Phone or tablet that can run the companion app",
+    "win_relation": "Hidden factions, team vs. team",
+    "interaction": "Hidden information and faction deduction",
+    "rules_version": "Base game",
+    "aliases": "Werewolf Word Guessing"
+  },
+  "who-am-i": {
+    "setup_items": "Sticky notes or paper strips that can be stuck to your forehead",
+    "conditions": "",
+    "win_relation": "Individual competition",
+    "interaction": "Give clues and guess",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "wingspan": {
+    "setup_items": "Bird cards, habitat boards, birdfeeder dice tower and dice, eggs, food, bonus cards, and solo deck",
+    "conditions": "Each player fills three rows of bird cards; solo uses an Automa",
+    "win_relation": "Solo vs. Automa or competitive play",
+    "interaction": "Shared bird cards, food, and round goals; some birds react on opponents' turns",
+    "rules_version": "Base game",
+    "aliases": "Wingspan; base game excluding Wingspan Asia"
+  },
+  "wink-murder": {
+    "setup_items": "Handwritten identity slips",
+    "conditions": "Secret identities/information; circle seating",
+    "win_relation": "Hidden-team conflict",
+    "interaction": "Observation, discussion, and identity deduction",
+    "rules_version": "Base rules",
+    "aliases": "Wink Assassin"
+  },
+  "word-association-chain": {
+    "setup_items": "No props needed",
+    "conditions": "",
+    "win_relation": "Individual competition",
+    "interaction": "Timed speaking and responding",
+    "rules_version": "Base game",
+    "aliases": ""
+  },
+  "would-you-rather": {
+    "setup_items": "No components needed",
+    "conditions": "For players who enjoy conversation",
+    "win_relation": "Shared participation; scoring optional",
+    "interaction": "Take turns speaking and listening",
+    "rules_version": "Basic rules",
+    "aliases": ""
+  },
+  "yacht": {
+    "setup_items": "Five six-sided dice, paper and pencil",
+    "conditions": "A flat surface for stable dice rolls",
+    "win_relation": "Individual competition",
+    "interaction": "Take turns rolling dice and comparing scores",
+    "rules_version": "Traditional rules",
+    "aliases": ""
+  },
+  "yahtzee": {
+    "setup_items": "Five six-sided dice, paper and pencil",
+    "conditions": "A flat surface for stable dice rolls",
+    "win_relation": "Solo challenge or competitive play",
+    "interaction": "Take turns rolling dice and compare scores",
+    "rules_version": "Basic scoring",
+    "aliases": "Dice Roll"
+  }
+}

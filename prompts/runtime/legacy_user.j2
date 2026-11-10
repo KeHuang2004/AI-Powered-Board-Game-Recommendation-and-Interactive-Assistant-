@@ -1,0 +1,5 @@
+{# version: v2 #}
+{# 兼容旧接口 /rules/explain 的 user 消息，照搬队友原实现：user 消息就是 json.dumps(source, ensure_ascii=False)，没有其它文字。
+   变量：source_json = {"game_name","core_rules"[,"detailed_rules"]} 的 JSON（include_detailed=true 时才有 detailed_rules）。
+   风格指令在 system（legacy_explain.j2），不在这里。 #}
+{{ source_json }}

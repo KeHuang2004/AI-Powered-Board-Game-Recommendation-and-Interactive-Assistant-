@@ -1,0 +1,7 @@
+{# version: v1 #}
+{# 用于 S3。变量：request_block、n_picks、total #}
+<request>
+{{ request_block }}
+</request>
+
+The catalog has {{ total }} games and is not shown here. Use search_games and get_game to find suitable candidates, then choose {{ n_picks }} game{{ "s" if n_picks != 1 else "" }} for this group. Think briefly in "analysis", then call submit_recommendations exactly once.

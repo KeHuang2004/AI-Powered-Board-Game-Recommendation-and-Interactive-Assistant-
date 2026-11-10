@@ -1,0 +1,3 @@
+# version: v1
+unsupported_g1: "G1 answers may use only dataset claims."
+missing_claims: "An answer supported by sources must include at least one claim."

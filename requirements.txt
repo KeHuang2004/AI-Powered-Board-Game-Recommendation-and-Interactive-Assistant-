@@ -4,3 +4,11 @@ pydantic>=2.7,<3
 google-genai>=1.0,<2
 python-dotenv>=1.0,<2
 httpx>=0.28,<1
+openpyxl
+pypdf
+rank_bm25
+openai
+jinja2
+pyyaml
+python-ulid
+bcrypt

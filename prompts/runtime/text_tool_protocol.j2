@@ -1,0 +1,20 @@
+{# version: v1 #}
+{# 文本工具协议（docs/04 第 2.1 节）：附加在原 system 文本之后。变量：tools（[{name, description, schema_json}]，只包含本轮暴露的工具） #}
+
+## Tools
+
+You can call the tools listed below. To call tools, reply with ONLY one fenced block in exactly this form, and nothing else:
+
+```tool_calls
+[{"name": "<tool name>", "arguments": {<arguments as JSON>}}]
+```
+
+The list may contain several calls. Their results will be shown to you in the conversation, and then you continue. If you do not need a tool, reply normally and do not include a tool_calls block.
+
+Available tools:
+{% for t in tools %}
+
+### {{ t.name }}
+{{ t.description }}
+Arguments (JSON schema): {{ t.schema_json }}
+{% endfor %}
