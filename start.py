@@ -27,7 +27,7 @@ def open_when_ready(server: uvicorn.Server, host: str, port: int) -> None:
     browser_host = "127.0.0.1" if host in {"0.0.0.0", "::"} else host
     if ":" in browser_host:
         browser_host = f"[{browser_host}]"
-    webbrowser.open(f"http://{browser_host}:{port}/")
+    webbrowser.open(f"http://{browser_host}:{port}/en/")
 
 
 def main(argv: list[str] | None = None) -> None:

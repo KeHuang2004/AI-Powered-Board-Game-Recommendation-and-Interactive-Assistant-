@@ -1,4 +1,4 @@
-# version: v2
+# version: v3
 setup_short: "A lesson needs at least two setup steps."
 step_empty: "Every step needs nonempty text."
 step_count: "A lesson needs between 4 and 30 steps in total."
@@ -10,3 +10,5 @@ search_unavailable: "Web search is not available."
 invalid_web_query: "Search query must not be blank."
 invalid_web_url: "Page URL must be an HTTP or HTTPS URL without credentials."
 web_disabled_source: "Web sources are unavailable for this lesson."
+web_source_unread: "Use web only for rules actually read from a page or a cached passage. Search links alone do not support a rule."
+rulebook_source_unavailable: "No bundled rulebook text was supplied. Use web for rules read from web pages and dataset for rules in the supplied game data."

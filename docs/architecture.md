@@ -2,7 +2,7 @@
 
 ![本地应用架构](assets/architecture.svg)
 
-一个 uvicorn 进程同时提供原生网页和 FastAPI 接口。浏览器默认访问 `127.0.0.1:8001`，`DEPLOY_MODE=local` 下直接使用，并显示模型设置页。
+一个 uvicorn 进程同时提供原生网页和 FastAPI 接口。浏览器默认访问 `127.0.0.1:8001`，`DEPLOY_MODE=local` 下直接使用。模型和搜索配置从本机 `.env` 读取。
 
 | 模块 | 职责 |
 |---|---|

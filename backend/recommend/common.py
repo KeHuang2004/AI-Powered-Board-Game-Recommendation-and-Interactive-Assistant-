@@ -26,6 +26,7 @@ class RecommendRequest(BaseModel):
 
 
 class InitialRecommendRequest(RecommendRequest):
+    players: int = Field(ge=1, le=21, strict=True)
     free_text: str = Field(default="", max_length=200)
 
 

@@ -1,7 +1,8 @@
-# version: v1
+# version: v2
 unknown_tool: "Unknown tool: {name}"
 parse_fail: "Tool arguments are not valid JSON."
 schema_fail: "Tool arguments failed schema validation: {errors}"
 tool_error: "The tool could not complete: {error}"
 validation_fail: "The submission did not pass validation: {errors}"
 protocol_reminder: "The tool-call block was invalid. Use the specified tool-call format."
+final_submit: "Rule lookup is complete. Use the game details and tool results already provided and call {tool} with the plan. Put unsupported rule details in unknowns."

@@ -24,6 +24,10 @@ class UpdateScore(BaseModel):
     delta: int = Field(strict=True)
 
 
+class ResetScores(BaseModel):
+    pass
+
+
 class SetPlayers(BaseModel):
     names: list[str] = Field(min_length=1, max_length=100)
 
@@ -93,6 +97,12 @@ def update_score(args: UpdateScore, ctx: RunCtx) -> dict:
     return {"scores": dict(state.scores)}
 
 
+def reset_scores(_args: ResetScores, ctx: RunCtx) -> dict:
+    state = _state(ctx)
+    state.scores = {name: 0 for name in state.players}
+    return {"scores": dict(state.scores)}
+
+
 def set_players(args: SetPlayers, ctx: RunCtx) -> dict:
     state = _state(ctx)
     state.scores = {name: state.scores.get(name, 0) for name in args.names}
@@ -145,6 +155,8 @@ def registry(*, web_context: bool | None = None) -> ToolRegistry:
     registry = ToolRegistry([
         Tool(name="roll_dice", params=RollDice, handler=roll_dice),
         Tool(name="update_score", params=UpdateScore, handler=update_score),
+        Tool(name="reset_scores", params=ResetScores, handler=reset_scores,
+             description="Set every player's score to zero."),
         Tool(name="set_players", params=SetPlayers, handler=set_players),
         Tool(name="advance_step", params=AdvanceStep, handler=advance_step),
         Tool(name="get_game", params=GetGame, handler=get_game),

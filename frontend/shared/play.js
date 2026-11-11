@@ -2,7 +2,18 @@
 let playSession = null;
 let playMeta = null;
 let playBusy = false;
+let playPreparation = null;
 let timerInterval = null;
+
+const playPreparationStages = {
+  details: [1, t('Loading game details…', '正在载入游戏资料…')],
+  planning: [2, t('Reviewing the rules and planning your first round…', '正在整理规则和首轮带玩步骤…')],
+  searching: [2, t('Searching online for game rules…', '正在联网查找游戏规则…')],
+  reading: [2, t('Reading rule sources…', '正在阅读规则资料…')],
+  checking: [2, t('Checking the steps for your first round…', '正在核对首轮带玩步骤…')],
+  cache_hit: [2, t('Loading your saved guide…', '正在读取已保存的带玩计划…')],
+  starting: [3, t('Setting up your play session…', '正在创建带玩会话…')],
+};
 
 function sourceText(tag) {
   return {rulebook: t('Rulebook', '规则书'), dataset: t('Dataset', '数据集'),
@@ -48,15 +59,25 @@ function appendChat(role, text, sources = []) {
   return content;
 }
 
+function formatDiceRoll(roll) {
+  const sides = roll.spec.split('d')[1];
+  const count = roll.values.length;
+  const values = roll.values.join(t(', ', '、'));
+  const dice = count === 1 ? `${sides}-sided die` : `${count} ${sides}-sided dice`;
+  const chineseDice = count === 1 ? `${sides} 面骰` : `${count} 个 ${sides} 面骰`;
+  return t(`Rolled ${values} (${dice})`, `掷出 ${values} 点（${chineseDice}）`);
+}
+
 function appendTool(event) {
   const names = {roll_dice: t('Dice roll', '掷骰'), update_score: t('Score update', '更新分数'),
+    reset_scores: t('All scores reset', '全部分数已重置'),
     set_players: t('Players updated', '更新玩家'), advance_step: t('Next step', '推进步骤'),
     get_game: t('Game information', '游戏信息'), lookup_rulebook: t('Rulebook lookup', '查询规则书'),
     web_search: t('Web search', '联网搜索'), fetch_page: t('Read webpage', '读取网页')};
   const item = element('div', '', 'tool-event');
   const result = event.result || {};
+  const rolled = event.name === 'roll_dice' && result.values;
   let detail = result.error || '';
-  if (event.name === 'roll_dice' && result.values) detail = result.spec + ' · ' + result.values.join(', ');
   if (event.name === 'update_score' && result.scores) {
     detail = Object.entries(result.scores).map(([name, score]) => name + ': ' + score).join(' · ');
   }
@@ -66,24 +87,46 @@ function appendTool(event) {
   if (event.name === 'lookup_rulebook' && result.passages) detail = result.passages.map(part => part.text).join('\n\n');
   if (event.name === 'web_search' && Array.isArray(result)) detail = result.map(part => part.title || part.url).join('\n');
   if (event.name === 'fetch_page' && result.url) detail = result.title || result.url;
-  item.append(element('strong', names[event.name] || t('Game tool', '游戏工具')),
-    element('span', detail, 'tool-event-result'));
+  const title = rolled ? formatDiceRoll(result) : names[event.name] || t('Game tool', '游戏工具');
+  item.append(element('strong', title));
+  if (!rolled) item.append(element('span', detail, 'tool-event-result'));
   $('chat-log').append(item);
 }
 
 function setPlayBusy(value) {
   playBusy = value;
-  for (const id of ['play-next', 'play-unclear', 'play-qa', 'roll-dice', 'score-player', 'score-delta']) {
+  for (const id of [
+    'play-next', 'play-unclear', 'play-qa', 'roll-dice', 'score-player', 'score-delta', 'reset-scores',
+  ]) {
     $(id).disabled = value;
   }
   $('chat-form').querySelector('button').disabled = value;
-  $('score-form').querySelector('button').disabled = value;
+  $('score-form').querySelector('button[type="submit"]').disabled = value;
   $('phase-nav').querySelectorAll('button').forEach(button => { button.disabled = value; });
 }
 
-async function streamPost(url, body, onEvent) {
+function setPlayPreparing(preparing) {
+  $('play-preparing').hidden = !preparing;
+  $('play-layout').hidden = preparing;
+  $('open-tools').hidden = preparing;
+}
+
+function updatePlayPreparation(stage) {
+  const current = playPreparationStages[stage === 'ready' ? 'starting' : stage];
+  if (!current) return;
+  const [step, message] = current;
+  const status = $('play-preparing-status');
+  if (status.textContent !== message) status.textContent = message;
+  $('play-preparing-progress').dataset.step = step;
+}
+
+function cancelPlayPreparation() {
+  playPreparation?.abort();
+}
+
+async function streamPost(url, body, onEvent, signal) {
   const response = await apiFetch(url, {method: 'POST', headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(body)});
+    body: JSON.stringify(body), signal});
   if (!response.ok) throw await responseError(response);
   if (!response.body) throw new Error('Streaming unavailable');
   const reader = response.body.getReader();
@@ -108,7 +151,13 @@ async function streamPost(url, body, onEvent) {
     onEvent(name, value);
   };
   while (true) {
-    const chunk = await reader.read();
+    let chunk;
+    try {
+      chunk = await reader.read();
+    } catch (error) {
+      if (error instanceof TypeError) error.code = 'network_error';
+      throw error;
+    }
     buffer += decoder.decode(chunk.value || new Uint8Array(), {stream: !chunk.done});
     buffer = buffer.replace(/\r\n/g, '\n');
     let split;
@@ -123,17 +172,18 @@ async function streamPost(url, body, onEvent) {
   if (!doneEvent) throw new Error('Stream ended before completion');
 }
 
+function modelRequiredMessage() {
+  if (window.healthState?.mode === 'local') {
+    return t('Configure the model in the local .env file and restart the app.',
+      '请在本地 .env 文件中配置模型后重启服务。');
+  }
+  return t('Guided play requires a configured model.', '带玩需要先配置模型。');
+}
+
 function requirementNotice() {
   const notice = $('play-requirement');
   notice.hidden = false;
-  notice.replaceChildren(document.createTextNode(t('A configured and verified model is needed to start guided play. ',
-    '开始带玩前需要配置并验证模型。')));
-  if (window.healthState?.mode === 'local') {
-    const button = element('button', t('Open settings', '前往设置'), 'text-button');
-    button.type = 'button';
-    button.addEventListener('click', () => openSettings());
-    notice.append(button);
-  }
+  notice.textContent = modelRequiredMessage();
 }
 
 async function requestPlay() {
@@ -150,36 +200,46 @@ async function createPlay(names) {
   if (!activeGame || playBusy) return;
   const body = {game_id: activeGame.game.game_id, lang: language, players: answers.players, rid: latestResult?.rid || null};
   if (names?.length) body.player_names = names;
+  const request = new AbortController();
+  playPreparation = request;
   playSession = null;
   $('chat-log').replaceChildren();
   $('play-game-name').textContent = activeGame.game.name;
-  $('current-step').textContent = t('Preparing your game…', '正在准备这一局…');
-  showScreen('play');
+  updatePlayPreparation('details');
+  setPlayPreparing(true);
   setPlayBusy(true);
   try {
-    await loadPlayMeta(language);
+    showScreen('play');
+    await loadPlayMeta(language, request.signal);
     await streamPost('/api/sessions', body, (event, data) => {
-      if (event === 'status') $('play-status').textContent = data.stage === 'cache_hit'
-        ? t('Ready from a saved plan', '已读取现有计划') : data.stage === 'ready'
-          ? t('Ready to play', '准备就绪') : t('Preparing your game…', '正在准备这一局…');
+      if (request.signal.aborted) return;
+      if (event === 'status') updatePlayPreparation(data.stage);
       if (event === 'session') {
         playSession = data;
         sessionStorage.setItem('game-night-session', data.session_id);
         renderPlay();
       }
-    });
-    if (!playSession) throw new Error('Session was not created');
-    $('play-status').textContent = '';
+    }, request.signal);
+    if (!playSession) {
+      const error = new Error('Session was not created');
+      error.code = 'session_creation_failed';
+      throw error;
+    }
   } catch (error) {
+    if (request.signal.aborted) return;
     if (window.needsLogin?.()) { showScreen('login'); return showAppError(error); }
     showScreen('detail');
     if (error.code === 'llm_not_configured') requirementNotice();
     else showAppError(error, () => createPlay(names));
-  } finally { setPlayBusy(false); }
+  } finally {
+    playPreparation = null;
+    setPlayPreparing(false);
+    setPlayBusy(false);
+  }
 }
 
-async function loadPlayMeta(lang) {
-  const response = await apiFetch('/api/meta?lang=' + encodeURIComponent(lang));
+async function loadPlayMeta(lang, signal) {
+  const response = await apiFetch('/api/meta?lang=' + encodeURIComponent(lang), {signal});
   if (!response.ok) throw await responseError(response);
   playMeta = await response.json();
 }
@@ -252,7 +312,7 @@ function renderScores() {
   }));
   if (state.players.includes(selected)) select.value = selected;
   const lastRoll = state.dice_log?.at(-1);
-  $('dice-result').textContent = lastRoll ? lastRoll.spec + ': ' + lastRoll.values.join(', ') : '';
+  $('dice-result').textContent = lastRoll ? formatDiceRoll(lastRoll) : '';
 }
 
 function renderPlay() {
@@ -339,38 +399,70 @@ async function sendPlayMessage(text) {
     renderScores();
     renderProgress();
   } catch (error) {
-    if (error.code === 'llm_not_configured') {
-      showAppError(error, () => sendPlayMessage(message));
-      if (window.healthState?.mode === 'local') $('app-error-text').textContent = t('Configure and verify your model in Settings.', '请先在设置中配置并验证模型。');
-    } else showAppError(error, () => sendPlayMessage(message));
+    if (error.code === 'llm_not_configured') error.userMessage = modelRequiredMessage();
+    showAppError(error, () => sendPlayMessage(message));
   } finally { setPlayBusy(false); }
 }
 
 function timerKey() { return 'game-night-timer-' + playSession.session_id; }
+function readSavedTimer() {
+  try { return JSON.parse(sessionStorage.getItem(timerKey()) || 'null'); }
+  catch { return null; }
+}
+function readTimerDuration(input) {
+  return /^\d+$/.test(input.value) && input.validity.valid ? input.valueAsNumber : null;
+}
+function validateTimerDuration() {
+  const input = $('timer-seconds');
+  const duration = readTimerDuration(input);
+  const invalid = duration === null;
+  input.setAttribute('aria-invalid', String(invalid));
+  const error = $('timer-error');
+  const max = Number(input.max).toLocaleString(language);
+  const message = invalid
+    ? t(`Enter a whole number of seconds from ${input.min} to ${max}.`, `请输入 ${input.min} 到 ${max} 之间的整数秒。`)
+    : '';
+  if (error.textContent !== message) error.textContent = message;
+  return duration;
+}
 function formatTime(seconds) {
   return String(Math.floor(seconds / 60)).padStart(2, '0') + ':' + String(seconds % 60).padStart(2, '0');
 }
-function renderTimer(end) {
-  const remaining = Math.max(0, Math.ceil((end - Date.now()) / 1000));
+function setTimerNotice(visible) {
+  $('timer-notice-card').classList.toggle('is-visible', visible);
+  $('timer-notice').textContent = visible ? t('Time’s up!', '时间到！') : '';
+}
+function renderTimer(timer) {
+  const remaining = Math.max(0, Math.ceil((timer.end - Date.now()) / 1000));
   $('timer-output').textContent = formatTime(remaining);
-  if (!remaining) { clearInterval(timerInterval); timerInterval = null; }
+  if (!remaining) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    setTimerNotice(!timer.dismissed);
+  }
+  return remaining;
 }
 function restoreTimer() {
   clearInterval(timerInterval);
   timerInterval = null;
-  let data = null;
-  try { data = JSON.parse(sessionStorage.getItem(timerKey()) || 'null'); } catch { /* start fresh */ }
-  if (data?.end) {
-    $('timer-seconds').value = data.duration;
-    renderTimer(data.end);
-    if (data.end > Date.now()) timerInterval = setInterval(() => renderTimer(data.end), 250);
-  } else $('timer-output').textContent = formatTime(Number($('timer-seconds').value) || 60);
+  setTimerNotice(false);
+  const input = $('timer-seconds');
+  const timer = readSavedTimer();
+  if (Number.isFinite(timer?.end)) {
+    input.value = Math.ceil(timer.duration); // Older sessions could save fractional durations.
+    if (renderTimer(timer) > 0) timerInterval = setInterval(() => renderTimer(timer), 250);
+  } else {
+    const duration = readTimerDuration(input) ?? Number(input.defaultValue);
+    input.value = duration;
+    $('timer-output').textContent = formatTime(duration);
+  }
+  validateTimerDuration();
 }
 
 $('start-play').addEventListener('click', requestPlay);
 $('player-form').addEventListener('submit', event => {
   event.preventDefault();
-  const names = $('player-names').value.split(/[,，\n]/).map(name => name.trim()).filter(Boolean);
+  const names = $('player-names').value.split(/[,，、\n]/).map(name => name.trim()).filter(Boolean);
   if (names.length && (names.length !== answers.players || new Set(names).size !== names.length)) {
     $('play-requirement').hidden = false;
     $('play-requirement').textContent = t('Enter one different name for each player, or skip names.', '请为每位玩家填写不同的名字，或选择跳过。');
@@ -397,19 +489,37 @@ $('score-form').addEventListener('submit', event => {
   const body = {player: $('score-player').value, delta: Number($('score-delta').value)};
   updatePlay('/tools/update_score', body, () => updatePlay('/tools/update_score', body, null));
 });
+$('reset-scores').addEventListener('click', () => {
+  updatePlay('/tools/reset_scores', {}, () => $('reset-scores').click());
+});
 $('open-tools').addEventListener('click', () => $('tool-drawer').classList.add('open'));
 $('close-tools').addEventListener('click', () => $('tool-drawer').classList.remove('open'));
+$('timer-seconds').addEventListener('input', validateTimerDuration);
 $('timer-start').addEventListener('click', () => {
   if (!playSession) return;
-  const duration = Math.min(86400, Math.max(1, Number($('timer-seconds').value) || 60));
+  const duration = validateTimerDuration();
+  if (duration === null) {
+    $('timer-seconds').focus();
+    return;
+  }
   const end = Date.now() + duration * 1000;
   sessionStorage.setItem(timerKey(), JSON.stringify({duration, end}));
-  clearInterval(timerInterval);
-  renderTimer(end);
-  timerInterval = setInterval(() => renderTimer(end), 250);
+  restoreTimer();
 });
 $('timer-reset').addEventListener('click', () => {
   if (!playSession) return;
   sessionStorage.removeItem(timerKey());
   restoreTimer();
+});
+$('timer-notice-close').addEventListener('click', event => {
+  if (!playSession) return;
+  const timer = readSavedTimer();
+  if (timer) sessionStorage.setItem(timerKey(), JSON.stringify({...timer, dismissed: true}));
+  const wasFocused = document.activeElement === event.currentTarget;
+  setTimerNotice(false);
+  if (wasFocused) {
+    const start = $('timer-start');
+    const target = start.getClientRects().length ? start : $('open-tools');
+    target.focus({preventScroll: true});
+  }
 });

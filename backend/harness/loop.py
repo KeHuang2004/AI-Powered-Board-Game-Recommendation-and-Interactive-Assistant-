@@ -42,6 +42,8 @@ def run_loop(client: LLMClient, messages: list[dict], registry: ToolRegistry,
              exposed: list[str] | Callable[[RunCtx], list[str]], ctx: RunCtx,
              max_iters: int = 3, max_submit_retries: int = 2,
              require_submit: bool = True, *, on_event: Callable[[dict], None] | None = None,
+             on_tool_start: Callable[[str], None] | None = None,
+             final_submit_tool: str | None = None,
              schema_overrides: dict[str, dict] | None = None, temperature: float | None = None,
              trace: Trace | None = None, on_finish: Callable[[LoopResult, Trace], None] | None = None,
              fallback_on_failure: bool = True) -> LoopResult:
@@ -66,7 +68,13 @@ def run_loop(client: LLMClient, messages: list[dict], registry: ToolRegistry,
     try:
         while True:
             final_round = not require_submit and tool_rounds >= max_iters
-            active = exposed(ctx) if callable(exposed) else exposed
+            submit_only = final_submit_tool if require_submit and tool_rounds >= max_iters else None
+            tool_choice: str | dict | None = "none" if final_round else None
+            if submit_only:
+                active = [submit_only]
+                tool_choice = {"type": "function", "function": {"name": submit_only}}
+            else:
+                active = exposed(ctx) if callable(exposed) else exposed
             try:
                 schemas = registry.schemas(active, ctx, schema_overrides)
             except Exception as error:  # noqa: BLE001 - schema errors are traced and stop this request
@@ -76,7 +84,7 @@ def run_loop(client: LLMClient, messages: list[dict], registry: ToolRegistry,
             try:
                 response = call_model(client, trace, messages,
                                       tools=schemas,
-                                      tool_choice="none" if final_round else None,
+                                      tool_choice=tool_choice,
                                       temperature=temperature, ctx=call_ctx)
             except Exception as error:  # noqa: BLE001 - adapter errors are traced and stop this request
                 if isinstance(error, CodexToolError):
@@ -136,14 +144,17 @@ def run_loop(client: LLMClient, messages: list[dict], registry: ToolRegistry,
             had_retry_error = False
             for call in response.tool_calls:
                 state_before = ctx.state.model_dump() if hasattr(ctx.state, "model_dump") else None
-                active = exposed(ctx) if callable(exposed) else exposed
+                if not submit_only:
+                    active = exposed(ctx) if callable(exposed) else exposed
+                if on_tool_start and call.name in active:
+                    on_tool_start(call.name)
                 outcome = registry.execute(call, ctx, active)
                 state_after = ctx.state.model_dump() if hasattr(ctx.state, "model_dump") else None
                 tool = registry.tools.get(call.name)
-                ordinary |= bool(tool and not tool.terminal)
+                ordinary |= bool(not submit_only and tool and not tool.terminal)
                 if outcome.error_kind:
                     interventions[outcome.error_kind] += 1
-                    had_retry_error |= not tool or tool.terminal
+                    had_retry_error |= bool(submit_only or not tool or tool.terminal)
                 if outcome.audit_errors:
                     result.audit_errors.extend(outcome.audit_errors)
                     interventions["validation_fail"] += 1
@@ -169,8 +180,10 @@ def run_loop(client: LLMClient, messages: list[dict], registry: ToolRegistry,
                 result.stop_reason = "loop_cap"
                 break
             if require_submit and tool_rounds >= max_iters and ordinary:
-                # A final submission-only round is still allowed.
-                exposed = [name for name in active if registry.tools[name].terminal]
+                if final_submit_tool:
+                    messages.append({"role": "user", "content": texts["final_submit"].format(tool=final_submit_tool)})
+                else:
+                    exposed = [name for name in active if registry.tools[name].terminal]
         if require_submit and result.submitted is None and fallback_on_failure:
             interventions["fallback"] += 1
     finally:

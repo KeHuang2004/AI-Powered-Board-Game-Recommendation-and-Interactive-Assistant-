@@ -174,11 +174,22 @@ def create_session(body: CreateSession, request: Request) -> StreamingResponse:
         events: queue.Queue = queue.Queue()
         cancelled = threading.Event()
 
+        def report_plan_tool(name: str) -> None:
+            tool_stage = {
+                "web_search": "searching",
+                "fetch_page": "reading",
+                "lookup_rulebook": "reading",
+                "submit_lesson_plan": "checking",
+            }.get(name)
+            if tool_stage and not cancelled.is_set():
+                events.put(("status", {"stage": tool_stage}))
+
         def worker() -> None:
             try:
-                lesson = plan.resolve_plan(prepared, client) if prepared else None
+                lesson = plan.resolve_plan(prepared, client, on_tool_start=report_plan_tool) if prepared else None
                 if cancelled.is_set():
                     return
+                events.put(("status", {"stage": "starting"}))
                 record = session.create_session(body.game_id, body.lang, names, mode, lesson, account=account)
                 events.put(("session", session.session_view(record)))
             except Exception as error:  # noqa: BLE001 - report safely inside the stream
@@ -188,7 +199,10 @@ def create_session(body: CreateSession, request: Request) -> StreamingResponse:
                 events.put(("done", {}))
 
         _start_worker(worker)
-        yield from _events_until_done(events, cancelled)
+        try:
+            yield from _events_until_done(events, cancelled)
+        finally:
+            cancelled.set()
 
     return StreamingResponse(stream(), media_type="text/event-stream")
 
@@ -248,7 +262,7 @@ def message(session_id: str, body: MessageRequest, request: Request) -> Streamin
 @router.post("/sessions/{session_id}/tools/{name}")
 def panel_tool(session_id: str, name: str, request: Request, arguments: Annotated[dict, Body()]) -> dict:
     record = _session(session_id, request)
-    if name not in ("roll_dice", "update_score", "set_players"):
+    if name not in session.PANEL_TOOLS:
         raise _error(404, "tool_not_found", "Tool not found")
     try:
         result = session.panel_tool(record, name, arguments)

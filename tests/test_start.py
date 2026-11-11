@@ -21,13 +21,13 @@ def test_server_options_without_browser(monkeypatch):
     ]
 
 
-def test_browser_waits_for_startup(monkeypatch):
+def test_browser_opens_english_home_after_startup(monkeypatch):
     server = SimpleNamespace(started=False, should_exit=False)
     opened = []
     monkeypatch.setattr(start.time, "sleep", lambda _: setattr(server, "started", True))
     monkeypatch.setattr(start.webbrowser, "open", opened.append)
     start.open_when_ready(server, "0.0.0.0", 8123)
-    assert opened == ["http://127.0.0.1:8123/"]
+    assert opened == ["http://127.0.0.1:8123/en/"]
 
 
 def test_missing_catalog_help(monkeypatch, tmp_path):

@@ -1,5 +1,6 @@
 const language = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
 const t = (english, chinese) => language === 'zh' ? chinese : english;
+const MAX_PLAYERS = 21;
 
 const questions = [
   {key: 'players', label: t('Players', '人数'), title: t('How many people are coming?', '今晚有多少人到场？'), description: t('Enter the total number of people, including anyone who might host.', '填写实际到场人数，包括愿意当主持的人。')},
@@ -11,7 +12,7 @@ const questions = [
 ];
 
 const $ = (id) => document.getElementById(id);
-const screens = ['home', 'quiz', 'loading', 'results', 'detail', 'play', 'settings', 'login'];
+const screens = ['home', 'quiz', 'loading', 'results', 'detail', 'play', 'team', 'settings', 'login'];
 const accents = ['game-signal', 'game-moon', 'game-flash'];
 const symbols = ['✳', '☾', '↗'];
 let step = 0;
@@ -23,11 +24,12 @@ let activeCard = null;
 let activeGame = null;
 let latestResult = null;
 let shownIds = [];
+let teamReturn = 'home';
+let liveTeamReturn = null;
 const APP_STATE_KEY = 'game-night-state-v1';
 
-function saveAppState() {
-  sessionStorage.setItem(APP_STATE_KEY, JSON.stringify({answers, step, latestResult, shownIds, activeGame,
-    screen: document.body.dataset.screen || 'home'}));
+function saveAppState(screen = document.body.dataset.screen || 'home') {
+  sessionStorage.setItem(APP_STATE_KEY, JSON.stringify({answers, step, latestResult, shownIds, activeGame, screen, teamReturn}));
 }
 
 function element(tag, content, className) {
@@ -38,7 +40,7 @@ function element(tag, content, className) {
 }
 
 function showScreen(name, addHistory = true) {
-  if (name !== 'detail' && explanationRequest) {
+  if (name !== 'detail' && name !== 'team' && explanationRequest) {
     explanationRequest.abort();
     explanationRequest = null;
   }
@@ -46,12 +48,14 @@ function showScreen(name, addHistory = true) {
     pending.abort();
     pending = null;
   }
+  if (name !== 'play' && name !== 'team') cancelPlayPreparation();
   for (const screen of screens) {
     const node = $(screen + '-screen');
     node.hidden = screen !== name;
     node.classList.toggle('active', screen === name);
   }
   document.body.dataset.screen = name;
+  if (name === 'results') resizeRefineInput();
   if (name !== 'loading') {
     saveAppState();
     if (addHistory && history.state?.screen !== name) history.pushState({screen: name}, '', '#' + name);
@@ -72,7 +76,15 @@ function startQuiz() {
   renderQuestion();
 }
 
+function isValidPlayerCount(value) {
+  return Number.isInteger(value) && value >= 1 && value <= MAX_PLAYERS;
+}
+
 function renderQuestion() {
+  if (!isValidPlayerCount(answers.players)) {
+    delete answers.players;
+    step = 0;
+  }
   const question = questions[step];
   const number = String(step + 1).padStart(2, '0');
   const next = $('quiz-next');
@@ -99,12 +111,12 @@ function renderQuestion() {
     input.addEventListener('input', () => { answers[question.key] = input.value; saveAppState(); });
     grid.append(input);
   } else if (!question.options) {
-    $('question-helper').textContent = t('Enter a whole number from 1 to 100.', '请输入 1 到 100 的整数');
+    $('question-helper').textContent = t(`Enter a whole number from 1 to ${MAX_PLAYERS}.`, `请输入 1 到 ${MAX_PLAYERS} 的整数`);
     const input = element('input', '', 'player-input');
     input.id = 'player-count';
     input.type = 'number';
     input.min = '1';
-    input.max = '100';
+    input.max = String(MAX_PLAYERS);
     input.step = '1';
     input.required = true;
     input.inputMode = 'numeric';
@@ -112,7 +124,8 @@ function renderQuestion() {
     input.setAttribute('aria-label', t('Total number of people', '实际到场人数'));
     input.setAttribute('aria-describedby', 'question-helper');
     input.addEventListener('input', () => {
-      if (input.validity.valid) answers.players = input.valueAsNumber;
+      const value = input.valueAsNumber;
+      if (/^\d+$/.test(input.value) && isValidPlayerCount(value)) answers.players = value;
       else delete answers.players;
       next.disabled = answers.players === undefined;
       saveAppState();
@@ -295,7 +308,22 @@ $('brand-home').addEventListener('click', event => {
   event.preventDefault();
   showScreen('home');
 });
-$('header-start').addEventListener('click', startQuiz);
+$('header-explore').addEventListener('click', () => {
+  const current = document.body.dataset.screen || 'home';
+  if (current === 'team') return;
+  teamReturn = current === 'loading' ? history.state?.screen || 'home' : current;
+  liveTeamReturn = teamReturn;
+  if (history.state?.screen !== teamReturn) {
+    history.replaceState({screen: teamReturn}, '', '#' + teamReturn);
+  }
+  history.pushState({screen: 'team', teamReturn}, '', '#team');
+  showScreen('team', false);
+});
+$('team-back').addEventListener('click', () => {
+  if (history.state?.teamReturn === teamReturn) return history.back();
+  history.replaceState({screen: teamReturn}, '', '#' + teamReturn);
+  restoreScreen(teamReturn);
+});
 $('hero-start').addEventListener('click', startQuiz);
 $('quiz-home').addEventListener('click', () => showScreen('home'));
 $('quiz-back').addEventListener('click', () => {
@@ -325,6 +353,14 @@ $('detail-back').addEventListener('click', () => {
   activeCard?.focus();
 });
 
+function resizeRefineInput() {
+  if ($('results-screen').hidden) return;
+  const input = $('refine-input');
+  input.style.height = 'auto';
+  const borderHeight = input.offsetHeight - input.clientHeight;
+  input.style.height = `${input.scrollHeight + borderHeight}px`;
+}
+
 async function refinePicks(message) {
   if (!latestResult?.rid) return;
   showScreen('loading');
@@ -348,20 +384,34 @@ async function refinePicks(message) {
     if (window.needsLogin?.()) { showScreen('login'); return showAppError(error); }
     showScreen('results');
     if (error.status === 422) {
-      error.userMessage = t('The combined preference text can be at most 600 characters. Try another set or edit your preferences.',
-        '原有偏好和补充内容合计不能超过 600 字，请选择换一批或重新填写问卷。');
+      error.userMessage = t('The combined preferences can be at most 600 characters. Get new picks with saved preferences or edit your answers.',
+        '已提交偏好和补充内容合计最多 600 字。你可以按已提交偏好换一批，或返回问卷调整偏好。');
       showAppError(error, () => $('refine-input').focus());
     } else showAppError(error, () => refinePicks(message));
   }
 }
 
 $('refine-submit').addEventListener('click', () => refinePicks($('refine-input').value.trim()));
+$('refine-input').addEventListener('input', resizeRefineInput);
 $('refine-input').addEventListener('keydown', event => {
-  if (event.key === 'Enter') { event.preventDefault(); $('refine-submit').click(); }
+  if (event.key === 'Enter' && !event.isComposing) {
+    event.preventDefault();
+    $('refine-submit').click();
+  }
 });
 $('refine-new').addEventListener('click', () => refinePicks(''));
+window.addEventListener('resize', resizeRefineInput);
 
 async function restoreScreen(name) {
+  if (name === 'team') {
+    teamReturn = history.state?.teamReturn || teamReturn;
+    return showScreen('team', false);
+  }
+  if (document.body.dataset.screen === 'team' && name === liveTeamReturn && !window.needsLogin?.()
+      && (name !== 'play' || playSession || playPreparation)) {
+    return showScreen(name, false);
+  }
+  if (name === 'settings') return openSettings(false);
   if (window.needsLogin?.()) return showScreen('login', false);
   if (name === 'play' && sessionStorage.getItem('game-night-session')) {
     if (await restorePlay()) return showScreen('play', false);
@@ -373,7 +423,6 @@ async function restoreScreen(name) {
     return showScreen('results', false);
   }
   if (name === 'quiz') { showScreen('quiz', false); return renderQuestion(); }
-  if (name === 'settings' && window.healthState?.mode === 'local') return openSettings(false);
   showScreen('home', false);
 }
 
@@ -385,13 +434,14 @@ function loadAppState() {
   latestResult = state.latestResult || null;
   shownIds = state.shownIds || [];
   activeGame = state.activeGame || null;
+  if (screens.includes(state.teamReturn) && state.teamReturn !== 'team') teamReturn = state.teamReturn;
   return state;
 }
 
 async function restoreApp() {
   const state = loadAppState();
   const screen = state.screen || 'home';
-  history.replaceState({screen}, '', '#' + screen);
+  history.replaceState(history.state?.screen === screen ? history.state : {screen}, '', '#' + screen);
   await restoreScreen(screen);
 }
 

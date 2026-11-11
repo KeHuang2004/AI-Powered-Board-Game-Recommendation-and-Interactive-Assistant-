@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from collections.abc import Callable
 from contextlib import closing
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -52,8 +53,13 @@ def validate_plan(plan: LessonPlan, ctx: RunCtx) -> list[str]:
         errors.append(messages["step_empty"])
     if not 4 <= len(steps) <= 30:
         errors.append(messages["step_count"])
-    if any(step.src == "web" for step in steps) and not ctx.meta.get("web_enabled"):
-        errors.append(messages["web_disabled_source"])
+    if any(step.src == "rulebook" for step in steps) and not ctx.meta.get("has_rulebook"):
+        errors.append(messages["rulebook_source_unavailable"])
+    if any(step.src == "web" for step in steps):
+        if not ctx.meta.get("web_enabled"):
+            errors.append(messages["web_disabled_source"])
+        elif not ctx.meta.get("has_web_evidence"):
+            errors.append(messages["web_source_unread"])
     return errors
 
 
@@ -91,10 +97,13 @@ def plan_from_storage(raw: str) -> LessonPlan:
     return plan
 
 
-def plan_tool_schema(web_enabled: bool) -> dict:
+def plan_tool_schema(web_enabled: bool, *, has_rulebook: bool = True) -> dict:
     schema = LessonPlan.model_json_schema()
+    sources = schema["$defs"]["Step"]["properties"]["src"]["enum"]
     if not web_enabled:
-        schema["$defs"]["Step"]["properties"]["src"]["enum"].remove("web")
+        sources.remove("web")
+    if not has_rulebook:
+        sources.remove("rulebook")
     return schema
 
 
@@ -123,7 +132,7 @@ def prepare_plan(game: dict, lang: str, players: int, model_profile: str = "prod
                  "game_view": json.dumps(view, ensure_ascii=False), "rulebook": book,
                  "web_enabled": web_enabled, "search_enabled": search_enabled}
     messages = build_messages("plan_system", "plan_user", variables)
-    hashes = [metadata("plan_system")["sha256"], metadata("plan_user")["sha256"]]
+    hashes = [metadata(name)["sha256"] for name in ("plan_system", "plan_user", "tutor_errors.yaml")]
     if book is not None:
         hashes.append(metadata("rulebook_context")["sha256"])
     digest = hashlib.sha256(json.dumps([hashes, messages], ensure_ascii=False, sort_keys=True).encode()).hexdigest()
@@ -140,14 +149,14 @@ def prepare_plan(game: dict, lang: str, players: int, model_profile: str = "prod
                         book is not None, web_enabled, search_enabled)
 
 
-def resolve_plan(prepared: PreparedPlan, client: LLMClient, *, meta: dict | None = None) -> LessonPlan:
+def resolve_plan(prepared: PreparedPlan, client: LLMClient, *, meta: dict | None = None,
+                 on_tool_start: Callable[[str], None] | None = None) -> LessonPlan:
     from . import tools
 
     if prepared.cached is not None:
         return prepared.cached
     context_meta = dict(meta or {})
-    if prepared.web_enabled:
-        context_meta["web_enabled"] = True
+    context_meta.update(web_enabled=prepared.web_enabled, has_rulebook=prepared.has_rulebook, has_web_evidence=False)
     ctx = RunCtx(kind="plan", template="plan_user", lang=prepared.lang, game_id=prepared.game_id,
                  model_profile=prepared.model_profile, meta=context_meta)
     registry = tools.registry(web_context=prepared.web_enabled)
@@ -160,6 +169,21 @@ def resolve_plan(prepared: PreparedPlan, client: LLMClient, *, meta: dict | None
     if prepared.has_rulebook:
         trace.record_prompt("rulebook_context")
     settings = get_settings()
+    web_sources: dict[str, dict] = {}
+    schema_overrides = {"submit_lesson_plan": plan_tool_schema(False, has_rulebook=prepared.has_rulebook)}
+
+    def record_read_pages(event: dict) -> None:
+        name = event["name"]
+        if name == "fetch_page" and not event["result"].get("content", "").strip():
+            return
+        if name not in {"fetch_page", "lookup_rulebook"}:
+            return
+        for source in web.event_sources([event]):
+            web_sources[source["url"]] = source
+        if web_sources and not ctx.meta["has_web_evidence"]:
+            ctx.meta["has_web_evidence"] = True
+            schema_overrides["submit_lesson_plan"] = plan_tool_schema(True, has_rulebook=prepared.has_rulebook)
+
     def exposed(_ctx: RunCtx) -> list[str]:
         names = []
         if prepared.web_enabled:
@@ -170,14 +194,14 @@ def resolve_plan(prepared: PreparedPlan, client: LLMClient, *, meta: dict | None
         return [*names, "submit_lesson_plan"]
 
     result = run_loop(client, prepared.messages, registry, exposed, ctx,
-                      settings.max_tool_iters, settings.max_submit_retries, True, trace=trace,
-                      schema_overrides={"submit_lesson_plan": plan_tool_schema(prepared.web_enabled)},
+                      settings.max_tool_iters, settings.max_submit_retries, True,
+                      trace=trace, on_tool_start=on_tool_start, on_event=record_read_pages,
+                      schema_overrides=schema_overrides, final_submit_tool="submit_lesson_plan",
                       fallback_on_failure=False)
     if result.submitted is None:
         raise RuntimeError("Lesson plan could not be generated")
     plan = LessonPlan.model_validate(result.submitted)
-    if prepared.web_enabled:
-        plan._web_sources = web.event_sources(result.events)
+    plan._web_sources = list(web_sources.values())
     with closing(appdb.connect()) as connection, connection:
         connection.execute(
             "INSERT INTO plan_cache VALUES (?, ?, ?, ?, ?, ?, ?) "

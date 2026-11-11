@@ -49,8 +49,8 @@ def create(client: TestClient, **changes: object) -> tuple[str, list[tuple[str, 
 def test_plan_cache_and_player_names_are_not_in_prompt(client: TestClient, tmp_path: Path) -> None:
     _, first = create(client, player_names=["Alice", "Bob", "Cathy", "Dan"])
     _, second = create(client, player_names=["Eve", "Fred", "Grace", "Hank"])
-    assert first[0] == ("status", {"stage":"planning"})
-    assert second[0] == ("status", {"stage":"cache_hit"})
+    assert [data["stage"] for name, data in first if name == "status"] == ["planning", "checking", "starting"]
+    assert [data["stage"] for name, data in second if name == "status"] == ["cache_hit", "starting"]
     traces = [json.loads(line) for line in (tmp_path / "trace.jsonl").read_text().splitlines()]
     plans = [item for item in traces if item["kind"] == "plan"]
     assert len(plans) == 1
@@ -116,6 +116,27 @@ def test_set_players_preserves_scores_and_initial_system(client: TestClient) -> 
     messages = session.build_turn_messages(after, "Continue")
     assert "players: P1, New" in messages[-1]["content"]
     assert "set_players" in messages[-1]["content"]
+
+
+def test_reset_scores_persists_without_resetting_play(client: TestClient) -> None:
+    sid, _ = create(client)
+    route = f"/api/sessions/{sid}"
+    for player, delta in (("P1", 5), ("P2", -2)):
+        response = client.post(f"{route}/tools/update_score", json={"player": player, "delta": delta})
+        assert response.status_code == 200
+    assert client.post(f"{route}/tools/roll_dice", json={"count": 1, "sides": 6}).status_code == 200
+    assert client.post(f"{route}/next").status_code == 200
+    before = client.get(route).json()["state"]
+    assert before["scores"]["P1"] == 5 and before["scores"]["P2"] == -2
+
+    scores = {name: 0 for name in before["players"]}
+    expected = {**before, "scores": scores}
+    reset = client.post(f"{route}/tools/reset_scores", json={})
+    assert reset.status_code == 200
+    assert reset.json() == {"result": {"scores": scores}, "state": expected}
+    restored = client.get(route).json()
+    assert restored["state"] == expected
+    assert restored["history"][-1]["name"] == "reset_scores"
 
 
 def test_set_players_supports_up_to_one_hundred(client: TestClient) -> None:
@@ -244,6 +265,21 @@ def test_plan_validator_rejects_missing_setup_blank_steps_and_excess() -> None:
     assert validate_plan(blank, ctx)
     excess = lesson.model_copy(update={"pitfalls":[Step(id=str(index), text="x", src="dataset") for index in range(31)]})
     assert validate_plan(excess, ctx)
+
+
+@pytest.mark.parametrize(("source", "evidence"), [
+    ("rulebook", "has_rulebook"), ("web", "has_web_evidence"),
+])
+def test_plan_source_labels_require_evidence(source: str, evidence: str) -> None:
+    from backend.tutor.plan import LessonPlan, validate_plan
+
+    data = json.loads((Path("tests/fixtures/mock_auto") / "plan_user.json").read_text())
+    data["setup"][0]["src"] = source
+    lesson = LessonPlan.model_validate(data)
+    ctx = RunCtx(kind="plan", template="plan_user", lang="en", meta={"web_enabled": True})
+    assert validate_plan(lesson, ctx)
+    ctx.meta[evidence] = True
+    assert validate_plan(lesson, ctx) == []
 
 
 def test_failed_plan_does_not_claim_a_fallback(tmp_path: Path) -> None:

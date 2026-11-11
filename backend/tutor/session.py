@@ -31,6 +31,9 @@ from .plan import (
 from .state import Phase, SessionState
 
 
+PANEL_TOOLS = ("roll_dice", "update_score", "reset_scores", "set_players")
+
+
 class SessionNotFound(LookupError):
     pass
 
@@ -267,7 +270,7 @@ def message(session: Session, text: str, client: LLMClient, *, model_profile: st
 
 
 def panel_tool(session: Session, name: str, arguments: dict) -> dict:
-    if name not in ("roll_dice", "update_score", "set_players"):
+    if name not in PANEL_TOOLS:
         raise ValueError("Tool is unavailable in the panel")
     ctx = RunCtx(kind="tutor_turn", template="tutor_turn", lang=session.lang,
                  game_id=session.game_id, state=session.state, strategy=session.mode)

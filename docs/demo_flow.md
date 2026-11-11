@@ -1,10 +1,10 @@
 # 本地演示流程
 
-按 README 安装并启动，模型设置页先确认连接。无密钥演示用 `.env` 中 `MODEL_PROVIDER=mock`、`SEARCH_PROVIDER=mock`，保持 `DEPLOY_MODE=local` 与 `s_team / t1 / g2`。不要切换设置页的搜索开关；它会启用真实搜索。
+按 README 配置 `.env` 并启动。无密钥演示使用 `MODEL_PROVIDER=mock` 和 `SEARCH_PROVIDER=mock`，保持 `DEPLOY_MODE=local` 与 `s_team / t1 / g2`。
 
 ## 中文：朋友聚会
 
-1. 打开 `/zh/`，点「开始」进入问卷。
+1. 打开 `/zh/`，点「帮我找游戏」进入问卷。
 2. 填 4 人 → 没人当主持 → 只用通用用品 → 朋友聚会 → 轻松聊天 → 补充偏好填「第一次玩，想先熟悉流程」。展示五项原有问卷和新增的选填项。
 3. 点「查看推荐」，看到三张卡片及 Mock 来源。可先展示补充偏好或换一批；正式演示带玩时保持首次结果，避免改变选定游戏。
 4. 打开第一张卡片，展示立即可读的目录规则与 AI 新手讲解。
@@ -13,7 +13,7 @@
 
 ## English: friends learning together
 
-1. Open `/en/` and start the questionnaire.
+1. Open `/en/` and select **Find a game** to start the questionnaire.
 2. Enter 4 players → No dedicated host → Basic supplies only → Friends' get-together → Relaxed conversation → “First time playing. Please guide us step by step.”
 3. Show the recommendations, open the first card, and read the catalog rules and AI explanation.
 4. Choose “Start guided play”, skip player names, and wait for the plan. Show source badges and one “Next step” action.

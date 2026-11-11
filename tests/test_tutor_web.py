@@ -190,10 +190,60 @@ def test_existing_rulebook_plan_does_not_expose_web_tools(tmp_path: Path) -> Non
     assert names == {"submit_lesson_plan"}
 
 
+@pytest.mark.parametrize(("retries", "opens"), [(1, False), (2, True)])
+def test_lookup_limit_forces_plan_submission_and_bounds_corrections(
+    monkeypatch: pytest.MonkeyPatch, retries: int, opens: bool,
+) -> None:
+    monkeypatch.setenv("MAX_TOOL_ITERS", "2")
+    monkeypatch.setenv("MAX_SUBMIT_RETRIES", str(retries))
+    fixture = (Path("tests/fixtures/mock_auto") / "plan_user.json").read_text()
+    valid = json.loads(fixture)
+    valid["setup"][0]["src"] = "web"
+    invalid = json.loads(fixture)
+    invalid["setup"][0]["src"] = "rulebook"
+
+    def response(call_id, name, arguments):
+        return {"tool_calls": [{"id": call_id, "name": name, "arguments": json.dumps(arguments)}]}
+
+    script = [
+        response("search", "web_search", {"query": "game rules"}),
+        response("read", "fetch_page", {"url": "https://example.test/rules"}),
+        response("extra", "fetch_page", {"url": "https://example.test/extra"}),
+        response("invalid", "submit_lesson_plan", invalid),
+        response("corrected", "submit_lesson_plan", valid),
+    ]
+    requests = []
+
+    class RecordingClient(MockClient):
+        def chat(self, messages, tools=None, tool_choice=None, **kwargs):
+            submission = next(tool["function"] for tool in tools if tool["function"]["name"] == "submit_lesson_plan")
+            sources = submission["parameters"]["$defs"]["Step"]["properties"]["src"]["enum"]
+            requests.append((tool_choice, [tool["function"]["name"] for tool in tools], sources))
+            return super().chat(messages, tools=tools, tool_choice=tool_choice, **kwargs)
+
+    monkeypatch.setattr("backend.api.make_client", lambda _profile: RecordingClient(script=script))
+    result = stream_events(TestClient(app).post("/api/sessions", json={
+        "game_id": non_rulebook_game(), "lang": "en", "players": 4,
+    }))
+    forced = {"type": "function", "function": {"name": "submit_lesson_plan"}}
+    assert requests[0][0] is requests[1][0] is None
+    assert "web" not in requests[1][2]
+    assert requests[2:] == [(forced, ["submit_lesson_plan"], ["dataset", "general", "web"])] * (retries + 1)
+    assert any(name == "session" for name, _ in result) is opens
+    assert any(name == "error" and data["code"] == "session_creation_failed" for name, data in result) is not opens
+    with appdb.connect() as connection:
+        assert [row["url"] for row in connection.execute("SELECT url FROM web_cache")] == [
+            "https://example.test/rules",
+        ]
+
+
 def test_auto_mock_end_to_end_search_and_sources(tmp_path: Path) -> None:
     client = TestClient(app)
     game_id = non_rulebook_game()
     events = stream_events(client.post("/api/sessions", json={"game_id": game_id, "lang": "en", "players": 4}))
+    assert [data["stage"] for name, data in events if name == "status"] == [
+        "planning", "searching", "reading", "checking", "starting",
+    ]
     view = next(data for name, data in events if name == "session")
     assert view["current"]["src"] == "web"
     reply_events = stream_events(client.post(f"/api/sessions/{view['session_id']}/message",

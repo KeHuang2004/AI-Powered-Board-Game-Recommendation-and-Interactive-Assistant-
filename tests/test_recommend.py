@@ -172,6 +172,16 @@ def test_s3_tools_use_catalog_views(sample_request: RecommendRequest) -> None:
     assert detail["game"]["id"] == "uno" and "core_rules" in detail["game"]
 
 
+@pytest.mark.parametrize(("players", "expected_status"), [
+    (1, 200), (21, 200), (0, 422), (22, 422), (2.999999999, 422),
+])
+def test_recommend_validates_questionnaire_player_count(
+    sample_request: RecommendRequest, players: int | float, expected_status: int
+) -> None:
+    response = TestClient(app).post("/recommend", json={**sample_request.model_dump(), "players": players})
+    assert response.status_code == expected_status
+
+
 def test_refine_excludes_all_previously_shown(sample_request: RecommendRequest) -> None:
     client = TestClient(app)
     first = client.post("/recommend", json=sample_request.model_dump())
