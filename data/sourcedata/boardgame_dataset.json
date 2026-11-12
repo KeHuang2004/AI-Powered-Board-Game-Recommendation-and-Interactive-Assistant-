@@ -105,6 +105,36 @@
     "Recommendation tier": "T2"
   },
   {
+    "Name": "Arcs",
+    "Tags": {
+      "Players": [2, 3, 4],
+      "Recommended players": [3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Strategy", "American-style thematic game", "Hand management", "Area control", "Tactical combat", "Strategy night", "Regular group"]
+    },
+    "Conclusion": "A strong fleet matters, but so does deciding what the chapter will reward. A player can change the direction of the conflict by declaring an ambition at the right moment.",
+    "Core rules": "In this standalone space conflict game, action cards determine what you can do and how much initiative you retain. Players lead, surpass, copy or pivot from the lead card to build, move, battle and influence the court. Declared ambitions score power at each chapter's end. Win by having the most power when a chapter-end victory threshold is reached or the fifth chapter ends.",
+    "Detailed rules": "Deal six action cards for each chapter. Leading gives the printed actions; surpassing uses a higher card of the lead suit, while copying or pivoting trades flexibility for fewer actions. An extra face-down card can seize initiative if nobody has already seized it that round. The leader may declare the card's ambition, setting its number to zero. Ambitions compare resources, trophies, captives or court holdings. Battles use chosen dice with different risks, and destroying cities can provoke outrage. The base game is a complete single-session game; campaign rules are not required.",
+    "Recommendation reasons": "Action cards make players adapt to a hand rather than execute a fixed production plan, and changing scoring priorities keeps rivals relevant. It is a strong fit for a table that enjoys direct conflict, opportunism and negotiating the consequences of aggressive moves.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "Ark Nova",
+    "Tags": {
+      "Players": [1, 2, 3, 4],
+      "Recommended players": [1, 2, 3],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Economic strategy", "Eurogame", "Engine building", "Tile placement", "Action planning", "Quiet solo play", "Strategy night"]
+    },
+    "Conclusion": "A popular zoo brings in money, but conservation is what closes the other half of the scoring track. Finding a way for one animal to advance both plans is the satisfying part.",
+    "Core rules": "Use five action cards to build enclosures, house animals, attract sponsors and support conservation. An action's strength depends on its position in your row; using it moves it to the weakest position. When appeal and conservation meet or cross, trigger final turns and compare final scores.",
+    "Detailed rules": "An animal needs a suitable empty enclosure and may require partner zoos, research or existing animal tags. Release animals for some conservation projects, freeing their enclosure while losing their appeal. Breaks bring income and reset certain resources; their timing is shared. Upgrade action cards to unlock stronger uses. Solo play uses a fixed sequence of turns and breaks rather than an opposing player.",
+    "Recommendation reasons": "The action row makes timing part of the puzzle: waiting improves an action, but a useful animal or conservation reward may be taken first. The two tracks give that timing a clear long-term purpose.",
+    "Recommendation tier": "T2"
+  },
+  {
     "Name": "Arkham Horror: The Card Game",
     "Tags": {
       "Players": [1, 2, 3, 4],
@@ -150,6 +180,21 @@
     "Recommendation tier": "T2"
   },
   {
+    "Name": "BattleTech Beginner Box",
+    "Tags": {
+      "Players": [2],
+      "Recommended players": [2],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Miniature wargame", "Tactical combat", "Spatial planning", "Two-player night", "Regular group"]
+    },
+    "Conclusion": "A giant war machine becomes a set of vulnerable locations and weapon arcs on the table. Moving into a better firing position can expose a damaged part of your own machine.",
+    "Core rules": "Use the Beginner Box's physical hex map, miniatures or standees and simplified record sheets for a two-player mech battle. Each round determine initiative, alternate movement and resolve weapon attacks. Track damage by location until an opposing mech is destroyed or the selected scenario objective is achieved.",
+    "Detailed rules": "Movement points, facing, woods and weapon ranges affect legal positions and attack difficulty. Declare weapons, roll two dice against the modified target number, determine hit locations and mark the listed damage on the record sheet. Weapon attacks in the phase are simultaneous, so a mech destroyed by incoming fire can still resolve attacks it already declared. The Beginner Box quick-start rules omit heat management, internal structure and critical-hit procedures, concentrating on movement and firing. Use the statistics on the included simplified mech sheets rather than combining them with full-game record sheets.",
+    "Recommendation reasons": "Location damage and weapon positioning give the machines an individual battlefield identity. The simplified box offers a manageable way to try those tactical decisions before taking on the larger rules system.",
+    "Recommendation tier": "T1"
+  },
+  {
     "Name": "Beat That!",
     "Tags": {
       "Players": [2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -192,7 +237,7 @@
     "Core rules": "Choose an opening scenario and explore the house together, adding rooms as you pass through new doors. Items, events and omens change the explorers' prospects. When a haunt begins, the scenario and triggering omen identify the adventure and any traitor. Follow the new victory conditions rather than score points.",
     "Detailed rules": "Choose an explorer with four traits and move up to their Speed. When discovering a room, draw a tile for the correct floor and resolve its instructions and any card symbol. After drawing an omen, roll one die per omen found so far; five or more triggers the haunt in this edition, and the last omen triggers it automatically. Consult the relevant books privately where instructed. Allies may now have different goals or knowledge, and some haunts have no traitor. Use the haunt's special rules when they override ordinary movement, combat or victory.",
     "Recommendation reasons": "The exploration and the haunt reward different kinds of play. A group that enjoys discovering a story together gets a second surprise when a familiar room or item suddenly matters to one side's objective.",
-    "Recommendation tier": "T1"
+    "Recommendation tier": "T2"
   },
   {
     "Name": "Blackjack",
@@ -240,6 +285,21 @@
     "Recommendation tier": "T0"
   },
   {
+    "Name": "Bohnanza",
+    "Tags": {
+      "Players": [3, 4, 5],
+      "Recommended players": [4, 5],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Card game", "Economic strategy", "Hand management", "Trading and negotiation", "Social gathering"]
+    },
+    "Conclusion": "The bean at the front of your hand must be planted soon. A bean you do not want can therefore become exactly the gift another player is hoping for.",
+    "Core rules": "Plant the first bean in your hand and optionally the second, then reveal two market beans and trade or donate beans with the active player. Received beans must be planted. Harvest matching fields to earn coins according to each bean's chart. The third exhaustion of the draw pile ends the game after any current trading and planting; harvest all fields and compare coins.",
+    "Detailed rules": "Finish your turn by drawing three cards to the back of your hand, which must never be rearranged. Each field holds one bean type, so planting a different bean may force an early harvest. This three-to-five-player base game gives three fields at three players and two otherwise. Only the active player can be part of a trade, traded beans cannot be traded again, and a one-bean field normally cannot be harvested while you have a larger field.",
+    "Recommendation reasons": "Trades can help both sides, and giving something away can save your own field. That keeps negotiation active even when it is not your turn.",
+    "Recommendation tier": "T1"
+  },
+  {
     "Name": "Bomb Busters",
     "Tags": {
       "Players": [2, 3, 4, 5],
@@ -267,7 +327,7 @@
     "Core rules": "Develop industries and transport links across a shared region over a canal era and a rail era. Spend cards to build, network, develop obsolete tiles away, sell goods, borrow money or scout for flexible cards. Score flipped industries and links at the end of each era. Highest total wins.",
     "Detailed rules": "Normally take two actions, paying a hand card for each; the opening round gives only one. Build with a matching location or industry card under its placement restrictions. Coal must travel through connected links; iron requires no transport connection. Selling eligible goods requires connection to the right merchant and usually beer. A mine or ironworks flips when emptied; sale industries flip when sold. Spending less moves you earlier in the next round. After canal scoring, remove canals and level-one industries before laying railways.",
     "Recommendation reasons": "Competition does not mean blocking every rival. If their sale uses your beer, or their new line helps empty your mine, you may both benefit. That tension makes the economic rules matter to the players watching someone else's turn.",
-    "Recommendation tier": "T1"
+    "Recommendation tier": "T2"
   },
   {
     "Name": "Bulls and Cows",
@@ -347,16 +407,16 @@
   {
     "Name": "Cartographers",
     "Tags": {
-      "Players": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100],
-      "Recommended players": [1, 2, 3, 4, 5, 6],
+      "Players": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+      "Recommended players": [2, 3, 4, 5, 6],
       "Requires DM": false,
       "Requires dedicated components": true,
-      "Categories": ["Paper and pencil", "Puzzle", "Flip and write", "Spatial planning", "Simultaneous play", "Quiet solo play", "Quiet puzzle night"]
+      "Categories": ["Paper and pencil", "Puzzle", "Flip and write", "Spatial planning", "Simultaneous play", "Quiet puzzle night"]
     },
     "Conclusion": "The same forest can become a tidy border on your map and the missing piece of a village on someone else's. You discover how differently everyone read the same draw when you compare maps.",
-    "Core rules": "Reveal exploration cards and have everyone draw an allowed shape and terrain on their own map. Four edicts set the scoring goals, with a different pair scored each season. Score your map after each of the four seasons; the highest cumulative score wins, or compare with the solo rating.",
-    "Detailed rules": "Rotate or reflect a shape to fit empty spaces without covering occupied squares; most placements need not connect to earlier ones. A ruins card constrains the next shape, and an ambush sends your sheet to a neighbour to draw monsters. End a season once revealed time values reach its limit. Score the two edicts and all coins earned so far; subtract one per empty square orthogonally adjacent to a monster, even if it touches two. Solo ambush cards specify where to place their shapes.",
-    "Recommendation reasons": "Seasonal scoring gives the map a changing purpose: an awkward shape now can prepare a much better score next season. Simultaneous drawing keeps the spatial puzzle intact whether you play alone or compare solutions with friends.",
+    "Core rules": "Reveal exploration cards and have everyone draw an allowed shape and terrain on their own map. Four edicts set the scoring goals, with a different pair scored each season. Score your map after each of the four seasons; the highest cumulative score wins.",
+    "Detailed rules": "Rotate or reflect a shape to fit empty spaces without covering occupied squares; most placements need not connect to earlier ones. A ruins card constrains the next shape, and an ambush sends your sheet to a neighbour to draw monsters. End a season once revealed time values reach its limit. Score the two edicts and all coins earned so far; subtract one per empty square orthogonally adjacent to a monster, even if it touches two.",
+    "Recommendation reasons": "Seasonal scoring gives the map a changing purpose: an awkward shape now can prepare a much better score next season. Simultaneous drawing keeps the spatial puzzle intact as players compare their different maps.",
     "Recommendation tier": "T1"
   },
   {
@@ -402,7 +462,7 @@
     "Core rules": "Build roads, settlements and cities on a shared island. Two dice determine which terrain produces resources for adjacent buildings. On your turn, trade resources and spend them to build or buy development cards. The first player to have ten victory points on their own turn wins.",
     "Detailed rules": "Everyone places two starting settlements with roads, reversing the order for the second placement. A producing hex gives one resource per settlement or two per city unless blocked by the robber. A seven produces nothing: anyone holding more than seven resource cards discards half, rounded down, then the roller moves the robber and may steal a random resource from an adjacent opponent. New settlements need an empty intersection at least two edges from the nearest settlement or city. Roads, harbours, knights and development cards offer different routes to ten.",
     "Recommendation reasons": "You can trade from a weak position if you have the one resource another player needs. That gives the table something to negotiate beyond dice luck, and makes your choice of trading partner matter as much as the exchange rate.",
-    "Recommendation tier": "T1"
+    "Recommendation tier": "T2"
   },
   {
     "Name": "Categories",
@@ -540,6 +600,21 @@
     "Recommendation tier": "T0"
   },
   {
+    "Name": "Cockroach Poker",
+    "Tags": {
+      "Players": [2, 3, 4, 5, 6],
+      "Recommended players": [4, 5, 6],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Card game", "Bluffing", "Hidden information", "Party", "Social gathering"]
+    },
+    "Conclusion": "Passing one face-down card can start a surprisingly long chain of suspicion. The pressure comes from choosing whom to challenge and when to pass the problem along.",
+    "Core rules": "Deal the creature cards, then take turns offering one face down to another player while naming a creature. The recipient either judges the claim or secretly looks and passes the card onward with a new claim. A wrong judgment makes the recipient keep the card face up; a correct judgment sends it back to the last sender. The first player to collect four of one creature loses, as does someone who must lead but has no hand cards.",
+    "Detailed rules": "The base deck has eight creature types with eight cards each. You may only pass the current card to someone who has not already seen it, so its final eligible recipient must judge. Whoever keeps the revealed card starts the next offer with a card from hand. Hands and face-up collections create different incentives for choosing a target. In the two-player rules, remove ten cards unseen before dealing, and losing requires five identical face-up creatures instead of four. There is one loser; everyone else wins together.",
+    "Recommendation reasons": "Very little procedure separates the players from the bluffing: one card, one claim and a decision. Because unwanted cards remain visible, the stakes become easy to read and the table can build jokes around repeated confrontations.",
+    "Recommendation tier": "T1"
+  },
+  {
     "Name": "Codenames",
     "Tags": {
       "Players": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -582,6 +657,21 @@
     "Core rules": "Turn over two cards from a face-down grid. Keep equal ranks and take another turn; otherwise turn both back in place. The player who collects the most pairs wins.",
     "Detailed rules": "Use two cards of each of the thirteen ranks. Shuffle the 26 cards into a regular grid without gaps. Show both cards long enough for everyone to see; never move unclaimed cards between turns. An unsuccessful turn passes clockwise. End when the last pair has been taken and count pairs, sharing a tie.",
     "Recommendation reasons": "Children and adults can play the same game with almost no teaching. Paying attention on someone else's turn can be more useful than making another guess yourself.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "Concordia",
+    "Tags": {
+      "Players": [2, 3, 4, 5],
+      "Recommended players": [3, 4, 5],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Economic strategy", "Eurogame", "Hand management", "Network building", "Resource management", "Strategy night"]
+    },
+    "Conclusion": "Playing a card does not only spend an action. It moves that action toward the point where you must collect your whole hand and begin the cycle again.",
+    "Core rules": "Play one personality card per turn and resolve its action to move colonists, build houses, produce or trade goods, or buy more personalities. Played cards remain unavailable until recalled. The last personality purchase or a player's fifteenth house triggers final turns. Each card's god scores a different feature of your empire.",
+    "Detailed rules": "Land and sea colonists use different routes. Building in an occupied city costs more money, but houses from several players can coexist. Activating a province produces for all eligible houses there, so a rival's action may help you. The Tribune retrieves your played cards. Purchased personalities are both new actions and additional scoring multipliers. Use Italia for two to four players and Imperium for three to five.",
+    "Recommendation reasons": "A small set of actions produces a surprisingly connected economy. You can gain from a neighbour's production, yet the cards you buy quietly determine whether those same houses will score well for you.",
     "Recommendation tier": "T2"
   },
   {
@@ -645,6 +735,21 @@
     "Recommendation tier": "T1"
   },
   {
+    "Name": "Crokinole",
+    "Tags": {
+      "Players": [2, 4],
+      "Recommended players": [2, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Dexterity", "Flicking", "Spatial planning", "Two-player night", "Social gathering"]
+    },
+    "Conclusion": "A gentle flick can land in the centre hole or knock a rival away from it. The board makes aim, angle and force immediately visible, so spectators can follow the tension as easily as the players.",
+    "Core rules": "Two players, or four in opposing partnerships, alternate flicking discs from their own shooting area. Aim to leave discs in high-scoring zones or sink them into the centre hole. If enemy discs remain on the board, the shot must contact an opposing disc, directly or through a chain. After all discs are played, compare each side's score for the round.",
+    "Detailed rules": "When no opposing disc is in play, your shot must leave at least one of your discs touching or inside the fifteen-point line, or score the centre hole. An invalid shot removes the played disc and any friendly discs it moved. Centre-hole discs are removed and bank twenty points. Remaining discs score fifteen, ten or five by zone; a disc touching a boundary scores the lower zone. Partners sit opposite each other and share a colour. Keep your shooting position and do not move the board to improve an angle.",
+    "Recommendation reasons": "The basic objective is immediately understandable, while skilled shots allow direct interaction, rebounds and precision play. It suits mixed-experience groups who enjoy a tactile contest and quick changes of fortune.",
+    "Recommendation tier": "T1"
+  },
+  {
     "Name": "Cthulhu: Death May Die",
     "Tags": {
       "Players": [1, 2, 3, 4, 5],
@@ -660,6 +765,21 @@
     "Recommendation tier": "T0"
   },
   {
+    "Name": "Dead of Winter",
+    "Tags": {
+      "Players": [2, 3, 4, 5],
+      "Recommended players": [3, 4, 5],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Narrative adventure", "American-style thematic game", "Hidden roles", "Cooperation", "Resource management", "Regular group", "Social gathering"]
+    },
+    "Conclusion": "Keeping the colony alive is hard enough before someone starts saving supplies for a private goal. A seemingly selfish move may be betrayal, caution or simply a survivor's own obsession.",
+    "Core rules": "Players control groups of survivors, gathering supplies and meeting a common objective while also pursuing secret objectives. Each round reveals a crisis, players take turns using action dice and cards, and the colony then consumes food and resolves threats. In the standard game, each player wins only if their own objective is fulfilled; the group can include a hidden betrayer.",
+    "Detailed rules": "Roll one action die per survivor plus one extra; spend suitable results to attack, search, build barricades or remove waste. Moving and some attacks require an exposure roll that can cause wounds, frostbite or a lethal bite. Contribute cards secretly to the crisis, where unsuitable cards undermine the total. The next player watches a Crossroads card and reads it if its trigger occurs. Survivor deaths, starvation and failed crises can reduce morale. Reaching zero morale or the round limit ends the game; players may vote to exile someone. Two-player play uses the cooperative setup with no betrayal or secret objectives and its adjusted survivor setup.",
+    "Recommendation reasons": "The colony's shortages create a reason to negotiate, while secret objectives make easy accusations unreliable. Conditional Crossroads events add difficult story decisions to the resource management, giving discussion a concrete situation to revolve around.",
+    "Recommendation tier": "T2"
+  },
+  {
     "Name": "Deception: Murder in Hong Kong",
     "Tags": {
       "Players": [4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -672,6 +792,21 @@
     "Core rules": "Each player other than the Forensic Scientist displays means and clue cards. The murderer secretly designates one of each from their own cards. The Scientist knows the pair and places markers on scene tiles to guide the investigators without speaking the solution. Investigators win by naming both cards correctly; the murderer wins if the investigation ends unsolved.",
     "Detailed rules": "The Scientist is a member of the investigating side, not a separate host. Initial tiles include cause of death, location and other aspects of the scene. Later rounds replace one ordinary scene tile to refine the clues. A player with a badge may spend it to accuse, naming the suspect's two cards. The Scientist only confirms success or failure, never which half was correct. A failed accuser may still discuss but has no second accusation. Larger groups can add an accomplice or witness with extra victory conditions.",
     "Recommendation reasons": "The Scientist's limited vocabulary is what makes the deduction interesting: “metal” can point toward several people's cards. In a group that likes talking through evidence, the murderer can steer that same ambiguity toward an innocent player.",
+    "Recommendation tier": "T1"
+  },
+  {
+    "Name": "Decrypto",
+    "Tags": {
+      "Players": [3, 4, 5, 6, 7, 8],
+      "Recommended players": [4, 6, 8],
+      "Requires DM": false,
+      "Requires dedicated components": false,
+      "Categories": ["Word game", "Clue giving", "Team competition", "Deduction", "Social gathering", "Regular group"]
+    },
+    "Conclusion": "Every clue helps your team but teaches the opponents something too. As the written clue history grows, a harmless association from an earlier round can become the key to breaking a code.",
+    "Core rules": "Two teams each see four secret words numbered 1 to 4. An encryptor draws a three-digit code and gives one clue for each digit, aiming for teammates to recover the order while opponents fail to intercept it. Two interceptions win, while two miscommunications lose; check these conditions after both teams have played the round.",
+    "Detailed rules": "Keep the same four words throughout the game and record every clue under the number revealed afterward. Clues must refer to word meaning, not spelling, position or private signals, and cannot repeat earlier clues. There is no interception attempt in round one. Later, the opposition commits to its code guess before the receiving team announces its answer. If the usual ending is tied or eight rounds pass, compare interceptions minus miscommunications, then guesses of opposing keywords. At three, two players transmit and one intercepts, trying for two interceptions within five rounds.",
+    "Recommendation reasons": "Accumulating clues makes the deduction grow instead of resetting after each answer. It suits a group that enjoys wordplay, taking notes and finding connections between things said several turns apart.",
     "Recommendation tier": "T1"
   },
   {
@@ -703,6 +838,21 @@
     "Detailed rules": "Start in the cell block with three search cards and a background. Some actions work anywhere; others require a specific room. Cigarettes pay for deals, and gang membership or wounds can affect your options. To dig, discard an appropriate tool in the cell block and score its tunnel value. The target is twelve points with two or three players, ten with four, and eight with five or six. Merely holding a tool earns no points.",
     "Recommendation reasons": "Five gives the direct confrontation room to develop. With only two actions each, taking an early lead can make you the person everyone else decides to stop.",
     "Recommendation tier": "T0"
+  },
+  {
+    "Name": "Disney Lorcana",
+    "Tags": {
+      "Players": [2],
+      "Recommended players": [2],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Collectible card game", "Deck construction", "Resource management", "Tactical combat", "Two-player night", "Family"]
+    },
+    "Conclusion": "A character sent on a quest earns lore but becomes vulnerable. Keeping it ready protects it while postponing the very points needed to win.",
+    "Core rules": "In the two-player format, build a deck of at least sixty cards using no more than two ink colours. Turn eligible hand cards into ink to pay for characters, items and actions. Characters quest for lore or challenge opposing exerted characters. The first player to reach twenty lore wins.",
+    "Detailed rules": "Start with seven cards and apply the opening redraw rule. Once per turn you may place one inkable card face down into the inkwell. Newly played characters normally wait until the next turn before exerting. Challenges deal damage to both characters simultaneously; enough damage banishes a character. Character abilities and songs provide exceptions. The starting player skips the first draw, and failing a required draw loses the game.",
+    "Recommendation reasons": "Questing and challenging pull the same characters toward different jobs. Familiar characters give a new player an entry point, while managing ink and vulnerable questers supplies the tactical decisions.",
+    "Recommendation tier": "T2"
   },
   {
     "Name": "Dito! (JinxO)",
@@ -747,7 +897,7 @@
     "Core rules": "Everyone starts with the same small deck. Each turn, play an action if desired, play treasures and buy a card into your discard pile, then discard the turn's cards and draw a new hand. When the Provinces or any three Supply piles are empty at turn end, the player with the most victory points in their deck wins.",
     "Detailed rules": "Use ten Kingdom piles plus the base Supply. Start with seven Coppers and three Estates; draw five cards. A turn normally has one action and one buy, though card text may grant more. Play action cards in order and resolve each fully. When you need to draw from an empty deck, shuffle your discards into a new deck; a trashed card is removed instead. If scores tie, the tied player who took fewer turns wins, otherwise they share the win.",
     "Recommendation reasons": "The ten Kingdom piles are visible from the start, so you can plan around a particular combination rather than hope to discover it in a random pack. Changing those piles changes what a good deck looks like.",
-    "Recommendation tier": "T1"
+    "Recommendation tier": "T2"
   },
   {
     "Name": "Doodle Dash",
@@ -867,6 +1017,21 @@
     "Core rules": "Play five tricks with a chosen trump suit. The trump jack and same-colour jack are highest. The calling team must win at least three tricks.",
     "Detailed rules": "Use the 9 through ace of each suit, five cards per person. Turn up one card to offer its suit as trump; if all pass, offer the other suits, redealing after a second full pass. Follow suit if able, counting the same-colour jack as trump. Callers score one for three or four tricks, two for a sweep, or four for a lone sweep. Defenders get two for stopping them. Play to ten.",
     "Recommendation reasons": "Short hands and the option to play alone make it a sociable partnership game with quick, consequential decisions.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "Everdell",
+    "Tags": {
+      "Players": [1, 2, 3, 4],
+      "Recommended players": [2, 3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Strategy", "Eurogame", "Worker placement", "Engine building", "Set collection", "Family", "Strategy night"]
+    },
+    "Conclusion": "A building can make a future resident cheaper to invite, but every resident also occupies one of the few spaces in your woodland city.",
+    "Core rules": "Place a worker to gain resources or benefits, play a critter or construction into your city, or prepare for the next season to recover workers and gain new ones. Players advance seasons individually. After everyone finishes autumn, score the cards, events and point tokens in their cities.",
+    "Detailed rules": "Most cities hold at most fifteen cards. Pay berries for critters and building materials for constructions; a matching unoccupied construction can admit its named critter free once. Play cards from hand or the public Meadow. Many worker spaces are exclusive, while some are shared. Production cards activate when played and at specified seasons. Once you finish, others may still have turns left. Solo uses Rugwort, who collects Meadow cards and obstructs spaces as seasons advance.",
+    "Recommendation reasons": "The linked buildings and critters make combinations easy to recognize. Choosing when to leave a season adds another decision: recover workers now, or squeeze one more useful play out of the current season.",
     "Recommendation tier": "T2"
   },
   {
@@ -990,6 +1155,36 @@
     "Recommendation tier": "T0"
   },
   {
+    "Name": "For Sale",
+    "Tags": {
+      "Players": [3, 4, 5, 6],
+      "Recommended players": [4, 5, 6],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Card game", "Economic strategy", "Bidding and auctions", "Simultaneous play", "Social gathering"]
+    },
+    "Conclusion": "Buying the finest house is only half the job. Selling it against the right opponents' houses may earn more than winning the auction cheaply did.",
+    "Core rules": "First auction properties, revealing one per player each round. Raise the bid or pass to take the lowest remaining property. Once all properties are bought, reveal cheques and have everyone secretly choose one property to sell. Higher properties receive higher cheques. Cheques plus unspent cash determine the winner.",
+    "Detailed rules": "On passing, recover half your bid rounded down and pay the rest; the last bidder pays the full bid and takes the highest property. Prepare starting cash and remove cards for the player count. In the selling phase, reveal all choices together, match their rank to the cheques and discard those properties. A property may be used only once.",
+    "Recommendation reasons": "Two different auctions fit into one short game. Public bids reveal how aggressively people buy, while simultaneous sales reward remembering which good properties they might still hold.",
+    "Recommendation tier": "T1"
+  },
+  {
+    "Name": "Forbidden Island",
+    "Tags": {
+      "Players": [2, 3, 4],
+      "Recommended players": [2, 3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Cooperative adventure", "Cooperation", "Action planning", "Family", "Regular group"]
+    },
+    "Conclusion": "The island visibly disappears while the team is still collecting its treasures. Every rescued tile buys time, but repairing everything can leave too few actions to escape.",
+    "Core rules": "Cooperate to collect four treasures and escape together from Fools' Landing using a Helicopter Lift card. Each turn take up to three actions, draw two treasure cards, then draw flood cards according to the water level. Flooding first flips an island tile and later removes it, steadily reducing the team's safe routes.",
+    "Detailed rules": "Normal actions move orthogonally, shore up your tile or an adjacent tile, give a treasure card to a player on your tile, or discard four matching treasure cards at a corresponding site to claim that treasure. Roles modify these abilities. A Waters Rise card raises the water level and places the shuffled flood discards back on top of the flood deck. The team loses if both sites for an unclaimed treasure disappear, Fools' Landing sinks, anyone cannot swim to safety, or the water reaches the final level. Special action cards can provide urgent transport or repairs.",
+    "Recommendation reasons": "The shrinking board makes urgency visible, and the limited action menu gives new cooperative players clear things to discuss. Different roles and island layouts change the rescue plan without requiring a long rules lesson.",
+    "Recommendation tier": "T1"
+  },
+  {
     "Name": "Forehead Poker",
     "Tags": {
       "Players": [3, 4, 5, 6, 7, 8, 9, 10],
@@ -1048,6 +1243,21 @@
     "Detailed rules": "Income and the Gaia phase precede the action phase. Pay for range and terraforming when founding mines; upgrade along your faction’s building track. Nearby opponents may pay victory points to charge power. Power cycles through three bowls and is normally spent from the third. A standard federation requires connected structures worth at least seven power; satellites cost permanent power tokens. Passing selects a booster for the next round. Faction abilities can change these costs and conditions.",
     "Recommendation reasons": "Four players learning together can discover different approaches on the same crowded map. It suits a group interested in how each faction develops rather than one looking for big swings of luck.",
     "Recommendation tier": "T0"
+  },
+  {
+    "Name": "Galactic Cruise",
+    "Tags": {
+      "Players": [1, 2, 3, 4],
+      "Recommended players": [1, 2, 3],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Economic strategy", "Eurogame", "Worker placement", "Resource management", "Action planning", "Strategy night", "Quiet solo play"]
+    },
+    "Conclusion": "Launching a holiday into space means getting a ship, passengers, supplies and an itinerary ready at the same time. The payoff is watching a carefully prepared cruise start feeding rewards back into the company.",
+    "Core rules": "Manage a space-tourism company by placing workers, developing ships and preparing cruises. Begin a turn by advancing ships already travelling, then assign a worker, launch a ship or recall workers in a meeting. Launches and company goals advance a shared progress track that triggers scoring assessments. After the final assessment sequence, the highest victory-point total wins.",
+    "Detailed rules": "An assigned worker can take up to two actions, with development links granting access to connected locations. Actions obtain blueprints, construct cabins, collect supplies, attract guests, schedule routes or improve the company. Launching commits a worker as pilot and requires a suitable ship, cruise, guests and food, oxygen and fuel. Cruises award benefits as they advance, and the pilot returns after landing. A meeting recalls workers for funding and one qualifying action. The three progress sections create repeated opportunities to score company goals; later launches often benefit from infrastructure built earlier. Solo uses an automated competitor.",
+    "Recommendation reasons": "The connected preparation steps reward planning without making a single imperfect move invalidate the whole company. Players who enjoy substantial economic games can see their early infrastructure turn into a more productive cycle of launches and returns.",
+    "Recommendation tier": "T2"
   },
   {
     "Name": "The Gang",
@@ -1122,7 +1332,7 @@
     "Core rules": "Fight a cooperative campaign of linked scenarios with two to four characters. In a normal round each character selects two ability cards and chooses one for initiative. When acting, use the top of one and the bottom of the other. Meet the scenario objective while at least one character can still fight. A solo player controls two characters.",
     "Detailed rules": "Reveal monster abilities and act in initiative order. Attack modifier cards adjust damage; monster movement and targeting follow their rules rather than another player's choices. Used cards normally enter the discard pile, while powerful loss actions go to the lost pile. Rest to recover discarded cards at the cost of losing one. A character exhausts at zero health or when unable to play or rest legally. The first five scenarios introduce rules gradually before full character decks and campaign choices come into play.",
     "Recommendation reasons": "The opening scenarios teach the card system in pieces. Once it clicks, the same hand offers both a positioning puzzle and a stamina puzzle: spending your strongest effect now leaves fewer turns to finish the job.",
-    "Recommendation tier": "T1"
+    "Recommendation tier": "T2"
   },
   {
     "Name": "Go Fish",
@@ -1155,6 +1365,21 @@
     "Recommendation tier": "T2"
   },
   {
+    "Name": "Great Western Trail",
+    "Tags": {
+      "Players": [1, 2, 3, 4],
+      "Recommended players": [2, 3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Economic strategy", "Eurogame", "Deck building", "Hand management", "Resource management", "Quiet solo play", "Strategy night"]
+    },
+    "Conclusion": "The road to Kansas City is familiar, but the herd in your hand and the buildings along the way change what is worth stopping for.",
+    "Core rules": "Move your rancher forward along the trail and use the building where you stop. Buy different cattle, hire staff, build facilities and advance your train before delivering a hand to Kansas City. Deliveries improve income and unlock benefits. When the job market triggers the end, finish the prescribed turns and score your cattle, buildings, stations, objectives and other bonuses.",
+    "Detailed rules": "A delivery values different cattle breeds in your hand, so duplicates do not automatically improve it. Cowhands improve cattle purchases, craftsmen construction and engineers railway progress. Your buildings change the available stops and may charge opponents tolls. Moving faster delivers more often but skips useful actions. The second edition includes Simmental cattle, revised components and a dedicated solo opponent.",
+    "Recommendation reasons": "The shared route ties deck building to movement. Improving the herd is not enough unless you also find a good sequence of stops to draw, prepare and deliver it.",
+    "Recommendation tier": "T2"
+  },
+  {
     "Name": "Hadrian’s Wall",
     "Tags": {
       "Players": [1, 2, 3, 4, 5, 6],
@@ -1168,6 +1393,21 @@
     "Detailed rules": "Each year, choose one of two cards as a scoring objective and use the other for supplies. Everyone marks actions simultaneously; a reward can fund another action immediately. At year’s end, reveal the raid cards and check each flank separately. Temple favours can cancel an attack; diplomats protect only their assigned flank. In solo play, two neutral cards stand in for neighbours when trading or scouting. After six years, break a tied score by least disdain, then by points from objectives.",
     "Recommendation reasons": "It offers a dense solo puzzle without waiting for anyone else’s turn. That same concentration can feel more like an exam if you want an easy evening.",
     "Recommendation tier": "T0"
+  },
+  {
+    "Name": "Hanabi",
+    "Tags": {
+      "Players": [2, 3, 4, 5],
+      "Recommended players": [3, 4, 5],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Card game", "Cooperation", "Memory", "Listening and communication", "Regular group", "Quiet puzzle night"]
+    },
+    "Conclusion": "You can see the useful card in your partner's hand, but getting them to recognise it costs a precious hint. The fireworks succeed when the group remembers what has been said and understands why it was said now.",
+    "Core rules": "Hold your cards facing outward so everyone except you can see them. Together build five coloured fireworks in ascending order from 1 to 5. On your turn give a legal hint, discard a card to recover a hint, or attempt to play a card. Three failed plays end the game; otherwise the completed fireworks determine the team's score, up to 25.",
+    "Detailed rules": "Deal five cards each at two or three players and four at four or five. Begin with eight available hint tokens. A hint names one colour or number and identifies every matching card in one teammate's hand. Discarded or played cards are replaced without their owner seeing the front. A successful 5 restores a hint if one is spent. Each colour has three 1s, two each of 2, 3 and 4, and one 5, so discards can make a firework impossible to finish. After the last card is drawn, each player gets one final turn. Do not communicate extra card information outside the allowed hints.",
+    "Recommendation reasons": "The reversed hands make cooperation depend on attention and interpretation rather than one player directing every move. A group can feel its communication improve across repeated games, even though the basic actions stay simple.",
+    "Recommendation tier": "T1"
   },
   {
     "Name": "Hangman",
@@ -1260,6 +1500,21 @@
     "Recommendation tier": "T0"
   },
   {
+    "Name": "Hive",
+    "Tags": {
+      "Players": [2],
+      "Recommended players": [2],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Abstract strategy", "Spatial planning", "Tactical combat", "Two-player night", "Travel"]
+    },
+    "Conclusion": "The playing area grows from the insects themselves. Moving one piece can open an escape, trap another insect or threaten the queen, provided the hive remains connected.",
+    "Core rules": "Two players place or move insect pieces, trying to surround the opposing queen on all six sides. Pieces are never captured, and the hive must remain one connected group. Your queen must be placed by your fourth turn, and you cannot move existing pieces until she is in play. If both queens become completely surrounded together, the game is drawn.",
+    "Detailed rules": "The base set gives each player eleven pieces: one queen, two beetles, two spiders, three grasshoppers and three ants. After your first piece, newly placed pieces may touch your own colour but not the opponent's. The queen moves one step, ants travel around the perimeter, spiders move exactly three steps, grasshoppers jump over a straight occupied line and beetles move one step and may climb onto pieces. Sliding pieces need enough space to pass, and no move may split the hive. A beetle on top determines the stack's colour for placement purposes.",
+    "Recommendation reasons": "Distinct movement rules create a tactical contest without a separate board or luck after setup. Its compact components travel well, and the connected-hive restriction produces combinations that reward repeated play.",
+    "Recommendation tier": "T1"
+  },
+  {
     "Name": "Hot Seat",
     "Tags": {
       "Players": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
@@ -1273,6 +1528,21 @@
     "Detailed rules": "Sit in a circle and choose comfortable topics such as hobbies or imaginary trips. Set two minutes per guest, ask one short question at a time and let the guest decide how much to say. Do not repeat a declined question. Rotate clockwise when time expires and shorten turns for a large group.",
     "Recommendation reasons": "On your turn you can start with an easy question and pass on one you would rather not answer. The time limit makes room for everyone to have a turn.",
     "Recommendation tier": "T2"
+  },
+  {
+    "Name": "Hues and Cues",
+    "Tags": {
+      "Players": [3, 4, 5, 6, 7, 8, 9, 10],
+      "Recommended players": [5, 6, 7, 8, 9, 10],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Word game", "Clue giving", "Party", "Icebreaker"]
+    },
+    "Conclusion": "One person's idea of a peach can be several squares away from another's. A board full of neighbouring colours makes those small differences in imagination visible.",
+    "Core rules": "Take turns describing a secret target colour on a 480-colour board. Give a one-word cue, let the other players place their first guesses, then give a cue of up to two words before their second guesses. Reveal the target and award points for closeness, then rotate the cue giver. The highest total after the prescribed turns wins.",
+    "Detailed rules": "Draw a card and choose one of its four colours using the printed coordinates. Cues cannot use basic colour names, board coordinates or visible objects in the room. Guessers place pieces on unoccupied spaces, with the direction of play reversed for the second guess. Centre the three-by-three scoring frame on the target: an exact guess scores three, another space inside scores two, and a space immediately outside, including diagonal neighbours, scores one. The cue giver gets one point for each piece inside the frame. Both guessing pieces can score.",
+    "Recommendation reasons": "The task is easy to explain but prompts creative descriptions and comparisons of personal associations. Near misses still score, which keeps a mixed group involved even when nobody finds the exact shade.",
+    "Recommendation tier": "T1"
   },
   {
     "Name": "Human Knot",
@@ -1318,6 +1588,21 @@
     "Detailed rules": "Everyone still inside reveals their decision together. Departing players bank what they carry and divide the leftover path gems among themselves. Players staying behind get none of that share. A hazard never takes treasure already banked at camp. After a failed expedition remove one copy of the hazard that ended it, then prepare the next cave. Most stored treasure after five expeditions wins. In the optional relic game, only a player leaving alone can claim a relic on the path.",
     "Recommendation reasons": "At eight, the rules are easy to explain and every new card gives everyone a decision. Watching the group split between running and staying keeps the table lively.",
     "Recommendation tier": "T0"
+  },
+  {
+    "Name": "Insider",
+    "Tags": {
+      "Players": [4, 5, 6, 7, 8],
+      "Recommended players": [5, 6, 7, 8],
+      "Requires DM": false,
+      "Requires dedicated components": false,
+      "Categories": ["Social deduction", "Questioning", "Hidden roles", "Voting", "Party", "Icebreaker"]
+    },
+    "Conclusion": "The most helpful questioner may be the person hiding the truth. Finding the answer is only the first half of the game; afterward everyone revisits how the conversation got there.",
+    "Core rules": "Deal a master, an insider and ordinary-player roles. The master and insider secretly learn the answer, then everyone else asks the master yes-or-no questions within five minutes. If the answer is not found, everyone loses. If it is found, the players, including the master, try to identify the insider; an unidentified insider wins instead.",
+    "Detailed rules": "Use the eyes-closed setup so only the insider sees the answer after the master has learned it. The insider can ask questions and help reach the solution, but should not make that knowledge obvious. When the answer is found, flip the sand timer immediately: discussion lasts as long as the guessing phase took. First vote on whether the player who gave the correct answer is the insider; if correctly cleared, proceed to the simultaneous accusation vote among the remaining suspects. The master is a participating role, so no separate moderator is required.",
+    "Recommendation reasons": "The cooperative guessing phase creates a conversation that the deduction phase can examine. Short rounds and limited roles make the shift from helping to suspecting easy to experience without a long setup.",
+    "Recommendation tier": "T1"
   },
   {
     "Name": "Just a Minute",
@@ -1470,6 +1755,111 @@
     "Recommendation tier": "T1"
   },
   {
+    "Name": "The Lord of the Rings: Fate of the Fellowship",
+    "Tags": {
+      "Players": [1, 2, 3, 4, 5],
+      "Recommended players": [1, 2, 3],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Cooperative adventure", "American-style thematic game", "Cooperation", "Action planning", "Resource management", "Regular group", "Quiet solo play"]
+    },
+    "Conclusion": "The war across Middle-earth and the ring-bearer's journey compete for the fellowship's attention. Buying safety in one region can be what makes the final push toward Mount Doom possible.",
+    "Core rules": "Cooperate to complete a selected set of objectives, finishing by destroying the One Ring before Frodo loses hope. In multiplayer, each player controls two characters and takes up to four actions with one and one action with the other. Draw two player cards, then resolve shadow cards that advance enemy forces and threaten the fellowship.",
+    "Detailed rules": "Actions move characters and accompanying troops, share cards, prepare symbol tokens, muster troops, attack or capture strongholds. Pay the required symbols from cards or tokens. Frodo's movements can trigger searches, with nearby Nazgûl and Sauron's gaze increasing the danger. Skies Darken cards intensify threats and recycle shadow discards. Complete preliminary objectives before attempting the final Ring objective; zero hope defeats the team, and each required card that cannot be drawn costs one hope. Solo uses Frodo and Sam as one character plus four supporting characters, rotating the four-action character while Frodo and Sam receive the single action.",
+    "Recommendation reasons": "Changing objectives make familiar characters serve different plans, and the pursuit of the ring-bearer gives the cooperative crisis management a clear story. It suits a group that wants to discuss a substantial shared strategy within the Middle-earth setting.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "Lost Ruins of Arnak",
+    "Tags": {
+      "Players": [1, 2, 3, 4],
+      "Recommended players": [1, 2, 3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Strategy", "Eurogame", "Deck building", "Worker placement", "Resource management", "Quiet solo play", "Strategy night"]
+    },
+    "Conclusion": "Two archaeologists cannot visit every promising site. A card bought for its useful effect may also be the transport you need to send one of them farther into the island.",
+    "Core rules": "Over five rounds, take turns performing one main action: dig at a site, discover a new one, defeat a guardian, buy a card or advance research. Use cards and resources to pay for those actions. Score discoveries, research, guardians, idols and cards, subtracting Fear, after the fifth round.",
+    "Detailed rules": "Each player has two workers per round. Reaching sites requires travel symbols, and new sites cost compasses and reveal guardians. Leaving a worker with an undefeated guardian gives Fear when recalled. Purchased items go beneath your deck for later use; artifacts can be used immediately when bought, with later uses costing a tablet. Research has two pieces whose movement order matters. Cards can also be spent for their travel symbols instead of their printed effects.",
+    "Recommendation reasons": "Cards, workers and research compete for the same small resource pool. That makes a good purchase useful in several ways, while the five-round limit keeps you deciding which opportunity to leave behind.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "Love Letter",
+    "Tags": {
+      "Players": [2, 3, 4, 5, 6],
+      "Recommended players": [4, 5, 6],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Card game", "Hidden information", "Deduction", "Elimination", "Social gathering", "Travel"]
+    },
+    "Conclusion": "A single card is all you can keep, so protecting a strong hand may mean giving up the very character that could expose someone else.",
+    "Core rules": "Draw one card, play one of your two cards and resolve its character ability. A round ends when only one player remains or the deck runs out. The survivor, or the remaining player with the highest card, gains favour. Reach the favour target for the player count to win.",
+    "Detailed rules": "Set one card aside unseen each round. Guards guess an opponent's rank other than Guard; Priests inspect a hand; Barons compare hands; Handmaids protect; Princes force a discard and redraw; Kings exchange hands. A Countess must be discarded when held with a King or Prince, and discarding the Princess eliminates you. A sole surviving Spy user earns an extra favour; a Chancellor draws two, keeps one card and puts the other two below the deck. Discards are public and help reveal which cards remain.",
+    "Recommendation reasons": "The small deck makes deduction visible: every discarded character changes the odds. Short rounds let a group try a bold accusation and quickly return for another attempt if it fails.",
+    "Recommendation tier": "T1"
+  },
+  {
+    "Name": "Magic: The Gathering",
+    "Tags": {
+      "Players": [2],
+      "Recommended players": [2],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Collectible card game", "Deck construction", "Hand management", "Tactical combat", "Two-player night", "Regular group"]
+    },
+    "Conclusion": "The same mana can summon another creature or stay untapped to answer an opponent. What you leave available can influence a turn before you play a spell.",
+    "Core rules": "In this two-player constructed format, bring a deck of at least sixty cards and start at twenty life. Play lands to generate mana, cast spells and attack with creatures. Reduce the opponent to zero life or satisfy another victory condition. Card text can change the ordinary rules.",
+    "Detailed rules": "Draw an opening hand of seven and use the agreed mulligan procedure. Normally play one land per turn. Creatures generally cannot attack or use tap abilities until controlled since your turn began; the defender chooses blockers. Instants and many abilities can respond on the stack, resolving last in, first out. A player who must draw from an empty library loses. Competitive decks also follow the chosen format's legality rules.",
+    "Recommendation reasons": "Different colours and deck plans support different styles of play. The interaction continues during an opponent's turn, giving a prepared response value alongside the cards already on the battlefield.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "Mansions of Madness: Second Edition",
+    "Tags": {
+      "Players": [1, 2, 3, 4, 5],
+      "Recommended players": [1, 2, 3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Cooperative adventure", "American-style thematic game", "Exploration", "Deduction", "Campaign play", "Regular group", "Quiet solo play"]
+    },
+    "Conclusion": "Opening another door can uncover a clue, a puzzle or something pursuing the investigators. The table explores together while the companion app reveals the mystery piece by piece.",
+    "Core rules": "Choose investigators and an app scenario, then explore the physical map and complete its objective together. Each investigator takes two actions during the investigator phase; the app then runs a mythos phase of events, monster activity and horror. The app is required, and solo play uses at least two investigators.",
+    "Detailed rules": "Actions include moving up to two spaces, searching or interacting with a token, exploring a door, attacking, trading and using printed abilities. Follow the app's instructions when it asks for a test: roll the relevant attribute's dice and spend clues to convert investigation results into successes. Puzzles limit attempts according to the stated skill. Damage and horror cards have individual effects; exceeding a threshold causes a wound or insanity and may eventually eliminate an investigator. An insanity card can alter its owner's victory conditions. The scenario determines the final objective and time pressure.",
+    "Recommendation reasons": "The app handles much of the hidden information and monster administration, allowing everyone to be an investigator. The appeal is a shared mystery with physical exploration, cooperative problem solving and a strong horror atmosphere.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "Marvel Champions: The Card Game",
+    "Tags": {
+      "Players": [1, 2, 3, 4],
+      "Recommended players": [1, 2],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Card game", "Cooperative adventure", "Deck construction", "Cooperation", "Hand management", "Quiet solo play", "Regular group"]
+    },
+    "Conclusion": "A hero's strongest attack may use cards that were also needed to pay for defence. Switching back to an ordinary identity creates another dilemma: recover now and give the villain room to advance the scheme.",
+    "Core rules": "Build a hero deck and cooperate to defeat every required stage of the chosen villain. Players take hero turns, paying for cards by discarding other cards as resources, and can switch once per turn between hero and alter-ego forms. The villain then attacks heroes or schemes against alter egos. Complete the fight before the main scheme's final stage succeeds or every hero is eliminated.",
+    "Detailed rules": "A normal deck contains 40 to 50 cards, including the hero's fifteen signature cards, one chosen aspect and basic cards. Exhaust your identity to attack, thwart or recover as its current form allows. Allies and upgrades stay in play, while events resolve once. Refill hands and ready cards before the villain phase, which adds threat, activates enemies and deals encounter cards. Boost cards make attacks and scheming less predictable; minions and side schemes create competing priorities. Choose the villain, difficulty and encounter modules before play; the core box supports solo without a moderator.",
+    "Recommendation reasons": "Distinct hero decks and interchangeable villain modules offer many combinations within one cooperative system. The hero and alter-ego decision gives even a quiet solo game a recurring thematic choice between recovery and responsibility.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "Memoir '44",
+    "Tags": {
+      "Players": [2],
+      "Recommended players": [2],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Wargame", "Hand management", "Tactical combat", "Two-player night"]
+    },
+    "Conclusion": "A useful command card can arrive for the wrong flank, forcing a commander to make the best of the troops they can activate. Terrain and short dice battles turn a historical scenario into approachable tactical decisions.",
+    "Core rules": "Play a two-player battle between opposing armies on a hex map. On your turn play a command card to order units, move those units, resolve their battles and draw a replacement card. Earn medals by eliminating enemy units or holding scenario objectives. The first side to reach the scenario's medal requirement wins.",
+    "Detailed rules": "Set up the units, terrain, hand sizes and victory conditions shown by the scenario. Section cards activate a limited number of units on the left, centre or right, while tactic cards provide special orders. Infantry, armour and artillery have different movement and firing ranges. Terrain can block sight, restrict movement or reduce battle dice. Matching unit symbols and grenades cause hits; flags cause retreat, with blocked retreats causing losses. A damaged unit generally keeps its normal combat strength until its last figure is removed. The listed headcount uses the standard base-game duel, not Overlord expansions.",
+    "Recommendation reasons": "Command cards limit choices enough to keep turns moving while still rewarding positioning and timing. The scenario system offers varied tactical situations with a relatively small set of core rules, making it an accessible introduction to historical wargaming.",
+    "Recommendation tier": "T2"
+  },
+  {
     "Name": "The Message",
     "Tags": {
       "Players": [3, 4, 5, 6, 7],
@@ -1483,6 +1873,21 @@
     "Detailed rules": "Draw and use legal action cards before sending intelligence. A cipher travels face down, a document face up, and a direct message goes to a named player. Action cards can intercept or redirect a message at specified moments. Reveal accepted intelligence in front of the recipient; it is no longer a hand card. When a card is sent as intelligence, its printed action does not also fire. Resolve missions, faction collections and black-card effects after delivery.",
     "Recommendation reasons": "A favourite choice for a five-player table that already likes hidden identities.",
     "Recommendation tier": "T0"
+  },
+  {
+    "Name": "MicroMacro: Crime City",
+    "Tags": {
+      "Players": [1, 2, 3, 4],
+      "Recommended players": [1, 2, 3],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Puzzle", "Cooperation", "Deduction", "Exploration", "Quiet puzzle night", "Social gathering"]
+    },
+    "Conclusion": "The same character can appear several times on one enormous city map, showing different moments of a story. Following that trail turns a crowded illustration into a crime investigation.",
+    "Core rules": "Choose a case and use its cards to investigate the physical city map together. Answer each question by locating the relevant people, objects or events, tracing their movements across different moments pictured on the map. Verify answers with the case cards and continue until the case is solved.",
+    "Detailed rules": "Lay out the full map under good light and keep unrevealed solution text hidden. Case cards provide starting information and a sequence of tasks; use the next solution only after agreeing on an answer. Players may search different areas and explain the evidence connecting sightings. There are no movement points, character statistics or competitive turns. Later cases demand longer chains of inference. Cases have fixed solutions, so someone who already knows one should avoid revealing it to new investigators. Solo play follows the same process.",
+    "Recommendation reasons": "Minimal rules let the group begin investigating almost immediately. Discovering an overlooked figure or reconstructing a route produces a shared breakthrough, with the illustration itself carrying much of the story.",
+    "Recommendation tier": "T1"
   },
   {
     "Name": "Midnight",
@@ -1500,6 +1905,21 @@
     "Recommendation tier": "T2"
   },
   {
+    "Name": "The Mind",
+    "Tags": {
+      "Players": [2, 3, 4],
+      "Recommended players": [2, 3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": false,
+      "Categories": ["Card game", "Cooperation", "Simultaneous play", "Regular group", "Social gathering"]
+    },
+    "Conclusion": "A long pause can feel like a signal even though nobody is allowed to explain their cards. Correctly waiting for another player's lower number creates the game's small moments of shared relief.",
+    "Core rules": "The team must play its number cards into one ascending pile without taking fixed turns or communicating their values. At level one each player gets one card, at level two each gets two, and so on. Complete all required levels before running out of lives: twelve levels with two players, ten with three, and eight with four.",
+    "Detailed rules": "Use the cards 1 to 100, starting with one life per player and one throwing star. Shuffle and deal a fresh hand for each level. If a card is played while lower cards remain in players' hands, lose one life and discard those skipped lower cards, then continue. By unanimous agreement, spend a throwing star so everyone discards their lowest card face up. Specified completed levels award lives or stars, subject to their limits. Players may request a pause to refocus, but may not use gestures, counting systems or other signals to convey numbers.",
+    "Recommendation reasons": "The rules create a distinctive experience of coordinating through timing alone. It is quick to introduce and gives a regular group an immediate reason to retry after a narrowly missed level.",
+    "Recommendation tier": "T1"
+  },
+  {
     "Name": "Modern Art",
     "Tags": {
       "Players": [3, 4, 5],
@@ -1515,6 +1935,21 @@
     "Recommendation tier": "T0"
   },
   {
+    "Name": "Monopoly Deal",
+    "Tags": {
+      "Players": [2, 3, 4, 5],
+      "Recommended players": [3, 4, 5],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Card game", "Set collection", "Hand management", "Direct interaction", "Social gathering", "Family"]
+    },
+    "Conclusion": "A finished colour group is close to victory, but it is also an attractive target. You must decide when to bank money and when to expose another valuable property.",
+    "Core rules": "Collect three complete property sets of different colours. Start with five cards; each turn draw two and play up to three as properties, banked money or actions. Rent and action cards move money and properties between players. Win as soon as you complete the required sets on your turn.",
+    "Detailed rules": "With an empty hand at turn start, draw five instead of two. Banked action cards become money and cannot later be used for their printed action. Pay debts from money or properties already in play, never from hand; there is no change and no debt beyond what you own. Keep at most seven cards at turn end. Wild properties can change groups under the normal rearrangement rules.",
+    "Recommendation reasons": "It retains the recognizable property sets and rent demands in a much shorter card format. Cards that swap or steal properties mean an almost-finished collection still needs a plan.",
+    "Recommendation tier": "T2"
+  },
+  {
     "Name": "Most Likely To",
     "Tags": {
       "Players": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
@@ -1527,6 +1962,21 @@
     "Core rules": "Read a playful Most Likely To prompt and point simultaneously at a consenting player who fits it. Count votes and discuss if desired. Predicting the majority is an optional way to score.",
     "Detailed rules": "Use kind, low-stakes prompts. Count to three before showing votes; self-votes count and ties may stand. Being nominated never earns or loses points. If scoring, predict the group's choice before the reveal and reward correct predictions. Rotate readers for ten prompts or until everyone has read one.",
     "Recommendation reasons": "Everyone points at once in response to the same lighthearted prompt. A split vote can lead to a conversation if the group enjoys being named and sharing its reasons.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "Nemesis",
+    "Tags": {
+      "Players": [1, 2, 3, 4, 5],
+      "Recommended players": [3, 4, 5],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Narrative adventure", "American-style thematic game", "Exploration", "Hidden information", "Push your luck", "Regular group", "Strategy night"]
+    },
+    "Conclusion": "The damaged spaceship gives everyone a reason to cooperate, while private objectives make every helpful offer worth questioning. Noise, failing rooms and uncertain escape routes turn the crew's decisions into a survival story.",
+    "Core rules": "Explore an infested ship, spend action cards to move and use equipment, and survive while completing your own objective. In the standard game players can cooperate but do not share a single victory condition. Surviving usually means escaping in a pod or entering hibernation before the functioning ship reaches the required destination.",
+    "Detailed rules": "Each round refresh hands, then take turns performing two actions or passing until everyone has passed; resolve the event phase afterward. Entering an empty room may generate noise and attract an intruder. Attacks, contamination, fire and serious wounds can kill a character. Keep one of your two starting objectives when the first intruder appears. Inspect engines and coordinates rather than assuming the ship is safe: hibernating survivors need at least two working engines and the correct destination, followed by contamination checks. Solo and cooperative modes replace the competitive objectives with their specified mission setup.",
+    "Recommendation reasons": "Hidden motives and unpredictable encounters make cooperation feel uneasy without requiring a scripted traitor. It suits a group that enjoys tense science-fiction stories, consequential decisions and the possibility that some characters will not make it home.",
     "Recommendation tier": "T2"
   },
   {
@@ -1575,6 +2025,21 @@
     "Recommendation tier": "T2"
   },
   {
+    "Name": "No Thanks!",
+    "Tags": {
+      "Players": [3, 4, 5, 6, 7],
+      "Recommended players": [4, 5],
+      "Requires DM": false,
+      "Requires dedicated components": false,
+      "Categories": ["Card game", "Bidding and auctions", "Push your luck", "Social gathering", "Travel"]
+    },
+    "Conclusion": "A bad card becomes less painful as everyone pays to avoid it. The question is whether to take the growing pile of chips now or wait for one more refusal.",
+    "Core rules": "Reveal a number card. On your turn either pay one counter to refuse it or take the card and all counters on it, then reveal the next card. Collected numbers are penalty points, but a consecutive run counts only its lowest number. Subtract counters you retain; lowest final score wins.",
+    "Detailed rules": "Remove nine of the 33 cards numbered 3–35 without revealing them. Start with eleven counters at three to five players, nine at six players or seven at seven. Counters stay hidden in your hand. With none left you must take the card. Continue until the remaining deck is exhausted. Missing cards mean a hoped-for connection between two runs might never arrive.",
+    "Recommendation reasons": "The available chips and incomplete runs create real choices from just two actions. You can deliberately accept a large number to regain the ability to refuse several worse offers later.",
+    "Recommendation tier": "T1"
+  },
+  {
     "Name": "Oh Hell",
     "Tags": {
       "Players": [3, 4, 5, 6, 7],
@@ -1605,6 +2070,21 @@
     "Recommendation tier": "T2"
   },
   {
+    "Name": "One Piece Card Game",
+    "Tags": {
+      "Players": [2],
+      "Recommended players": [2],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Collectible card game", "Deck construction", "Resource management", "Tactical combat", "Two-player night", "Regular group"]
+    },
+    "Conclusion": "DON!! can pay for a new ally or make the ally already on the table hit harder. Committing it to an attack changes what remains available for the rest of the turn.",
+    "Core rules": "Use one Leader, fifty main-deck cards and ten DON!! cards. Start with five cards and Life equal to the Leader's value. Play Characters, Events and Stages, and attack opposing rested Characters or the Leader. A Leader taking damage with no Life left loses; an empty deck also causes defeat.",
+    "Detailed rules": "Refresh at turn start, draw and add two DON!!, except the first player's first turn adds one and skips the draw. Neither player attacks on their first turn; newly played Characters normally cannot attack that turn either. Spend active DON!! to pay costs or attach it to grant power during your turn. The defender can redirect with Blocker or discard Counter cards to increase power. A successful Leader hit normally moves a Life card to its owner's hand and may trigger its effect.",
+    "Recommendation reasons": "A single resource system connects deployment and combat. The Leader's ability shapes the deck, and damage can put new cards into a defender's hand, so attacking carries consequences beyond removing Life.",
+    "Recommendation tier": "T2"
+  },
+  {
     "Name": "One-Word Story",
     "Tags": {
       "Players": [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
@@ -1618,6 +2098,21 @@
     "Detailed rules": "Choose a theme before starting. Add only one word, without planning aloud or revising earlier words; grammatical repeats are fine. Continue to a complete beginning, middle and ending, or use a five-minute timer. On a turn a player may use The End as a closing exception. The group shares the outcome without scoring.",
     "Recommendation reasons": "You only add one word, so you never have to invent the whole plot. Listen to the last player, then decide whether to follow their idea or take the story somewhere unexpected.",
     "Recommendation tier": "T2"
+  },
+  {
+    "Name": "Onitama",
+    "Tags": {
+      "Players": [2],
+      "Recommended players": [2],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Abstract strategy", "Hand management", "Spatial planning", "Two-player night"]
+    },
+    "Conclusion": "The move you use now will eventually become available to your opponent. Attacking safely means considering both the position you create and the movement card you hand away.",
+    "Core rules": "Each side has a master and four students on a five-by-five board. Use one of your two movement cards to move a piece, capturing an enemy by landing on it, then exchange the used card for the waiting fifth card. Win by capturing the enemy master or moving your own master onto the enemy master's starting temple square.",
+    "Detailed rules": "Select five movement cards for the game, giving two to each player and leaving one beside the board. Read the movement diagram from your side of the board and choose any one marked destination relative to the moving piece. You cannot land on a friendly piece or leave the board, but intervening pieces do not block a jump. The exchanged card determines your next pair of options, so all future movement possibilities remain visible. If neither card allows a legal move, pass and still exchange one of your cards.",
+    "Recommendation reasons": "Only five cards are active, yet their circulation makes the tactical puzzle change every turn. The compact board and two victory routes produce short, readable contests with room for careful anticipation.",
+    "Recommendation tier": "T1"
   },
   {
     "Name": "Palace",
@@ -1647,7 +2142,7 @@
     "Core rules": "The team wins by discovering all four cures. Each player takes up to four actions with a specialist, then draws two player cards and infects cities. Move, treat disease, build a research station or exchange knowledge so the right person can turn a set of city cards into a cure.",
     "Detailed rules": "Normally, sharing knowledge requires two specialists in the city named on the card. Discover a cure at a research station by discarding five city cards of its colour, unless your role changes the requirement. An epidemic infects a new city heavily and puts the shuffled infection discard pile back on top. A fourth cube of one colour would cause an outbreak that spreads to neighbouring cities. Lose at the eighth outbreak, if a required cube is unavailable, or if the player deck cannot supply two cards. Cured diseases need not be eradicated to win.",
     "Recommendation reasons": "The roles give a group concrete reasons to coordinate. A medic can contain a dangerous cluster while another player saves the few actions needed to meet a teammate and exchange a card. Both jobs serve the same finish line.",
-    "Recommendation tier": "T1"
+    "Recommendation tier": "T2"
   },
   {
     "Name": "Password",
@@ -1663,6 +2158,21 @@
     "Detailed rules": "Use ordinary clue words, not the answer, part of it, related word forms, spelling, direct translations, gestures or extra sounds. Allow at most five clue-and-guess exchanges per team, then reveal without points if unsolved. Alternate the starting team and rotate the clue and guess roles.",
     "Recommendation reasons": "The single-word limit makes each association matter. Hearing a partner land on the same idea from so little information is the payoff.",
     "Recommendation tier": "T2"
+  },
+  {
+    "Name": "Patchwork",
+    "Tags": {
+      "Players": [2],
+      "Recommended players": [2],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Abstract strategy", "Tile placement", "Resource management", "Two-player night", "Family"]
+    },
+    "Conclusion": "A cheap patch can leave an expensive hole, while a slow purchase may give the opponent several turns. Building a quilt is also a contest over time and the next pieces available.",
+    "Core rules": "Fill a nine-by-nine quilt by buying patches with buttons and paying their time costs. The player farther behind on the time track acts next, so turns do not necessarily alternate. Buy one of the next three patches around the shared ring, or advance past the opponent to earn buttons. When both reach the end, score remaining buttons minus two per empty square, plus any bonus.",
+    "Detailed rules": "After a purchase, move the neutral marker to the bought patch's position and place the patch anywhere it fits, rotating or flipping it without overlaps. Move your time token by the patch's time cost. Crossing a button-income symbol earns the buttons printed on all patches in your quilt. The first token to pass a leather-patch space takes its one-square patch. The first player to fill an unbroken seven-by-seven area earns seven bonus points. Advancing instead of buying earns one button per time space moved.",
+    "Recommendation reasons": "Spatial fitting, income and turn timing all use the same small set of pieces. It gives two players meaningful planning with little setup and no hidden rules on a large deck of cards.",
+    "Recommendation tier": "T1"
   },
   {
     "Name": "Pictionary",
@@ -1710,6 +2220,21 @@
     "Recommendation tier": "T2"
   },
   {
+    "Name": "Pokémon Trading Card Game",
+    "Tags": {
+      "Players": [2],
+      "Recommended players": [2],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Collectible card game", "Deck construction", "Resource management", "Tactical combat", "Two-player night", "Family"]
+    },
+    "Conclusion": "Your active Pokémon handles the immediate fight while the bench holds your next plan. Spending today's Energy attachment on one may delay the other.",
+    "Core rules": "Each player uses sixty cards, a starting hand of seven and six face-down Prize cards. Put a Basic Pokémon in the Active Spot and up to five on the Bench. Attach Energy, evolve and play Trainers to support attacks. Win by taking all Prizes, leaving the opponent without a Pokémon in play, or making them fail a required draw.",
+    "Detailed rules": "Normally attach one Energy from hand and play one Supporter each turn. A Pokémon cannot usually evolve on its first turn in play or on either player's first turn. Attacking ends the turn. The starting player cannot attack or play a Supporter on their first turn. Knocking out a Pokémon grants the Prize count specified by its rules; stronger multi-Prize Pokémon also give the opponent a bigger reward.",
+    "Recommendation reasons": "A clear Prize race makes the objective easy to follow, while evolving, retreating and preparing the Bench create decisions beyond simply using the largest attack.",
+    "Recommendation tier": "T2"
+  },
+  {
     "Name": "Power Grid",
     "Tags": {
       "Players": [2, 3, 4, 5, 6],
@@ -1737,6 +2262,81 @@
     "Core rules": "Lead a single or a set of equal ranks. Others must pass or beat it with the same number of cards. First out becomes President; continue to rank the remaining players.",
     "Detailed rules": "Deal all cards; 3 is low and 2 high. Passing does not bar you from re-entering before the trick ends. After every other active player passes consecutively, the last player to play starts a fresh trick. In later deals you may use a rank exchange: last gives first their two best cards for any two back, with a one-card exchange for the next pair of ranks.",
     "Recommendation reasons": "The changing table hierarchy gives consecutive hands a social story: today’s President can become the player everyone is trying to unseat.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "The Quacks of Quedlinburg",
+    "Tags": {
+      "Players": [2, 3, 4],
+      "Recommended players": [3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Strategy", "Bag building", "Push your luck", "Simultaneous play", "Family", "Social gathering"]
+    },
+    "Conclusion": "Your bag contains better ingredients now, but it still contains the dangerous white ones. Improving the odds does not remove the decision to stop.",
+    "Core rules": "Across nine rounds, draw ingredients blindly from your own bag and advance them along your pot. Stop when satisfied, or continue until the white total exceeds seven and the pot explodes. Your stopping space determines points and buying power. Buy new ingredients for later rounds; highest final score wins.",
+    "Detailed rules": "Different ingredient colours have powers set by the chosen recipe books. Rat tails help players behind on points start farther up the pot. An exploded pot normally chooses points or purchases instead of gaining both; a flask can return a just-drawn white chip only before it causes an explosion. Rubies improve future starts or refill the flask. In the last round, remaining purchasing power converts to points.",
+    "Recommendation reasons": "Purchases let you shape the bag, so the next round reflects an earlier decision. Everyone brewing at once also keeps the suspense shared rather than making the table watch one long turn.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "The Quest for El Dorado",
+    "Tags": {
+      "Players": [2, 3, 4],
+      "Recommended players": [2, 3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Strategy", "Eurogame", "Deck building", "Racing", "Spatial planning", "Family", "Two-player night"]
+    },
+    "Conclusion": "A better explorer can cross difficult jungle, but buying it spends cards that might have moved you forward now. The fastest-looking route is only useful if your deck can travel it.",
+    "Core rules": "Race across a modular map by playing cards whose colour and strength match the terrain you enter. Spend cards to buy better explorers into your deck, then refill your hand. When a player reaches El Dorado, finish the round; among arrivals, collected route barriers break a tie.",
+    "Detailed rules": "Each turn starts with up to four cards. A single card can pay for consecutive compatible spaces if its strength suffices, but two weak cards cannot normally combine to enter one stronger terrain space. Other explorers block entry to their spaces. New cards go to your discard pile, joining your deck after a reshuffle. Special terrain and expedition cards change movement, purchasing or deck thinning. Two players each race with two explorers and must bring both to El Dorado to trigger the finish and qualify for victory.",
+    "Recommendation reasons": "The map makes deck-building choices immediately tangible. Buying a water specialist is meaningful because you can point to the river it will help you cross, and blocked paths reward keeping another route available.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "Quoridor",
+    "Tags": {
+      "Players": [2, 4],
+      "Recommended players": [2, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Abstract strategy", "Spatial planning", "Direct interaction", "Two-player night", "Family"]
+    },
+    "Conclusion": "Every wall slows someone down, but it may also lengthen your own route. The race is about recognising when one step forward is more useful than another obstruction.",
+    "Core rules": "Race a pawn from its starting edge to any square on the opposite edge of a nine-by-nine board. Each turn either move the pawn or place one wall. Walls block movement but must leave every player at least one route to their goal. The first pawn to reach its target edge wins. The standard game supports two or four players.",
+    "Detailed rules": "Two players receive ten walls each; four players receive five each and start at the middle of different edges. A normal move goes one orthogonal square without crossing a wall. If an adjacent pawn has an open square directly behind it, you may jump over it; if the space behind is blocked by a wall or board edge, the permitted side-jump rule applies. A wall spans two square edges and cannot cross or overlap another wall. Once placed, walls stay in position. Having no walls left limits you to pawn moves.",
+    "Recommendation reasons": "Two simple action choices lead to visible tactical consequences. With no hidden information or card text, players can focus on shortest paths, temporary detours and the value of saving a wall for later.",
+    "Recommendation tier": "T1"
+  },
+  {
+    "Name": "Qwirkle",
+    "Tags": {
+      "Players": [2, 3, 4],
+      "Recommended players": [2, 3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Abstract strategy", "Tile placement", "Combination scoring", "Family", "Social gathering"]
+    },
+    "Conclusion": "One tile can complete a valuable line and change the opportunities beside it. The familiar matching task gradually becomes a contest over intersections and who gets to place the sixth tile.",
+    "Core rules": "Place tiles to form connected straight lines that share either colour or shape, with no identical tile repeated within a line. On your turn add one or more tiles to a single line and score every line created or extended, or exchange tiles instead. Refill to six tiles. A completed six-tile line earns a six-point bonus, and the highest score wins.",
+    "Detailed rules": "The set contains six colours and six shapes, with three copies of each combination. Every new tile must fit all lines it touches, so a placement can score both horizontally and vertically. Score one point per tile in each affected line, counting existing tiles as well. A full Qwirkle therefore scores twelve for that line. When exchanging, choose tiles from your rack, draw replacements and return the exchanged tiles to the bag. Once the bag is empty, continue until a player uses their last tile; that player gains six bonus points and the game ends.",
+    "Recommendation reasons": "Matching colours and shapes gives newcomers an easy starting point, but double scoring and six-tile bonuses reward planning. The common board keeps the consequences visible and supports a relaxed family game with meaningful decisions.",
+    "Recommendation tier": "T1"
+  },
+  {
+    "Name": "Race for the Galaxy",
+    "Tags": {
+      "Players": [2, 3, 4],
+      "Recommended players": [2, 3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Card game", "Eurogame", "Engine building", "Simultaneous play", "Hand management", "Strategy night", "Two-player night"]
+    },
+    "Conclusion": "You may not need to choose production yourself if another player is about to do it. Reading that intention can free your own choice for something more valuable.",
+    "Core rules": "Secretly select phases, then reveal together. Everyone performs each chosen phase in order, but the player who selected it receives a bonus. Build developments and worlds by spending other cards, produce goods and consume them for cards or points. Finish the round when a tableau reaches twelve cards or the victory-point pool runs out, then score.",
+    "Detailed rules": "Explore improves your hand, Develop builds a technology, Settle adds a world, Consume uses goods and Produce refills producing worlds. Military worlds use military strength instead of ordinary payment. Card powers discount costs or improve particular phases. Goods remain face down on their worlds until consumed. Two-player advanced rules let each player choose two phases rather than one.",
+    "Recommendation reasons": "Cards double as opportunities and payment, so building one useful engine piece means giving up other plans. Simultaneous phase selection adds an opponent-reading problem to that resource puzzle.",
     "Recommendation tier": "T2"
   },
   {
@@ -1770,6 +2370,21 @@
     "Recommendation tier": "T2"
   },
   {
+    "Name": "Robinson Crusoe: Adventures on the Cursed Island",
+    "Tags": {
+      "Players": [1, 2, 3, 4],
+      "Recommended players": [1, 2, 3],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Cooperative adventure", "American-style thematic game", "Worker placement", "Exploration", "Resource management", "Regular group", "Quiet solo play"]
+    },
+    "Conclusion": "The island keeps turning yesterday's compromises into today's problems. Building shelter, finding food and completing the scenario all compete for the same small pool of actions.",
+    "Core rules": "Work together to survive on an island and fulfil the chosen scenario before its time limit. Each round resolves events, morale and production, then players assign action pawns before resolving their plans, weather and night. Building, gathering and exploring can be guaranteed with enough workers or attempted more cheaply with risk dice.",
+    "Detailed rules": "Each character normally supplies two action pawns. For building, gathering and exploration, two appropriate pawns secure the action; one pawn requires dice for success, wounds and adventure. Adventure cards can insert later consequences into the event deck. Build tools to unlock recipes, maintain food, and improve shelter, roof and palisade against weather. Unfed characters take wounds, and one character's death defeats the team. Scenario sheets change objectives, inventions and round events. Solo play adds Friday and the dog with their own action restrictions, rather than adding extra human players.",
+    "Recommendation reasons": "The allocation puzzle continually asks whether to secure one essential job or risk several at once. Scenario objectives and delayed consequences support varied survival stories, particularly for players who enjoy demanding cooperation and can accept occasional bad luck.",
+    "Recommendation tier": "T2"
+  },
+  {
     "Name": "Rock Paper Scissors Tournament",
     "Tags": {
       "Players": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
@@ -1800,6 +2415,21 @@
     "Recommendation tier": "T0"
   },
   {
+    "Name": "Rummikub",
+    "Tags": {
+      "Players": [2, 3, 4],
+      "Recommended players": [2, 3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Abstract strategy", "Set collection", "Hand shedding", "Sequencing", "Family", "Social gathering"]
+    },
+    "Conclusion": "The shared table is never quite finished: one new tile can unlock a rearrangement of several existing sets. Emptying a crowded rack can depend on spotting a connection everyone else overlooked.",
+    "Core rules": "Start with fourteen tiles and race to empty your rack. Play groups of three or four equal numbers in different colours, or runs of at least three consecutive numbers in one colour. Your initial meld must total at least thirty using only your own tiles. On later turns, add to or rearrange table sets while keeping every resulting set legal; otherwise draw one tile and end your turn.",
+    "Detailed rules": "The classic set has two copies of each 1 to 13 in four colours plus two jokers. A 1 cannot follow 13. A newly drawn tile cannot be played that turn. Jokers represent a missing tile; after your initial meld, a joker may be freed by a legal rearrangement but must be reused in a new set that turn. You must also play at least one tile from your rack during that turn. Turns have a one-minute limit; an unfinished rearrangement must be restored and costs three penalty tiles. Remaining rack values count against players after someone goes out, with each unplayed joker worth thirty.",
+    "Recommendation reasons": "Familiar number sequences make the starting idea accessible, while the freedom to rebuild existing sets supplies the depth. The shared layout gives everyone a changing puzzle to inspect between turns.",
+    "Recommendation tier": "T1"
+  },
+  {
     "Name": "Rummy",
     "Tags": {
       "Players": [2, 3, 4, 5, 6],
@@ -1815,6 +2445,66 @@
     "Recommendation tier": "T2"
   },
   {
+    "Name": "Sanctuary",
+    "Tags": {
+      "Players": [1, 2, 3, 4, 5],
+      "Recommended players": [2, 3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Strategy", "Eurogame", "Tile placement", "Engine building", "Action planning", "Family", "Strategy night"]
+    },
+    "Conclusion": "An animal needs more than an empty square: its neighbours, open space and habitat all matter. Building the zoo becomes a spatial puzzle tied to the timing of increasingly powerful actions.",
+    "Core rules": "Build a personal zoo with animal, building and project tiles. Each turn take one available tile within the range of your Projects card, then use one action card to gain or play tiles. Used actions return to the weakest position while unused ones become stronger. Score the completed zoo, conservation achievements and remaining bonuses; the most points wins.",
+    "Detailed rules": "An animal's level must fit the chosen habitat action's strength. Place new tiles next to the entrance or existing tiles, satisfying printed conditions and any required open areas; spare tiles can be placed face down to create those areas. Animal pairs, icons and placements can earn conservation benefits and upgrades. End a turn with at most six hand tiles. Supporting four conservation objectives or filling the zoo gives an end bonus and one final turn to everyone else; exhausting the draw pile first ends play after that turn. Count printed and conditional tile points, conservation achievements, open areas and remaining marker bonuses.",
+    "Recommendation reasons": "The interest lies in fitting multiple placement requirements together while keeping the right actions ready. It is a distinct zoo-planning puzzle with substantial decisions, suited to players who enjoy spatial optimisation and connected scoring effects.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "SCOUT",
+    "Tags": {
+      "Players": [2, 3, 4, 5],
+      "Recommended players": [4, 5],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Card game", "Hand management", "Hand shedding", "Social gathering", "Travel"]
+    },
+    "Conclusion": "The awkward card between two pairs cannot simply be moved aside. One card taken from the table may turn that awkward hand into your best combination.",
+    "Core rules": "Keep your hand in its dealt order, choosing which end is up at the start. Show adjacent equal numbers or a consecutive run to beat the current set, or scout one end card from that set into your hand. Play one round per player and total captured cards and scout rewards, normally subtracting cards left in hand.",
+    "Detailed rules": "A longer set beats a shorter one; for equal lengths, matching numbers beat a run, then higher values decide. Scouting allows the taken card to be flipped before insertion, but does not permit rearranging other cards. Once per round a Scout & Show token combines the two actions. A round ends when a hand empties or everyone else scouts without beating the standing show. An unbeaten Show owner ignores the hand penalty when everyone else Scouts. Two players use two rounds with the separate scouting-limit setup.",
+    "Recommendation reasons": "Scouting makes passing productive. You weaken the set everyone is trying to beat while improving your own hand, so watching the ends of other players' combinations matters as much as holding high cards.",
+    "Recommendation tier": "T1"
+  },
+  {
+    "Name": "Scythe",
+    "Tags": {
+      "Players": [1, 2, 3, 4, 5],
+      "Recommended players": [1, 2, 3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Economic strategy", "Eurogame", "Engine building", "Area control", "Asymmetric powers", "Quiet solo play", "Strategy night"]
+    },
+    "Conclusion": "A mech can win a fight, but an unplayed threat may hold territory without costing power or popularity. The economy keeps running whichever choice you make.",
+    "Core rules": "Unless your faction ability permits otherwise, choose a different action section on your player mat each turn and perform its top action, bottom action or both in order. Produce, move, trade and build an economy while expanding on the map. The game ends immediately when someone places a sixth achievement star. Coins plus scoring for stars, territory and resources decide the winner.",
+    "Detailed rules": "Faction and player mats create different abilities and costs. Mechs transport workers and unlock movement options. Combat uses secretly committed power and combat cards; the winner takes the territory but may lose popularity for displacing workers. Popularity sets the value of your final stars, territories and resources. The Factory offers a powerful extra action, and Automa supplies the solo opponent.",
+    "Recommendation reasons": "Visible borders and hidden combat commitments make deterrence useful. Building an efficient economy and knowing when a fight is worth its cost are connected decisions, rather than separate paths.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "Sea Salt & Paper",
+    "Tags": {
+      "Players": [2, 3, 4],
+      "Recommended players": [2, 3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Card game", "Set collection", "Push your luck", "Social gathering", "Two-player night"]
+    },
+    "Conclusion": "Seven points let you stop, but stopping is only one option. Calling for a final chance invites every opponent to prove that your lead was less secure than it looked.",
+    "Core rules": "Take a card from a discard pile, or draw two from the deck and keep one. Collect scoring sets and play pairs for actions. Once your card points reach seven, end the round immediately or declare Last Chance, giving each opponent one final turn. Add round scores until the player-count target is reached.",
+    "Detailed rules": "Pairs can take another turn, draw from a discard pile or take an opponent's card, depending on their symbols. On Stop, everyone scores their card points. A successful Last Chance caller scores card points plus the largest colour group, while others score only their colour bonus; if someone exceeds the caller, the caller gets only the colour bonus and others score card points. Four mermaids in one hand win outright. An empty draw deck ends the round without scoring; game targets are 40, 35 and 30 points at two, three and four players.",
+    "Recommendation reasons": "The open discard piles let you infer what other players want. That turns the decision to stop into a judgment about their hands as well as your own score.",
+    "Recommendation tier": "T1"
+  },
+  {
     "Name": "The Search for Lost Species",
     "Tags": {
       "Players": [1, 2, 3, 4],
@@ -1828,6 +2518,21 @@
     "Detailed rules": "The scientist furthest back on the time track normally acts next, so the length of an action affects who moves again. Survey, use cameras or visit a town to narrow down possibilities on your private sheet. A location attempt must name the target area and correctly identify the contents of two areas adjacent to it; mountains block adjacency. A correct attempt triggers final opportunities according to the time track. In solo play the app also handles a rival scientist, Tini.",
     "Recommendation reasons": "It feels like a tougher Sudoku built from animal habits. Playing solo leaves time to reason without racing a human opponent to the answer.",
     "Recommendation tier": "T0"
+  },
+  {
+    "Name": "Secret Hitler",
+    "Tags": {
+      "Players": [5, 6, 7, 8, 9, 10],
+      "Recommended players": [7, 8, 9, 10],
+      "Requires DM": false,
+      "Requires dedicated components": false,
+      "Categories": ["Social deduction", "Hidden roles", "Voting", "Bluffing", "Regular group", "Social gathering"]
+    },
+    "Conclusion": "The table elects a government, sees the policy it produces, and then hears conflicting explanations. Public votes and private card choices give every claim something concrete to be checked against.",
+    "Core rules": "Players secretly belong to the liberal or fascist team, with Hitler on the fascist side. Elect a president and chancellor, who secretly narrow three policy cards down to one enacted policy. Liberals win by enacting five liberal policies or killing Hitler; fascists win with six fascist policies or by electing Hitler chancellor after at least three fascist policies are enacted.",
+    "Detailed rules": "Choose the role distribution and policy board for the player count. A nominated government needs a strict majority; the last elected government is normally restricted from the next chancellor nomination, with the smaller-table exception. The president discards one of three policies and the chancellor selects from the remaining two. Fascist track spaces may grant investigations, special elections or executions. Three consecutive failed elections enact the top policy without an executive power. After five fascist policies, both officeholders may agree to veto a hand. Players may lie about hidden information but must follow the election and card procedures.",
+    "Recommendation reasons": "The policy deck leaves room for honest players to produce suspicious results, so deductions need more than a single bad outcome. Elections and unlocked powers keep the whole table debating who should be trusted with the next decision.",
+    "Recommendation tier": "T1"
   },
   {
     "Name": "SETI: Search for Extraterrestrial Intelligence",
@@ -1965,6 +2670,36 @@
     "Recommendation tier": "T2"
   },
   {
+    "Name": "Slay the Spire: The Board Game",
+    "Tags": {
+      "Players": [1, 2, 3, 4],
+      "Recommended players": [1, 2, 3],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Card game", "Cooperative adventure", "Deck building", "Cooperation", "Campaign play", "Quiet solo play", "Regular group"]
+    },
+    "Conclusion": "The climb becomes a conversation about card combinations, enemy threats and the next route. A reward that looks modest alone can become valuable when another character covers its weakness.",
+    "Core rules": "This physical cooperative game has each player build a character deck while the team climbs a branching map. Resolve encounters, add or upgrade cards, acquire relics and defeat the boss at the chosen stopping act. Combat uses a shared player turn followed by enemy actions. If any character reaches zero health, the whole team loses.",
+    "Detailed rules": "At the start of a combat round reset energy to three and block to zero, draw five cards and roll the shared die for the round's effects. Players may interleave card plays, paying energy and resolving attacks, skills and powers. Coordinate targets, but a card only helps another character when its text permits. After all players finish, enemies perform their shown actions. Rewards reshape decks between fights; rest sites offer healing or upgrades, and shops offer purchases and removal. Shuffle the discard pile when a draw deck empties. Progress can be saved between acts, and the board game requires no video game.",
+    "Recommendation reasons": "The adaptation makes deck-building a cooperative exercise: teammates can arrange their plays to solve the same fight. Character differences, route choices and rewards keep subsequent climbs varied while preserving the satisfaction of improving a personal deck.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "Sleeping Gods",
+    "Tags": {
+      "Players": [1, 2, 3, 4],
+      "Recommended players": [1, 2],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Cooperative adventure", "American-style thematic game", "Exploration", "Storytelling", "Resource management", "Regular group", "Quiet solo play"]
+    },
+    "Conclusion": "A voyage across an illustrated atlas becomes a shared record of places visited, promises made and discoveries left unfinished. The crew's abilities and supplies determine which opportunities are worth pursuing next.",
+    "Core rules": "Cooperatively manage a ship and nine crew members, exploring an open world to find the totems that can help them return home. On your turn take a ship action, resolve an event, then perform two actions such as travelling, exploring, visiting a market or using a port. The campaign advances through event decks and story passages rather than a fixed competitive score race.",
+    "Detailed rules": "Divide crew among the players while sharing the captain. Skill challenges combine participating crew skills with a fate draw; fatigue limits repeated participation. Command tokens pay for abilities and assistance. In combat, place damage on enemy grids to cover health and disable dangerous symbols, while surviving enemies counterattack. Quests award keywords, cards and routes that can change later encounters. Record progress to pause a campaign. Defeat normally imposes the campaign's recovery penalties; the final event sequence and collected discoveries determine the ending. A solo player manages the whole crew.",
+    "Recommendation reasons": "Open exploration and connected story threads reward curiosity, while the enemy grids give combat meaningful tactical choices. It works especially well when the same small group wants to return to an ongoing journey over several sessions.",
+    "Recommendation tier": "T2"
+  },
+  {
     "Name": "Snap",
     "Tags": {
       "Players": [2, 3, 4, 5, 6],
@@ -1978,6 +2713,21 @@
     "Detailed rules": "Deal evenly into unseen stocks. If three top ranks match, the caller takes all matching piles. A wrong call sends the caller’s exposed pile to the centre; the next correct caller also takes it. Turn over an exhausted face-up pile to replenish your stock without rearranging it. A player with neither pile leaves play.",
     "Recommendation reasons": "Quick visual matching gives children and adults a shared challenge. Waiting for a turn to flip never means waiting for a turn to play.",
     "Recommendation tier": "T2"
+  },
+  {
+    "Name": "So Clover!",
+    "Tags": {
+      "Players": [3, 4, 5, 6],
+      "Recommended players": [3, 4, 5, 6],
+      "Requires DM": false,
+      "Requires dedicated components": false,
+      "Categories": ["Word game", "Word association", "Cooperation", "Social gathering", "Family"]
+    },
+    "Conclusion": "A clue that perfectly joins two words in your mind may send your friends in an unexpected direction. Rebuilding the little four-card puzzle lets everyone compare how they make associations.",
+    "Core rules": "Everyone privately arranges four keyword cards on a clover board and writes one clue linking the pair of words along each outside edge. Mix those cards with one extra card, then let the other players reconstruct the original arrangement using only the four clues. Add each board's result to the team's total.",
+    "Detailed rules": "Each clue is one word and cannot be a keyword itself, its translation, a related word form or an invented word. All players prepare their boards simultaneously. During reconstruction the board's owner stays silent while the others choose four cards and their orientations. A completely correct first attempt scores six. Otherwise remove the misplaced cards without explanation and allow one final attempt, scoring one point per correctly placed card, up to four. Once every board has been solved, compare the combined score with the team's previous results.",
+    "Recommendation reasons": "Everyone gets to create clues and join the discussion, with no opposing team or elimination. The same small puzzle supports both imaginative clues and patient joint reasoning, making it accessible to mixed groups.",
+    "Recommendation tier": "T1"
   },
   {
     "Name": "SOS",
@@ -2037,7 +2787,7 @@
     "Core rules": "Each player controls a different spirit defending the island. Grow, gain energy and play powers, then resolve fast powers, the invaders' actions and slow powers. Generate fear to weaken the invaders' hold and make the current victory condition easier to meet. The spirits win or lose together.",
     "Detailed rules": "Presence sets your reach and uncovering it from your spirit board improves your options. Invaders normally ravage, build and explore in the terrain shown by their cards, so an explored land can become next turn's building site. Initially remove all invaders to win; later terror levels require no towns or cities, then no cities, and exhausting the fear deck wins outright. Lose if a spirit loses all presence on the island, the island runs out of blight under its blight rules, or an Invader Card must be drawn from an empty deck.",
     "Recommendation reasons": "Different spirits make coordination concrete. One can prevent the next build while another invests in a slow power that pays off later. The visible invader sequence gives the group enough information to plan those moves together.",
-    "Recommendation tier": "T1"
+    "Recommendation tier": "T2"
   },
   {
     "Name": "Spit",
@@ -2160,6 +2910,21 @@
     "Recommendation tier": "T0"
   },
   {
+    "Name": "Take Time",
+    "Tags": {
+      "Players": [2, 3, 4],
+      "Recommended players": [2, 3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Card game", "Puzzle", "Cooperation", "Hidden information", "Regular group", "Quiet puzzle night"]
+    },
+    "Conclusion": "The group can agree on a plan before seeing its numbers, then has to carry it out in silence. Each hidden card changes what the others can safely assume about the clock.",
+    "Core rules": "Cooperatively place twelve cards around a clock's six sections. Discuss a strategy before looking at your cards, then take turns placing one card without discussing its value. Every section needs at least one card, and section totals must be nondecreasing clockwise from the hand and normally no higher than 24. Follow the clock's additional restrictions to pass the test.",
+    "Detailed rules": "The deck has solar and lunar cards numbered 1 to 12; card backs reveal the type but not the number. Only twelve are dealt for a test. Place cards face down except for the limited face-up plays permitted by reminder and bonus tokens. In a two-player game, each player initially sees four cards and adds two reserved cards after both have played twice. Reveal and check all sections after placement. Failed attempts provide extra face-up opportunities on a retry. Forty clocks introduce further restrictions in chapters; the first three introductory clocks waive the 24-point ceiling.",
+    "Recommendation reasons": "The repeating clock structure is easy to recognise, while new restrictions make the team revise its shared plan. Limited communication turns successful coordination into the reward, with retries helping the group learn rather than merely repeating a score chase.",
+    "Recommendation tier": "T1"
+  },
+  {
     "Name": "Telephone",
     "Tags": {
       "Players": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
@@ -2202,7 +2967,7 @@
     "Core rules": "Run a corporation, play projects and place tiles as the table raises oxygen to 14%, temperature to +8°C and places nine oceans. Generations end with production. In multiplayer, once all three targets are met, finish that generation; terraforming rating plus points from cards, the map, milestones and awards determines the winner.",
     "Detailed rules": "On each turn take one or two actions, or pass for the rest of the generation. New projects cost money to keep and more to play; symbols and global conditions can affect when a project is legal or what later cards are worth. Standard projects offer an alternative to cards. Greenery can raise oxygen, and each city scores for adjacent greenery regardless of who owns it. In the original solo challenge, complete all three global targets by the end of generation fourteen.",
     "Recommendation reasons": "The project cards let you build an economy with its own character, while the shared planet sets a deadline no company controls alone. A production upgrade that looks excellent in a long game may arrive one generation too late.",
-    "Recommendation tier": "T1"
+    "Recommendation tier": "T2"
   },
   {
     "Name": "Terrorscape",
@@ -2232,7 +2997,7 @@
     "Core rules": "Use any five of your two private cards and five community cards to make the best poker hand, or win the pot when everyone else folds. Play with equal stacks of play chips.",
     "Detailed rules": "Post the two blinds and deal two hole cards each. Bet before the flop, after three community cards, after the fourth card and after the fifth, burning one card before each reveal. Call, fold, check when nothing is owed or raise within your stack. At showdown compare standard poker hands; identical hands split. An all-in player can win only pots they contributed to.",
     "Recommendation reasons": "Using play chips, a table can enjoy the same central puzzle: everyone sees the same community cards, but a check or raise tells a different story depending on who makes it. A new card can strengthen your hand and make an opponent’s earlier bet look quite different.",
-    "Recommendation tier": "T1"
+    "Recommendation tier": "T2"
   },
   {
     "Name": "Thirty-One",
@@ -2370,6 +3135,21 @@
     "Recommendation tier": "T2"
   },
   {
+    "Name": "Twilight Struggle",
+    "Tags": {
+      "Players": [2],
+      "Recommended players": [2],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Wargame", "Strategy", "Hand management", "Area control", "Push your luck", "Two-player night", "Regular group"]
+    },
+    "Conclusion": "Your hand may contain events that help the other side, so the question is often how to suffer the least from a necessary play. Regional scoring makes timing as important as the influence already on the map.",
+    "Core rules": "One player leads the United States and the other the Soviet Union, competing for influence during the Cold War. Play cards for operations or historical events, and score regions when their scoring cards appear. A twenty-point lead or control of Europe during its scoring can win immediately; otherwise resolve final scoring after turn ten. Causing nuclear war loses the game.",
+    "Detailed rules": "Each turn begins with a simultaneous headline event choice, followed by alternating action rounds. Operations place influence, attempt realignments or launch coups. Using an opponent's event card for operations normally triggers its event too; a space-race attempt can discard a qualifying card without that event. Control requires an influence lead meeting a country's stability, and regional domination depends on both total countries and battlegrounds. Coups in battleground countries lower DEFCON. Meet military-operations obligations and play scoring cards before the turn ends. New eras introduce later events into the deck.",
+    "Recommendation reasons": "Shared event cards make knowledge of the opponent's possibilities matter, and unwanted cards produce difficult but interesting damage-control decisions. The changing historical deck gives repeated two-player matches a recognisable arc without a fixed sequence of outcomes.",
+    "Recommendation tier": "T2"
+  },
+  {
     "Name": "Two Truths and a Lie",
     "Tags": {
       "Players": [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
@@ -2415,6 +3195,21 @@
     "Recommendation tier": "T2"
   },
   {
+    "Name": "Undaunted: Normandy",
+    "Tags": {
+      "Players": [2],
+      "Recommended players": [2],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Wargame", "Deck building", "Tactical combat", "Area control", "Two-player night", "Regular group"]
+    },
+    "Conclusion": "The soldiers on the map are also cards in your deck. Taking casualties therefore changes not only the position on the battlefield, but which orders you are likely to have later.",
+    "Core rules": "Two players command opposing squads in a scenario on a modular map. Each round draw four cards and secretly commit one to bid for initiative, then alternate playing the remaining cards to activate soldiers or support actions. Recruit cards to improve the deck, scout terrain and capture objectives until a side meets the scenario's victory condition.",
+    "Detailed rules": "The higher initiative bid acts first; the committed card is unavailable for other actions that round. Each soldier type has a specific action menu, including movement, attacks, control or scouting. Scouting opens territory but adds Fog of War cards that obstruct future hands. Bolstering adds soldier cards to the discard pile. Attacks roll against the target's defence, cover and range; a casualty removes a matching soldier card, making losses affect the deck. Shuffle the discard when necessary and follow each scenario's unit limits and objectives. This entry covers the standalone Normandy box.",
+    "Recommendation reasons": "Deck-building and battlefield movement reinforce each other: recruiting the right soldier matters because that unit has a job on the map. The initiative sacrifice also makes each short hand a useful decision instead of simply playing every good card available.",
+    "Recommendation tier": "T2"
+  },
+  {
     "Name": "Unlock!",
     "Tags": {
       "Players": [1, 2, 3, 4, 5, 6],
@@ -2428,6 +3223,21 @@
     "Detailed rules": "Leave the deck in order and start the selected adventure in the app. Read the starting card and reveal only the numbers it directs you to. Certain red and blue objects combine by adding their numbers; other puzzles use hidden numbers, codes or an on-screen machine. Discard cards when instructed. Hints can unstick the group, while wrong codes or penalties may cost time. Finish when the scenario confirms its objective; a replay reveals solutions you already know.",
     "Recommendation reasons": "Solo play lets you linger over an unexpected interaction without anyone reading the next card ahead of you. It is an escape room you can unravel at your own pace.",
     "Recommendation tier": "T0"
+  },
+  {
+    "Name": "Unmatched: Battle of Legends, Volume One",
+    "Tags": {
+      "Players": [2, 3, 4],
+      "Recommended players": [2, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Wargame", "American-style thematic game", "Hand management", "Asymmetric powers", "Tactical combat", "Two-player night", "Social gathering"]
+    },
+    "Conclusion": "Legendary fighters bring different decks to the same battlefield. Reading the opponent's likely defence is as important as moving your hero into range.",
+    "Core rules": "Choose a hero and its fixed deck, then take two actions per turn: manoeuvre, scheme or attack. Manoeuvring draws a card and allows movement; schemes resolve special effects; attacks compare secretly selected combat cards. Defeat the opposing hero to win a duel. Team games continue until both enemy heroes are defeated.",
+    "Detailed rules": "The box includes King Arthur, Alice, Medusa and Sinbad, with distinct abilities and sidekicks. Fighters occupy connected spaces; melee attacks need adjacency and ranged attacks can target within a shared zone. The attacker plays an attack or versatile card and the defender may answer with defence or versatile, resolving effects in their printed timing. Damage equals attack minus defence when positive. Manoeuvres may discard a card for extra movement. The deck never reshuffles: an unsuccessful required draw deals two damage to each of your fighters. Three players use team play with one player controlling two heroes.",
+    "Recommendation reasons": "Distinct decks give matchups their personality while the shared action system remains short. Bluffing over combat cards and managing the map make it appealing for players who want a focused tactical duel with recognisable characters.",
+    "Recommendation tier": "T1"
   },
   {
     "Name": "UNO",
@@ -2445,6 +3255,21 @@
     "Recommendation tier": "T1"
   },
   {
+    "Name": "Viticulture Essential Edition",
+    "Tags": {
+      "Players": [1, 2, 3, 4, 5, 6],
+      "Recommended players": [1, 2, 3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Economic strategy", "Eurogame", "Worker placement", "Resource management", "Quiet solo play", "Strategy night"]
+    },
+    "Conclusion": "The grapes planted this summer are a promise rather than immediate points. They still need harvesting, a suitable cellar and a buyer before they become a successful order.",
+    "Core rules": "Place workers on summer and winter actions to plant vines, harvest grapes, make wine and fill orders. Choose a wake-up position for turn order and bonuses each year. Workers and resources support the production cycle. Once a player reaches twenty points, finish that year; highest score wins.",
+    "Detailed rules": "Most spaces accept a limited number of workers. The Grande Worker can use an otherwise full action once per year. Vines require field capacity and sometimes a trellis or irrigation; higher-value wine needs larger cellars. At year's end retrieve workers, age grapes and wine, gain income and discard down to the hand limit. Visitor cards add alternative actions, and the solo Automa competes for spaces.",
+    "Recommendation reasons": "The production steps give planning a concrete theme: an upgraded cellar matters because it lets the wine you saved fulfil a better order. Seasonal competition makes the timing matter too.",
+    "Recommendation tier": "T2"
+  },
+  {
     "Name": "War",
     "Tags": {
       "Players": [2],
@@ -2457,6 +3282,51 @@
     "Core rules": "Both players reveal one card at a time; higher rank takes the pair. Ties start a war for the whole pile. Collect every card to win.",
     "Detailed rules": "Deal 26 face-down cards each; aces are high. Put won cards underneath your stack without sorting. On a tie each player adds three face down and one face up, repeating if necessary. If short of cards, use what remains with the last one face up. A shorter game can end at a set time, with the larger stack winning.",
     "Recommendation reasons": "It makes comparing numbers tangible for beginners, with the drama of a tie and no strategy for a child to remember.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "War Chest",
+    "Tags": {
+      "Players": [2, 4],
+      "Recommended players": [2, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Wargame", "Abstract strategy", "Bag building", "Tactical combat", "Area control", "Two-player night", "Regular group"]
+    },
+    "Conclusion": "A unit coin can put a soldier on the board, command one already there or help recruit more. The bag determines which plans can be carried out now, while positioning determines which commands are worth saving.",
+    "Core rules": "Command units on a hex board and capture control locations. Draw three coins from your bag, then alternate spending one coin per action. Coins can deploy or strengthen their matching unit, be discarded to command it, or be spent face down for recruitment and other general actions. Win by placing all your control markers; four players compete as two teams.",
+    "Detailed rules": "Two-player armies each use four unit types; in the four-player game each person controls three. Newly recruited coins enter the discard pile and become available after the bag is refilled. Moving, attacking and controlling normally require a matching coin and follow the unit's restrictions. Attacks remove one coin from an enemy stack, so bolstered units can absorb losses. Each unit's tactic changes its options, such as range or movement. Drawing coins creates uncertainty, but the board and available units are public. Partners coordinate their different forces toward shared control markers.",
+    "Recommendation reasons": "The same components connect army building and positional tactics without lengthy combat tables. Different unit mixes and hidden coin draws encourage adaptable plans, and the four-player mode adds meaningful partnership coordination.",
+    "Recommendation tier": "T1"
+  },
+  {
+    "Name": "War of the Ring: Second Edition",
+    "Tags": {
+      "Players": [2, 3, 4],
+      "Recommended players": [2],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Wargame", "American-style thematic game", "Area control", "Asymmetric powers", "Tactical combat", "Two-player night", "Regular group"]
+    },
+    "Conclusion": "The armies draw attention across the map while the fellowship tries to make a quieter journey. Each side has to judge when the war matters most and when the ring-bearers are the real emergency.",
+    "Core rules": "The Free Peoples and Shadow compete through military conquest and the fellowship's journey. Roll action dice, then alternate spending results on movement, recruitment, events, battles or fellowship actions. The Free Peoples win by destroying the Ring or capturing four military victory points; the Shadow wins by reaching twelve corruption or capturing ten military victory points.",
+    "Detailed rules": "Ring destruction and corruption resolve immediately, while military victories are checked at the end of the round. Nations must advance politically before fully entering war. Strongholds support sieges, leaders provide combat rerolls, and event cards alter both battles and strategy. The Shadow assigns dice to the hunt, which threatens fellowship movement; companions can absorb losses or leave to aid the war. In Mordor the fellowship advances on a special track under different hunt conditions. Two players each command one side; three or four use the printed division of responsibilities within those same sides.",
+    "Recommendation reasons": "The two linked victory races let players create recognisable Middle-earth stories through their own choices. Asymmetric forces and limited action dice make both sides continually balance immediate threats against long-term plans.",
+    "Recommendation tier": "T2"
+  },
+  {
+    "Name": "Warhammer 40,000: Kill Team",
+    "Tags": {
+      "Players": [2],
+      "Recommended players": [2],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Miniature wargame", "Tactical combat", "Asymmetric powers", "Area control", "Two-player night", "Regular group"]
+    },
+    "Conclusion": "Each operative is a separate tactical commitment: hold cover, take a shot or risk advancing onto an objective. Alternating activations keep the opponent's last move relevant to the next decision.",
+    "Core rules": "Two players command small physical miniature teams across terrain, scoring the chosen mission's objectives. A normal battle lasts four turning points, each with a strategy phase and a firefight phase. Players alternate activating one ready operative, spending action points up to its action-point limit. The mission determines scoring and victory; the introductory flow here follows the official Lite rules.",
+    "Detailed rules": "Prepare two legal teams, their current unit profiles, terrain, dice and an inch ruler. At activation choose Engage or Conceal: concealment protects a covered operative from ordinary targeting but prevents shooting and charging. Actions include repositioning, dashing, falling back, charging, shooting, fighting and mission actions. Ranged attacks compare attack successes with defence saves; melee alternates spending successes to strike or parry. Sixes are critical successes and ones fail. Command points pay for ploys. Injury reduces mobility and accuracy, and zero wounds removes an operative. Keep the mission and team rules from the same edition.",
+    "Recommendation reasons": "Small teams make individual positioning and activation order matter. It offers a focused route into miniature skirmishing, particularly for players who enjoy terrain, asymmetric specialists and responding immediately to an opponent's move.",
     "Recommendation tier": "T2"
   },
   {
@@ -2547,7 +3417,7 @@
     "Core rules": "Across four rounds, take one action per turn: play a bird in a permitted habitat, gain food in the forest, lay eggs in the grassland, or draw bird cards in the wetland. Birds improve the action rows and may activate powers. Score birds, eggs, cached food, tucked cards, round goals and bonus cards; highest total wins.",
     "Detailed rules": "Pay a bird's food cost and any egg cost shown for its column. When using a habitat action, take the benefit visible in its first empty space, then work right to left through the birds in that row, optionally using brown powers. Other powers trigger on placement or between turns as printed. At each round end, commit an action cube to the goal board, leaving one fewer action for the next round. Solo uses the Automa deck to provide an opponent and competing scores.",
     "Recommendation reasons": "Your early bird choices keep doing work on later turns. That makes the growing chain easy to see, and the different powers give you a reason to build a different habitat the next time you play.",
-    "Recommendation tier": "T1"
+    "Recommendation tier": "T2"
   },
   {
     "Name": "Wink Murder",
@@ -2595,6 +3465,21 @@
     "Recommendation tier": "T2"
   },
   {
+    "Name": "Wyrmspan",
+    "Tags": {
+      "Players": [1, 2, 3, 4, 5],
+      "Recommended players": [1, 2, 3, 4],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Strategy", "Eurogame", "Engine building", "Resource management", "Quiet solo play", "Strategy night"]
+    },
+    "Conclusion": "Every dragon changes what a later expedition through its cave can accomplish. Deciding where to expand is also deciding which chain of benefits you want to activate again.",
+    "Core rules": "Across four rounds, build a dragon sanctuary in three caves. On a turn spend the required resources to excavate a space, entice a dragon into an excavated space or explore a cave to activate its rewards. Pass when finished for the round. Score dragons, end-of-round goals, guild progress, tucked cards, cached resources and eggs to determine the winner.",
+    "Detailed rules": "Excavate from left to right, paying a coin and any column egg cost before resolving the cave card. Enticing a dragon requires the matching cave, an empty excavated space and its printed food and egg costs. Exploration travels through occupied spaces, activating relevant abilities; repeated exploration of a cave costs more eggs within the round. Coins limit actions and are replenished between rounds, while effects can earn more. Guild advances offer shared bonuses to claim. The solo mode uses Automa. Dragon abilities may trigger when played, explored, between rounds or at game end, according to their symbols.",
+    "Recommendation reasons": "Choosing between extending a cave and reusing its existing dragons creates several ways to develop an engine. The guild race and changing goals give players reasons to adjust their plans, while the dragon cards support varied combinations.",
+    "Recommendation tier": "T2"
+  },
+  {
     "Name": "Yacht",
     "Tags": {
       "Players": [2, 3, 4, 5, 6, 7, 8],
@@ -2623,5 +3508,20 @@
     "Detailed rules": "Use five dice. Ones through sixes score matching faces; an upper subtotal of 63 earns 35 more. Three and four of a kind score the full sum when qualified; full house scores 25, small straight 30, large straight 40, five of a kind 50 and chance the sum. An impossible category takes zero. This basic scorecard omits repeat-Yahtzee bonuses. Play solo to beat your previous score, or compare totals with any number of opponents.",
     "Recommendation reasons": "Five ordinary dice and a score sheet are enough. Whether to bank a safe result or reroll depends on which boxes are still empty, even with the very same dice.",
     "Recommendation tier": "T1"
+  },
+  {
+    "Name": "Yu-Gi-Oh! Trading Card Game",
+    "Tags": {
+      "Players": [2],
+      "Recommended players": [2],
+      "Requires DM": false,
+      "Requires dedicated components": true,
+      "Categories": ["Collectible card game", "Deck construction", "Hand management", "Tactical combat", "Two-player night", "Regular group"]
+    },
+    "Conclusion": "A monster can be an attacker, a defence or material for a different summon. Building the sequence is only part of the challenge when the opponent can interrupt it.",
+    "Core rules": "Duel with a main deck of forty to sixty cards and 8,000 Life Points. Summon monsters and use Spell and Trap Cards to defeat the opposing field and reduce the opponent to zero. Empty-deck draws and particular card effects can also decide the duel.",
+    "Detailed rules": "Start with five cards. The first player skips their first draw and Battle Phase. A turn normally permits one Normal Summon or Set, while Special Summons follow their effects. Higher-level Normal Summons may require Tributes. Fusion, Synchro, Xyz, Pendulum and Link procedures have their own requirements. Effects form Chains resolved in reverse order, subject to timing and Spell Speed. Check current card text and the selected Forbidden and Limited List.",
+    "Recommendation reasons": "The absence of a separate mana resource allows elaborate sequences of summons and effects. Players who enjoy learning combinations also have to learn where a well-timed interruption can break them.",
+    "Recommendation tier": "T2"
   }
 ]

@@ -98,24 +98,6 @@ def import_games(connection: sqlite3.Connection, source_dir: Path) -> int:
     return len(mapping)
 
 
-def validate_baseline_facts(connection: sqlite3.Connection) -> None:
-    """Reject source drift before replacing the live catalog."""
-    tiers = dict(connection.execute("SELECT tier, count(*) FROM games GROUP BY tier"))
-    if tiers != {"T0": 46, "T1": 44, "T2": 85}:
-        raise ValueError(f"Unexpected tier counts: {tiers}")
-    requirements = connection.execute(
-        "SELECT count(*), sum(requires_host), sum(requires_dedicated_components) FROM games"
-    ).fetchone()
-    if requirements != (175, 5, 64):
-        raise ValueError(f"Unexpected game or requirement counts: {requirements}")
-    tag_count = connection.execute(
-        "SELECT count(DISTINCT tag) FROM game_tags WHERE locale = 'zh'"
-    ).fetchone()[0]
-    max_players = connection.execute("SELECT max(players) FROM game_player_counts").fetchone()[0]
-    if (tag_count, max_players) != (85, 100):
-        raise ValueError(f"Unexpected tag count or maximum players: {tag_count}, {max_players}")
-
-
 def split_values(value: object, separator: str) -> list[str]:
     return [part.strip() for part in str(value or "").split(separator) if part.strip()]
 
@@ -131,9 +113,13 @@ def import_extra(connection: sqlite3.Connection, source_dir: Path) -> None:
     finally:
         workbook.close()
     by_name = {row["英文名称"]: row for row in records}
-    names = dict(connection.execute("SELECT name, game_id FROM game_text WHERE locale = 'en'"))
-    if len(records) != 175 or len(by_name) != 175 or set(by_name) != set(names):
-        raise ValueError("Excel English names must match all 175 catalog games exactly")
+    catalog_names = connection.execute(
+        "SELECT en.name, zh.name, en.game_id FROM game_text AS en "
+        "JOIN game_text AS zh ON en.game_id = zh.game_id "
+        "WHERE en.locale = 'en' AND zh.locale = 'zh'"
+    ).fetchall()
+    if len(records) != len(by_name) or set(by_name) != {name for name, _, _ in catalog_names}:
+        raise ValueError("Excel English names must match the catalog without duplicates")
 
     translation_path = source_dir / "translations.en.json"
     if translation_path.exists():
@@ -142,9 +128,11 @@ def import_extra(connection: sqlite3.Connection, source_dir: Path) -> None:
             raise ValueError("English translations must be an object keyed by game ID")
     else:
         translations = {}
-        logger.warning("English translations missing; English extra fields will be empty")
-    for name, game_id in names.items():
+    untranslated = 0
+    for name, chinese_name, game_id in catalog_names:
         row = by_name[name]
+        if row["游戏名称"] != chinese_name:
+            raise ValueError(f"Excel Chinese name does not match the catalog: {game_id}")
         excel_tags = {tag for column in ("类型", "机制", "场景") for tag in split_values(row[column], "、")}
         source_tags = {item[0] for item in connection.execute(
             "SELECT tag FROM game_tags WHERE game_id = ? AND locale = 'zh'", (game_id,)
@@ -154,6 +142,7 @@ def import_extra(connection: sqlite3.Connection, source_dir: Path) -> None:
         zh = {key: str(row[column] or "").strip() for key, column in EXTRA_COLUMNS.items()}
         zh["aliases"] = split_values(row["其他检索名"], "、")
         en_raw = translations.get(game_id)
+        untranslated += en_raw is None
         if en_raw is not None and (
             not isinstance(en_raw, dict)
             or any(not isinstance(en_raw.get(key), str) for key in (*EXTRA_COLUMNS, "aliases"))
@@ -167,6 +156,8 @@ def import_extra(connection: sqlite3.Connection, source_dir: Path) -> None:
                 (game_id, locale, *(values[key] for key in EXTRA_COLUMNS),
                  json.dumps(values["aliases"], ensure_ascii=False), translated),
             )
+    if untranslated:
+        logger.warning("English extra fields are unavailable for %d games", untranslated)
 
 
 def import_rulebooks(connection: sqlite3.Connection, source_dir: Path) -> None:
@@ -196,7 +187,6 @@ def build_catalog(data_dir: Path = DATA_DIR) -> int:
             connection.executescript((db_dir / "schema.sql").read_text(encoding="utf-8"))
             with connection:
                 count = import_games(connection, data_dir / "sourcedata")
-                validate_baseline_facts(connection)
                 import_extra(connection, data_dir / "sourcedata")
                 import_rulebooks(connection, data_dir / "sourcedata")
                 if connection.execute("PRAGMA foreign_key_check").fetchone() is not None:

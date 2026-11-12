@@ -37,10 +37,11 @@ def assert_original_fields(actual: object, expected: object) -> None:
 def test_health_and_games(client: TestClient) -> None:
     health = client.get("/health")
     assert health.status_code == 200
-    assert health.json()["games_loaded"] == 175
+    assert health.json()["games_loaded"] == 235
     games = client.get("/games")
     assert games.status_code == 200
-    assert len(games.json()) == 175
+    assert len(games.json()) == 235
+    assert {"game_id": "ark-nova", "name": "Ark Nova"} in games.json()
 
 
 @pytest.mark.parametrize("fixture", sorted(FIXTURES.glob("*.json")), ids=lambda path: path.stem)

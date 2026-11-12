@@ -9,7 +9,7 @@
   },
   "response": {
     "method": "catalog",
-    "eligible_count": 87,
+    "eligible_count": 91,
     "recommendations": [
       {
         "game_id": "citadels",

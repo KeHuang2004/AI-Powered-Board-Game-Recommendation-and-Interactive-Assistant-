@@ -873,5 +873,305 @@
     "game_id": "yahtzee",
     "en": "Yahtzee",
     "zh": "快艇骰子"
+  },
+  {
+    "game_id": "arcs",
+    "en": "Arcs",
+    "zh": "星海弧光"
+  },
+  {
+    "game_id": "ark-nova",
+    "en": "Ark Nova",
+    "zh": "方舟动物园"
+  },
+  {
+    "game_id": "battletech-beginner-box",
+    "en": "BattleTech Beginner Box",
+    "zh": "战斗科技：入门盒"
+  },
+  {
+    "game_id": "bohnanza",
+    "en": "Bohnanza",
+    "zh": "种豆得豆"
+  },
+  {
+    "game_id": "cockroach-poker",
+    "en": "Cockroach Poker",
+    "zh": "蟑螂扑克"
+  },
+  {
+    "game_id": "concordia",
+    "en": "Concordia",
+    "zh": "和谐罗马"
+  },
+  {
+    "game_id": "crokinole",
+    "en": "Crokinole",
+    "zh": "弹指棋"
+  },
+  {
+    "game_id": "dead-of-winter",
+    "en": "Dead of Winter",
+    "zh": "亡者寒冬"
+  },
+  {
+    "game_id": "decrypto",
+    "en": "Decrypto",
+    "zh": "截码战"
+  },
+  {
+    "game_id": "disney-lorcana",
+    "en": "Disney Lorcana",
+    "zh": "迪士尼洛卡纳"
+  },
+  {
+    "game_id": "everdell",
+    "en": "Everdell",
+    "zh": "仙境幽谷"
+  },
+  {
+    "game_id": "for-sale",
+    "en": "For Sale",
+    "zh": "地产拍卖"
+  },
+  {
+    "game_id": "forbidden-island",
+    "en": "Forbidden Island",
+    "zh": "禁闭岛"
+  },
+  {
+    "game_id": "galactic-cruise",
+    "en": "Galactic Cruise",
+    "zh": "银河邮轮"
+  },
+  {
+    "game_id": "great-western-trail",
+    "en": "Great Western Trail",
+    "zh": "大西部之路"
+  },
+  {
+    "game_id": "hanabi",
+    "en": "Hanabi",
+    "zh": "花火"
+  },
+  {
+    "game_id": "hive",
+    "en": "Hive",
+    "zh": "蜂巢"
+  },
+  {
+    "game_id": "hues-and-cues",
+    "en": "Hues and Cues",
+    "zh": "色彩妙语"
+  },
+  {
+    "game_id": "insider",
+    "en": "Insider",
+    "zh": "局内人"
+  },
+  {
+    "game_id": "lost-ruins-of-arnak",
+    "en": "Lost Ruins of Arnak",
+    "zh": "阿纳克遗迹"
+  },
+  {
+    "game_id": "love-letter",
+    "en": "Love Letter",
+    "zh": "情书"
+  },
+  {
+    "game_id": "magic-the-gathering",
+    "en": "Magic: The Gathering",
+    "zh": "万智牌"
+  },
+  {
+    "game_id": "mansions-of-madness-second-edition",
+    "en": "Mansions of Madness: Second Edition",
+    "zh": "疯狂诡宅"
+  },
+  {
+    "game_id": "marvel-champions-the-card-game",
+    "en": "Marvel Champions: The Card Game",
+    "zh": "漫威群英传：卡牌版"
+  },
+  {
+    "game_id": "memoir-44",
+    "en": "Memoir '44",
+    "zh": "回忆录44"
+  },
+  {
+    "game_id": "micromacro-crime-city",
+    "en": "MicroMacro: Crime City",
+    "zh": "小城大案：罪恶都市"
+  },
+  {
+    "game_id": "monopoly-deal",
+    "en": "Monopoly Deal",
+    "zh": "地产大亨卡牌版"
+  },
+  {
+    "game_id": "nemesis",
+    "en": "Nemesis",
+    "zh": "复仇女神"
+  },
+  {
+    "game_id": "no-thanks",
+    "en": "No Thanks!",
+    "zh": "谢绝推销"
+  },
+  {
+    "game_id": "one-piece-card-game",
+    "en": "One Piece Card Game",
+    "zh": "航海王卡牌对战"
+  },
+  {
+    "game_id": "onitama",
+    "en": "Onitama",
+    "zh": "御圣棋"
+  },
+  {
+    "game_id": "patchwork",
+    "en": "Patchwork",
+    "zh": "拼布艺术"
+  },
+  {
+    "game_id": "pokemon-trading-card-game",
+    "en": "Pokémon Trading Card Game",
+    "zh": "宝可梦集换式卡牌游戏"
+  },
+  {
+    "game_id": "quoridor",
+    "en": "Quoridor",
+    "zh": "步步为营"
+  },
+  {
+    "game_id": "qwirkle",
+    "en": "Qwirkle",
+    "zh": "形色棋"
+  },
+  {
+    "game_id": "race-for-the-galaxy",
+    "en": "Race for the Galaxy",
+    "zh": "银河竞逐"
+  },
+  {
+    "game_id": "robinson-crusoe-adventures-on-the-cursed-island",
+    "en": "Robinson Crusoe: Adventures on the Cursed Island",
+    "zh": "鲁滨逊漂流记：诅咒之岛历险"
+  },
+  {
+    "game_id": "rummikub",
+    "en": "Rummikub",
+    "zh": "拉密"
+  },
+  {
+    "game_id": "scout",
+    "en": "SCOUT",
+    "zh": "马戏团之夜"
+  },
+  {
+    "game_id": "sanctuary",
+    "en": "Sanctuary",
+    "zh": "方舟保护区"
+  },
+  {
+    "game_id": "scythe",
+    "en": "Scythe",
+    "zh": "镰刀战争"
+  },
+  {
+    "game_id": "sea-salt-paper",
+    "en": "Sea Salt & Paper",
+    "zh": "海盐纸"
+  },
+  {
+    "game_id": "secret-hitler",
+    "en": "Secret Hitler",
+    "zh": "秘密希特勒"
+  },
+  {
+    "game_id": "slay-the-spire-the-board-game",
+    "en": "Slay the Spire: The Board Game",
+    "zh": "杀戮尖塔：桌游版"
+  },
+  {
+    "game_id": "sleeping-gods",
+    "en": "Sleeping Gods",
+    "zh": "沉睡之神"
+  },
+  {
+    "game_id": "so-clover",
+    "en": "So Clover!",
+    "zh": "四叶草密语"
+  },
+  {
+    "game_id": "take-time",
+    "en": "Take Time",
+    "zh": "掌握时刻"
+  },
+  {
+    "game_id": "the-lord-of-the-rings-fate-of-the-fellowship",
+    "en": "The Lord of the Rings: Fate of the Fellowship",
+    "zh": "魔戒：远征队的宿命"
+  },
+  {
+    "game_id": "the-mind",
+    "en": "The Mind",
+    "zh": "心灵同步"
+  },
+  {
+    "game_id": "the-quacks-of-quedlinburg",
+    "en": "The Quacks of Quedlinburg",
+    "zh": "庸医"
+  },
+  {
+    "game_id": "the-quest-for-el-dorado",
+    "en": "The Quest for El Dorado",
+    "zh": "黄金国之旅"
+  },
+  {
+    "game_id": "twilight-struggle",
+    "en": "Twilight Struggle",
+    "zh": "冷战热斗"
+  },
+  {
+    "game_id": "undaunted-normandy",
+    "en": "Undaunted: Normandy",
+    "zh": "无畏：诺曼底"
+  },
+  {
+    "game_id": "unmatched-battle-of-legends-volume-one",
+    "en": "Unmatched: Battle of Legends, Volume One",
+    "zh": "无双对决：传奇之战第一卷"
+  },
+  {
+    "game_id": "viticulture-essential-edition",
+    "en": "Viticulture Essential Edition",
+    "zh": "葡萄酒庄园"
+  },
+  {
+    "game_id": "war-chest",
+    "en": "War Chest",
+    "zh": "战争之匣"
+  },
+  {
+    "game_id": "war-of-the-ring-second-edition",
+    "en": "War of the Ring: Second Edition",
+    "zh": "魔戒圣战"
+  },
+  {
+    "game_id": "warhammer-40-000-kill-team",
+    "en": "Warhammer 40,000: Kill Team",
+    "zh": "战锤40K：杀戮小队"
+  },
+  {
+    "game_id": "wyrmspan",
+    "en": "Wyrmspan",
+    "zh": "龙翼翱翔"
+  },
+  {
+    "game_id": "yu-gi-oh-trading-card-game",
+    "en": "Yu-Gi-Oh! Trading Card Game",
+    "zh": "游戏王集换式卡牌游戏"
   }
 ]

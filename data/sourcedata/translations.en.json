@@ -186,7 +186,7 @@
   "cartographers": {
     "setup_items": "Map sheets, explore and ambush cards, season and scoring cards, pencils",
     "conditions": "Each player needs a map sheet and a pencil; larger tables need extra map sheets",
-    "win_relation": "Solo challenge or competitive play",
+    "win_relation": "Competitive play",
     "interaction": "Shared card reveals and scoring goals; ambushes have you draw on someone else's map",
     "rules_version": "Base game",
     "aliases": "Cartographers"

@@ -1,126 +1,158 @@
-# 玩局 桌游推荐集成版
+# Game Night · Board Game Finder
 
-EE6405 课程项目。在团队已有的双语问卷、推荐、规则讲解与 SQLite 目录上，增加可追踪的模型调用、补充偏好与换一批、第一局带玩和来源标注。本次交付在本地使用，打开网页即可操作，无需账号。网页和 API 使用一个 Python 服务，无需前端构建或 Docker。默认策略由负责人指定为 `s_team / t1 / g2`。
+**English** · [简体中文](README.zh.md)
 
-## 项目结构
+Game Night is an EE6405 course project that helps a group choose a board game, understand its rules, and start a guided first game. It includes a bilingual catalog of **235 games** and runs locally as a single FastAPI service serving both the web UI and the API.
 
-```text
-backend/          兼容团队 API；模型配置、harness、推荐、带玩、问答与用量
-frontend/
-  en/、zh/        双语页面，扩展问卷、带玩与设置
-  shared/         原生 JavaScript 和 CSS
-data/
-  database/       已构建的目录 SQLite 与 schema.sql（提交）
-  sourcedata/     原始 JSON、Excel 扩展、英文补充翻译与规则书（提交）
-  app.db          会话、缓存、登录令牌与用量（运行时生成，不提交）
-  traces/         调用记录（不提交）
-prompts/runtime/  产品运行时提示词与工具说明
-tests/            产品回归测试；fixtures/mock_auto 也是离线演示必需资源
-scripts/          账号添加与数据维护
-docs/             架构、决策、演示与冷启动验收
-start.py          启动前端和后端
-.env.example      产品配置模板，无真实密钥
-```
+## What you can do
 
-## 启动
+| Feature | What happens |
+| --- | --- |
+| Find a game | Enter the headcount, host availability, equipment, occasion, mood, and any optional preferences. The service filters by playable headcount, host, and equipment. It ranks eligible games and returns up to three. |
+| Refine the results | Add a preference or ask for another batch. The service carries forward the questionnaire answers and excludes games already shown in that recommendation chain. |
+| Learn the rules | Read the catalog's core and detailed rules. With a model configured, the page also requests an AI beginner guide based on those rules. |
+| Start guided play | Enter player names or use the defaults. Follow a first-game plan, ask rule questions, and use the dice, scoring, and timer controls. |
+| Contribute | Open **Contribute** to view the GitHub repository, report a bug, suggest a game, or flag a rule correction. |
 
-需要 Python 3.11–3.14。以下命令均在仓库根目录执行，首次在自己的虚拟环境中安装依赖：
+## Quick start
 
-```sh
-git clone https://github.com/KeHuang2004/AI-Powered-Board-Game-Recommendation-and-Interactive-Assistant-.git
-cd AI-Powered-Board-Game-Recommendation-and-Interactive-Assistant-
-# 产品改动合入 main 前，切换到收到的产品交付分支或 v1.0 tag。
-python -m venv .venv
-```
+Use **Python 3.11–3.14**. Run the commands from the checkout that contains this README. The catalog database is included, so you can start without rebuilding it.
 
-macOS / Linux：
-
-```sh
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-cp .env.example .env
-```
-
-Windows PowerShell：
+**Windows PowerShell**
 
 ```powershell
-.venv\Scripts\Activate.ps1
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
+```
+
+If you already use a Conda environment, activate it and use its `python` in place of `.\.venv\Scripts\python.exe`.
+
+**macOS or Linux**
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 python -m pip install -r requirements.txt
-Copy-Item .env.example .env
+[ -f .env ] || cp .env.example .env
 ```
 
-如果 PowerShell 不允许激活，可直接用 `.venv\Scripts\python.exe` 执行上述 pip 及后续 Python 命令。团队原有 Windows Python 3.14 的 `.runtime` 离线依赖查找逻辑保留；新的克隆请先按上面安装依赖。
-
-### 本地使用
-
-保持 `.env` 中 `DEPLOY_MODE=local`，填入模型配置，执行：
-
-```sh
-python start.py
-```
-
-服务就绪后会自动打开英文首页 <http://127.0.0.1:8001/en/>。手动访问根地址也会进入 `/en/`，可从页头 Settings 中切换到中文。模型、密钥和联网搜索在本机 `.env` 中配置，修改后重启服务。模型名留空时可以看目录推荐和规则，带玩需模型配置就绪。
-
-**无需密钥的离线演示**使用 `.env` 中的 `MODEL_PROVIDER=mock`，其余模型字段留空。启动即可完成问卷、推荐、详情和带玩。如需展示搜索工具和来源卡片，同时设置 `SEARCH_PROVIDER=mock`。离线演示使用固定回复和示例网页。
-
-```sh
-python start.py --port 8002 --no-browser
-```
-
-上例更换端口且不自动开浏览器。缺少 `data/database/boardgames.sqlite3` 时会提示 `python -m backend.build_catalog`；仓库已提交该目录库，正常克隆无需重建。接口文档在 `/docs`，`/health` 显示模式和配置状态，实际连接可用性以测试结果为准。
-
-## 全局模型配置
-
-推荐排序、AI 规则讲解与带玩共用根目录 `.env`。所有产品配置及中文注释见 [.env.example](.env.example)。模型名不设默认值，由使用者按已开通的服务填写：
+For a first run without an API key, edit these entries in the root `.env`:
 
 ```dotenv
-MODEL_PROVIDER=compatible
-MODEL_NAME=
-MODEL_API_KEY=
-MODEL_BASE_URL=
+DEPLOY_MODE=local
+MODEL_PROVIDER=mock
+SEARCH_PROVIDER=none
 ```
 
-| `MODEL_PROVIDER` | 配置 |
-|---|---|
-| `deepseek` | 填 `MODEL_API_KEY`、`MODEL_NAME`，使用官方接口地址。 |
-| `compatible` | 填 `MODEL_API_KEY`、`MODEL_NAME`、`MODEL_BASE_URL`；地址保留服务要求的前缀，例如 `/v1`。须支持 Chat Completions 工具调用。 |
-| `gemini` | 填 `MODEL_API_KEY`、`MODEL_NAME`，经官方 OpenAI 兼容接口调用。 |
-| `catalog` | 仅使用目录推荐和资料库规则，不支持带玩。 |
-| `mock` | 固定离线响应，无密钥，无外网模型调用，可演示完整流程。 |
+Run `python start.py` in an active environment, or `.\.venv\Scripts\python.exe start.py` in PowerShell. The server listens on `127.0.0.1:8001` and opens the English homepage. Switch languages under **Settings**, or open the pages directly:
 
-`MODEL_REASONING_EFFORT`、`MODEL_EXTRA_BODY` 依服务支持选填。旧的 `RECOMMEND_*`、`GEMINI_MODEL`、`GEMINI_API_KEY`、`DEEPSEEK_API_KEY` 仍兼容；新配置建议只使用 `MODEL_*`，显式存在的全局字段（即使为空）优先于旧字段。手工修改 `.env` 后重启。
+| Page | Address |
+| --- | --- |
+| English | [127.0.0.1:8001/en/](http://127.0.0.1:8001/en/) |
+| 中文 | [127.0.0.1:8001/zh/](http://127.0.0.1:8001/zh/) |
+| Health | [127.0.0.1:8001/health](http://127.0.0.1:8001/health) |
+| OpenAPI UI | [127.0.0.1:8001/docs](http://127.0.0.1:8001/docs) |
 
-搜索默认关闭。`SEARCH_PROVIDER=deepseek` 时，优先用 `SEARCH_API_KEY`，其次尝试模型密钥或旧 `DEEPSEEK_API_KEY`。搜索用于带玩中缺少规则书的游戏，由 harness 调用搜索和取网页工具。本次冷启动只验证 mock 搜索；真实搜索服务可用性未经本次验收。
+If port 8001 is busy, run `python start.py --port 8002 --no-browser` and use port 8002 in the URLs. Press **Ctrl+C** to stop the server.
 
-## 推荐和规则
+## Model configuration
 
-- 问卷沿用团队的实际人数、主持、道具、场合与氛围，新增第 6 项选填补充偏好。
-- `POST /recommend` 默认使用保留团队排序与提示词的 `s_team`，先过滤人数、主持及专用道具，再在合格候选中推荐最多 3 款；模型出错可回落到目录推荐。
-- 双语名称、标签与规则按页面语言读取；详情保留目录规则，同时经 harness 生成 AI 新手讲解。资料库规则在请求失败时仍可阅读。
-- `POST /recommend` 仍接受 `language: "en" | "zh"`，省略时返回中文。新增 `/recommend/refine` 支持补充偏好并排除已展示游戏。
-- KK 的 `GET /games`、`GET /games/{game_id}/core-rules` 和 `POST /rules/explain` 继续保留。
-- 详情中「开始带玩」→ 填或跳过名字 → 分步推进第一局；计划、对话、来源标签、骰子、计分和计时工具共用会话状态。`t1` 的「下一步」由代码推进，不调用模型。
+Recommendation, AI rule explanation, and the Agent Harness all use the model settings in the **root `.env`**. Environment variables already set in the process take precedence. Restart the server after editing the file.
 
-## 数据目录与更新
+| `MODEL_PROVIDER` | Required settings and behavior |
+| --- | --- |
+| `mock` | Uses fixed local responses. Useful for rehearsing the full workflow without a model key. |
+| `catalog` | Uses catalog ranking and stored rules. Model-based explanations, Q&A, and guided play are unavailable. |
+| `deepseek` | Set `MODEL_NAME` and `MODEL_API_KEY`. The provider URL is built in. |
+| `gemini` | Set `MODEL_NAME` and `MODEL_API_KEY`. Uses Gemini's OpenAI-compatible endpoint. |
+| `compatible` | Set `MODEL_NAME`, `MODEL_API_KEY`, and `MODEL_BASE_URL`, including the required URL prefix such as `/v1`. Use a Chat Completions endpoint with tool calling for guided play. |
 
-```text
-data/database/boardgames.sqlite3       目录数据库，与用户运行数据分开
-data/database/schema.sql              保留团队原表与字段，增加 extra_fields、rulebooks
-data/sourcedata/boardgame_dataset.json 英文原始数据
-data/sourcedata/桌游数据集_中文版.json   中文原始数据
-data/sourcedata/game_ids.json          固定中英文游戏 ID
-data/sourcedata/translations.en.json   扩展字段的英文翻译
-data/sourcedata/rulebooks/             已导入的规则书 PDF
+For a real provider, use a model enabled for your account and enter the key in your local `.env`. Legacy settings such as `DEEPSEEK_API_KEY`, `GEMINI_API_KEY`, and `RECOMMEND_*` are still recognized. Within the same configuration source, an explicitly set `MODEL_*` field takes priority over its legacy equivalent, even when blank. [.env.example](.env.example) lists the available settings.
+
+**Search is configured separately.** `SEARCH_PROVIDER=none` disables new searches. `SEARCH_PROVIDER=mock` uses a sample page to demonstrate search and source cards. `SEARCH_PROVIDER=deepseek` requires access to the configured search service. It uses `SEARCH_API_KEY` first, then attempts `MODEL_API_KEY` or the legacy `DEEPSEEK_API_KEY`.
+
+## How the system works
+
+1. The frontend sends the questionnaire to FastAPI. The default recommender, `s_team`, filters the catalog, orders eligible games by tags and recommended headcount, then asks the model to rerank up to 12 candidates. If the model fails, catalog ranking supplies the results and uses the structured questionnaire fields.
+2. Game details read localized rules directly from the catalog. The AI beginner guide is a separate request, so users can read the stored rules while it loads.
+3. In the default `t1` mode, the Agent Harness generates or reuses a structured first-game plan. The code advances steps and manages session state. A new chat message can call the configured model and the tools available in that phase. Source badges indicate the stated source category.
+4. The app stores sessions and caches in a runtime SQLite database. It records model calls and tool events in local trace files.
+
+| Path | Responsibility |
+| --- | --- |
+| [frontend/](frontend/) | English and Chinese HTML pages with shared JavaScript and CSS |
+| [backend/server.py](backend/server.py) and [backend/api.py](backend/api.py) | Web entry point, recommendations, game details, and guided-play APIs |
+| [backend/config.py](backend/config.py) and [backend/llm.py](backend/llm.py) | Shared model configuration and provider adapters |
+| [backend/harness/](backend/harness/), [backend/tutor/](backend/tutor/), and [backend/qa/](backend/qa/) | Model and tool orchestration, lesson plans, session state, and rule Q&A |
+| [prompts/runtime/](prompts/runtime/) | Prompt templates and tool descriptions |
+
+## Data and SQLite
+
+- [`data/database/boardgames.sqlite3`](data/database/boardgames.sqlite3) is the catalog loaded at startup. Its [schema](data/database/schema.sql) defines shared game records, localized text, playable and recommended headcounts, tags, localized extra fields, and rulebooks.
+- [`data/sourcedata/`](data/sourcedata/) holds the English and Chinese JSON, the Excel workbook for extra fields, the stable bilingual ID map, English extra-field translations, and three PDFs for UNO, Blackjack, and Texas Hold’em.
+- `data/app.db` is generated at runtime for recommendations, sessions, caches, and usage. `data/traces/` holds model-call traces.
+
+The questionnaire accepts **1–21 people**. The highest supported count in this catalog is **21** for Blood on the Clocktower. Cartographers supports **2–15** in this catalog. Playable headcount is a filter, while recommended headcount helps rank eligible games. The 60 games added in this release have bilingual core and detailed rules. Their English extra fields, such as setup items and win conditions, still need translations.
+
+To update the catalog, keep existing game IDs, append a stable ID and both names for each new game in `game_ids.json`, and update both JSON files and the Excel workbook together. Add English extra fields to `translations.en.json` by game ID. Then run:
+
+```bash
+python -m backend.build_catalog
 ```
 
-应用启动时从 SQLite 加载目录快照。团队的 `games`、`game_text`、`game_player_counts`、`game_tags` 保留；扩展字段和规则书来自补充资料。用户会话及缓存写入另一个自动创建的 `data/app.db`，无需独立数据库服务。
+The builder checks bilingual names, shared metadata, player counts, Excel tags, and database integrity before replacing the catalog. Restart the application to load the rebuilt database.
 
-更新源数据时保留已有游戏 ID、双语配对与字段约束，在项目根目录执行 `python -m backend.build_catalog` 并重启。构建器校验双语、人数、唯一键、外键和扩展字段；校验失败保留上次成功的目录库。Excel 补充文件、规则书 PDF 和 `translations.en.json` 也应随产品源码一起保留。
+## API reference
 
-## Agent harness branch
+The [OpenAPI UI](http://127.0.0.1:8001/docs) lists the full request schemas. The main routes are:
 
-产品改动直接基于[团队仓库](https://github.com/KeHuang2004/AI-Powered-Board-Game-Recommendation-and-Interactive-Assistant-)的 `main`（基点 `fe1084d`）开发，保留原页面、接口和团队推荐基线。`backend/model_api.py` 原文件保留，新调用走 harness。合入时需要完整的产品改动，包含运行时模板、mock fixtures、数据扩展及文档，无需另建应用。
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /health` | Return loaded game count, configuration status, and active strategies |
+| `POST /recommend` | Rank up to three games and return a recommendation ID (`rid`) |
+| `POST /recommend/refine` | Use `rid` and optional `message` to request a new batch |
+| `GET /games` and `GET /games/{game_id}/core-rules` | List games and read stored core rules |
+| `GET /api/games/{game_id}?lang=en` | Fetch localized game details and rulebook availability |
+| `POST /rules/explain` | Generate a guide with `mode: "llm"` or read stored rules with `mode: "raw"` |
+| `POST /api/qa` | Ask a rule question for a specific game |
+| `POST /api/sessions` and `POST /api/sessions/{session_id}/message` | Start guided play or send a message using server-sent events (SSE) |
+| `GET /api/sessions/{session_id}` | Restore session state and history |
+| `POST /api/sessions/{session_id}/next`, `/jump`, or `/tools/{name}` | Advance a step, jump to a phase, or run a panel tool using the same session URL prefix |
 
-产品测试：`python -m pip install -r requirements-dev.txt`，然后 `python -m pytest` 和 `ruff check backend tests`。测试使用 mock，不消耗真实模型额度。交付验收见 [coldstart.md](docs/coldstart.md)，实现说明见 [architecture.md](docs/architecture.md)、[decisions.md](docs/decisions.md)，演示步骤见 [demo_flow.md](docs/demo_flow.md)。
+Example `POST /recommend` JSON body:
 
-不要提交 `.env`、`accounts.yaml`、`data/app.db`、`data/traces/` 或虚拟环境。
+```json
+{
+  "players": 4,
+  "has_host": false,
+  "has_dedicated_components": false,
+  "scene": "friends",
+  "mood": "relaxed",
+  "language": "en",
+  "free_text": "We are first-time players."
+}
+```
+
+## Demo and troubleshooting
+
+1. Open `/health` and check that `games_loaded` is **235**.
+2. Try four players, no dedicated host, basic supplies, friends, and relaxed conversation. Check the recommendation source shown on the results page.
+3. Open a game, check the stored rules and AI guide, then select **Start guided play** and skip player names.
+4. Select **Next step** and send a new question. A new question exercises the model even if the lesson plan came from the cache.
+
+If the page shows catalog ranking or a guide error, check the model provider, name, and key in `.env`, then restart. `/health` reports configuration status. A returned guide or chat response confirms that the request worked. To regenerate a cached plan during a demo, temporarily set `PLAN_CACHE=0` and restart. Mock mode demonstrates the workflow using fixed content. Evaluate real model answers and source quality separately.
+
+## Development and contributions
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m pytest -q
+ruff check backend tests start.py
+```
+
+The automated tests use mock model responses. On Windows Python 3.11, the settings-write tests may fail because the settings endpoint uses `os.fchmod`. For local configuration on that platform, edit `.env` directly.
+
+For a data change, include the relevant source files and the rebuilt catalog in the same pull request. Keep `.env`, `accounts.yaml`, `data/app.db`, `data/traces/`, and virtual environments out of Git. Report issues or propose changes through the [GitHub repository](https://github.com/KeHuang2004/AI-Powered-Board-Game-Recommendation-and-Interactive-Assistant-).
+
+See the [demo walkthrough](docs/demo_flow.md), [architecture notes](docs/architecture.md), [technical decisions](docs/decisions.md), and [earlier cold-start verification](docs/coldstart.md) for more detail.

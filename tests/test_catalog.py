@@ -9,7 +9,7 @@ import pytest
 from openpyxl import load_workbook
 
 from backend import catalog
-from backend.build_catalog import import_extra, validate_baseline_facts
+from backend.build_catalog import import_extra
 from backend.catalog_db import DATABASE_PATH, load_games
 
 SOURCE_DIR = DATABASE_PATH.parent.parent / "sourcedata"
@@ -18,29 +18,27 @@ SOURCE_DIR = DATABASE_PATH.parent.parent / "sourcedata"
 def test_catalog_counts_and_imported_data() -> None:
     with closing(sqlite3.connect(DATABASE_PATH)) as connection:
         assert connection.execute("PRAGMA user_version").fetchone()[0] == 2
-        validate_baseline_facts(connection)
+        mapping = json.loads((SOURCE_DIR / "game_ids.json").read_text(encoding="utf-8"))
+        assert set(connection.execute("SELECT game_id, name FROM game_text WHERE locale = 'en'")) == {
+            (entry["game_id"], entry["en"]) for entry in mapping
+        }
+        assert set(connection.execute("SELECT game_id, name FROM game_text WHERE locale = 'zh'")) == {
+            (entry["game_id"], entry["zh"]) for entry in mapping
+        }
         assert connection.execute(
             "SELECT locale, translated, count(*) FROM game_extra GROUP BY locale, translated ORDER BY locale"
-        ).fetchall() == [("en", 1, 175), ("zh", 1, 175)]
+        ).fetchall() == [("en", 0, 60), ("en", 1, 175), ("zh", 1, 235)]
         assert {row[0] for row in connection.execute("SELECT game_id FROM rulebooks")} == {
             "blackjack", "texas-holdem", "uno"
         }
         assert connection.execute("PRAGMA foreign_key_check").fetchall() == []
         assert connection.execute("PRAGMA integrity_check").fetchone()[0] == "ok"
-        # Re-importing exercises all 175 name joins and category comparisons.
+        # Re-importing exercises every bilingual name join and category comparison.
         with closing(sqlite3.connect(":memory:")) as copy:
             connection.backup(copy)
             copy.execute("DELETE FROM game_extra")
             import_extra(copy, SOURCE_DIR)
-            assert copy.execute("SELECT count(*) FROM game_extra").fetchone()[0] == 350
-
-
-def test_invalid_baseline_facts_are_rejected() -> None:
-    with closing(sqlite3.connect(":memory:")) as copy, closing(sqlite3.connect(DATABASE_PATH)) as source:
-        source.backup(copy)
-        copy.execute("UPDATE games SET requires_host = 0")
-        with pytest.raises(ValueError, match="requirement counts"):
-            validate_baseline_facts(copy)
+            assert copy.execute("SELECT count(*) FROM game_extra").fetchone()[0] == 2 * len(mapping)
 
 
 def test_translation_file_is_imported(tmp_path: Path) -> None:
@@ -60,11 +58,12 @@ def test_translation_file_is_imported(tmp_path: Path) -> None:
             "SELECT setup_items, aliases, translated FROM game_extra WHERE game_id='uno' AND locale='en'"
         ).fetchone()
         assert result == ("cards", '["Alias one", "Alias two"]', 1)
-        assert copy.execute("SELECT count(*) FROM game_extra WHERE locale='en' AND translated=0").fetchone()[0] == 174
+        assert copy.execute("SELECT count(*) FROM game_extra WHERE locale='en' AND translated=0").fetchone()[0] == len(catalog.GAMES) - 1
 
 
 @pytest.mark.parametrize(("cell", "value", "message"), [
     ("K5", "Missing game", "English names"),
+    ("A5", "Wrong Chinese name", "Chinese name"),
     ("F5", "Wrong category", "categories"),
 ])
 def test_excel_mismatch_is_rejected(tmp_path: Path, cell: str, value: str, message: str) -> None:
@@ -87,7 +86,7 @@ def test_v1_snapshot_remains_readable(tmp_path: Path) -> None:
         source.backup(target)
         target.executescript("DROP TABLE game_extra; DROP TABLE rulebooks; PRAGMA user_version=1;")
     games = load_games(path)
-    assert len(games) == 175
+    assert len(games) == len(catalog.GAMES)
     assert all("rulebook" not in game and "extra" not in game["text"]["zh"] for game in games)
     assert games[0]["text"]["en"]["core_rules"] == load_games()[0]["text"]["en"]["core_rules"]
 
@@ -106,6 +105,8 @@ def test_compress_counts(counts: list[int], expected: str) -> None:
     (" TEXAS  HOLD'EM ", "en", "texas-holdem"),
     ("牛头王", "zh", "6-nimmt"),
     ("Take 5!", "en", "6-nimmt"),
+    ("Ark Nova", "en", "ark-nova"),
+    ("方舟动物园", "zh", "ark-nova"),
 ])
 def test_name_search(query: str, lang: str, game_id: str) -> None:
     assert game_id in {game["game_id"] for game in catalog.search_names(query, lang)}

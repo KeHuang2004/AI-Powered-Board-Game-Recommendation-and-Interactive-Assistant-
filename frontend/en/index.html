@@ -12,7 +12,7 @@
   <div class="site-shell">
     <header class="site-header">
       <a class="brand" href="#home" id="brand-home" aria-label="Game Night, back to home"><span class="brand-mark">✳</span><span>Game Night<span class="brand-dot">.</span></span></a>
-      <div class="header-right"><span class="prototype-pill"><span class="live-dot"></span> Board Game Finder</span><button class="header-link settings-entry" id="header-settings" type="button">Settings</button><button class="header-link" id="header-explore" type="button">Explore <span aria-hidden="true">↗</span></button></div>
+      <div class="header-right"><span class="prototype-pill"><span class="live-dot"></span> Board Game Finder</span><button class="header-link settings-entry" id="header-settings" type="button">Settings</button><button class="header-link" id="header-explore" type="button">Contribute <span aria-hidden="true">↗</span></button></div>
     </header>
 
 <div id="app-error" class="app-error" role="alert" hidden><span id="app-error-text">Something went wrong.</span><button type="button" class="text-button" id="app-error-retry">Retry</button><button type="button" class="text-button" id="app-error-close">Close</button></div>
@@ -76,11 +76,29 @@
       <section class="screen form-screen" id="team-screen" aria-labelledby="team-title" hidden>
         <div class="detail-wrap">
           <button type="button" class="text-button" id="team-back">← Back</button>
-          <div class="page-banner">
-            <h2 id="team-title">Meet the <span>team</span></h2>
+          <div class="page-banner contribute-banner">
+            <div>
+              <h2 id="team-title">Contribute to <span>Game Night</span></h2>
+              <p>Suggest a game, improve our bilingual rules, or help build the app.</p>
+            </div>
             <div class="page-cards" aria-hidden="true"></div>
           </div>
-          <div id="team-members"></div>
+          <div class="contribute-actions">
+            <a class="contribute-link contribute-link-primary" href="https://github.com/KeHuang2004/AI-Powered-Board-Game-Recommendation-and-Interactive-Assistant-" target="_blank" rel="noopener noreferrer">
+              <span>
+                <strong>View source on GitHub</strong>
+                <span class="contribute-link-description">Browse the code, fork the repository, or submit a pull request.</span>
+              </span>
+              <span class="contribute-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="contribute-link" href="https://github.com/KeHuang2004/AI-Powered-Board-Game-Recommendation-and-Interactive-Assistant-/issues" target="_blank" rel="noopener noreferrer">
+              <span>
+                <strong>Report an issue</strong>
+                <span class="contribute-link-description">Flag a bug, correct a rule, or suggest a game for the catalog.</span>
+              </span>
+              <span class="contribute-arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
         </div>
       </section>
       <section class="screen form-screen" id="settings-screen" aria-labelledby="settings-title" hidden>
