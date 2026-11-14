@@ -11,9 +11,9 @@ from typing import Literal
 
 from ulid import ULID
 
-from .. import appdb
-from ..catalog import GAMES_BY_ID, game_view
-from ..config import get_settings, lang_name
+from .. import database
+from ..database import get_games_by_id, game_view
+from ..setting import get_settings, lang_name
 from ..harness.loop import LoopResult, run_loop
 from ..harness.policies import check_input
 from ..harness.prompts import load_yaml, render
@@ -51,7 +51,6 @@ class Session:
     session_id: str
     created_at: str
     updated_at: str
-    account: str | None
     game_id: str
     lang: Literal["zh", "en"]
     mode: Literal["t0", "t1"]
@@ -61,12 +60,12 @@ class Session:
 
 
 def game_card(game_id: str, lang: str) -> dict:
-    game = GAMES_BY_ID[game_id]
+    game = get_games_by_id()[game_id]
     return {**game_view(game, lang), "other_lang_name": game["text"]["zh" if lang == "en" else "en"]["name"]}
 
 
 def create_session(game_id: str, lang: Literal["zh", "en"], names: list[str], mode: Literal["t0", "t1"],
-                   plan: LessonPlan | None, account: str | None = None) -> Session:
+                   plan: LessonPlan | None) -> Session:
     now = datetime.now(UTC).isoformat()
     state = SessionState(mode=mode, phase="setup" if mode == "t1" else "qa", players=list(names),
                          scores=dict.fromkeys(names, 0), lang=lang)
@@ -75,7 +74,7 @@ def create_session(game_id: str, lang: Literal["zh", "en"], names: list[str], mo
     state.total_steps = len(state.steps())
     if mode == "t1" and not state.total_steps:
         state.phase = "qa"
-    session = Session("ses_" + str(ULID()), now, now, account, game_id, lang, mode, plan, state, [])
+    session = Session("ses_" + str(ULID()), now, now, game_id, lang, mode, plan, state, [])
     _save(session, create=True)
     return session
 
@@ -85,16 +84,19 @@ def _save(session: Session, *, create: bool = False) -> None:
     new_updated_at = datetime.now(UTC).isoformat()
     state = session.state.model_dump()
     state["initial_player_count"] = session.state._initial_player_count
-    values = (session.created_at, new_updated_at, session.account, session.game_id, session.lang, session.mode,
+    values = (session.created_at, new_updated_at, session.game_id, session.lang, session.mode,
               plan_to_storage(session.plan) if session.plan else None, json.dumps(state, ensure_ascii=False),
               json.dumps(session.history, ensure_ascii=False), session.session_id)
-    with closing(appdb.connect()) as connection, connection:
+    with closing(database.connect_runtime()) as connection, connection:
         if create:
-            connection.execute("INSERT INTO sessions VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                               (session.session_id, *values[:-1]))
+            connection.execute(
+                "INSERT INTO sessions (session_id, created_at, updated_at, game_id, lang, mode, "
+                "plan_json, state_json, history_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (session.session_id, *values[:-1]),
+            )
         else:
             cursor = connection.execute(
-                "UPDATE sessions SET created_at=?, updated_at=?, account=?, game_id=?, lang=?, mode=?, "
+                "UPDATE sessions SET created_at=?, updated_at=?, game_id=?, lang=?, mode=?, "
                 "plan_json=?, state_json=?, history_json=? WHERE session_id=? AND updated_at=?",
                 (*values, previous_updated_at),
             )
@@ -104,7 +106,7 @@ def _save(session: Session, *, create: bool = False) -> None:
 
 
 def load_session(session_id: str) -> Session:
-    with closing(appdb.connect()) as connection:
+    with closing(database.connect_runtime()) as connection:
         row = connection.execute("SELECT * FROM sessions WHERE session_id=?", (session_id,)).fetchone()
     if row is None:
         raise SessionNotFound(session_id)
@@ -114,7 +116,7 @@ def load_session(session_id: str) -> Session:
     lesson = plan_from_storage(row["plan_json"]) if row["plan_json"] else None
     state._initial_player_count = initial_count
     state._plan = lesson
-    return Session(row["session_id"], row["created_at"], row["updated_at"], row["account"], row["game_id"],
+    return Session(row["session_id"], row["created_at"], row["updated_at"], row["game_id"],
                    row["lang"], row["mode"], lesson, state, json.loads(row["history_json"]))
 
 
@@ -144,7 +146,7 @@ def jump(session: Session, phase: Phase) -> dict:
 
 
 def system_text(session: Session, *, experiment: bool = False) -> str:
-    game = GAMES_BY_ID[session.game_id]
+    game = get_games_by_id()[session.game_id]
     search_enabled = not experiment and web.enabled()
     enabled = search_enabled or (not experiment and bool(web.cached_pages(session.game_id)))
     view = game_context(game, session.lang, web_enabled=enabled)
@@ -226,7 +228,7 @@ def message(session: Session, text: str, client: LLMClient, *, model_profile: st
     trace.record_prompt("tutor_errors.yaml")
     if session.mode == "t1":
         trace.record_prompt("tutor_state")
-    has_rulebook = GAMES_BY_ID[session.game_id].get("rulebook") is not None
+    has_rulebook = get_games_by_id()[session.game_id].get("rulebook") is not None
     if has_rulebook:
         trace.record_prompt("rulebook_context")
     events = []

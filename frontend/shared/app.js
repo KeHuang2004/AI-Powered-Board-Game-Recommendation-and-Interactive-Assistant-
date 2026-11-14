@@ -12,7 +12,7 @@ const questions = [
 ];
 
 const $ = (id) => document.getElementById(id);
-const screens = ['home', 'quiz', 'loading', 'results', 'detail', 'play', 'team', 'settings', 'login'];
+const screens = ['home', 'quiz', 'loading', 'results', 'detail', 'play', 'team', 'settings'];
 const accents = ['game-signal', 'game-moon', 'game-flash'];
 const symbols = ['✳', '☾', '↗'];
 let step = 0;
@@ -181,7 +181,6 @@ async function recommend() {
   } catch (error) {
     if (pending !== request) return;
     pending = null;
-    if (window.needsLogin?.()) { showScreen('login'); return showAppError(error); }
     showScreen('quiz');
     $('recommend-error').textContent = t('Couldn’t load recommendations. Your choices are saved. Please try again.', '暂时无法获取推荐。你的选择已保留，请再试一次。');
     showAppError(error, recommend);
@@ -381,7 +380,6 @@ async function refinePicks(message) {
   } catch (error) {
     if (pending !== request) return;
     pending = null;
-    if (window.needsLogin?.()) { showScreen('login'); return showAppError(error); }
     showScreen('results');
     if (error.status === 422) {
       error.userMessage = t('The combined preferences can be at most 600 characters. Get new picks with saved preferences or edit your answers.',
@@ -407,15 +405,13 @@ async function restoreScreen(name) {
     teamReturn = history.state?.teamReturn || teamReturn;
     return showScreen('team', false);
   }
-  if (document.body.dataset.screen === 'team' && name === liveTeamReturn && !window.needsLogin?.()
+  if (document.body.dataset.screen === 'team' && name === liveTeamReturn
       && (name !== 'play' || playSession || playPreparation)) {
     return showScreen(name, false);
   }
   if (name === 'settings') return openSettings(false);
-  if (window.needsLogin?.()) return showScreen('login', false);
   if (name === 'play' && sessionStorage.getItem('game-night-session')) {
     if (await restorePlay()) return showScreen('play', false);
-    if (window.needsLogin?.()) return showScreen('login', false);
   }
   if (name === 'detail' && activeGame) return openGame(activeGame.game, activeGame.index, false);
   if (name === 'results' && latestResult) {
@@ -440,7 +436,7 @@ function loadAppState() {
 
 async function restoreApp() {
   const state = loadAppState();
-  const screen = state.screen || 'home';
+  const screen = screens.includes(state.screen) ? state.screen : 'home';
   history.replaceState(history.state?.screen === screen ? history.state : {screen}, '', '#' + screen);
   await restoreScreen(screen);
 }

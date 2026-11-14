@@ -1,15 +1,19 @@
-"""Product and experiment configuration without serializing credentials."""
+"""Application configuration and settings endpoints."""
 from __future__ import annotations
 
 import hashlib
 import json
 import logging
 import os
+import re
+import tempfile
+import threading
 from pathlib import Path
 from typing import Literal
 
 from dotenv import dotenv_values
-from pydantic import BaseModel, Field, model_validator
+from fastapi import APIRouter
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 ROOT = Path(__file__).resolve().parent.parent
 logger = logging.getLogger(__name__)
@@ -160,12 +164,9 @@ class Settings(BaseModel):
     deploy_mode: Literal["local", "server"] = "local"
     recommender: str = "s_team"
     tutor: str = "t1"
-    grounding: str = "g2"
     max_tool_iters: int = 3
     max_submit_retries: int = 2
     history_turns: int = 8
-    daily_token_budget: int = 2000000
-    rate_limit_per_min: int = 20
     trace_dir: str = "data/traces"
     trace_file: str = ""
     plan_cache: bool = True
@@ -204,3 +205,125 @@ def set_verified(value: bool) -> None:
 def reload_product_profile() -> Profile | None:
     set_verified(False)
     return product_profile()
+
+
+settings_router = APIRouter(prefix="/api")
+_SETTINGS_LOCK = threading.RLock()
+_KEYS = {"provider":"MODEL_PROVIDER", "base_url":"MODEL_BASE_URL",
+         "api_key":"MODEL_API_KEY", "model":"MODEL_NAME"}
+
+
+class ModelSettings(BaseModel):
+    provider: Literal["deepseek", "gemini", "compatible", "catalog", "mock"]
+    base_url: str = Field(max_length=2048)
+    api_key: str = Field(max_length=4096)
+    model: str = Field(max_length=512)
+
+    @field_validator("base_url", "api_key", "model")
+    @classmethod
+    def single_line(cls, value: str) -> str:
+        if any(char in value for char in "\n\r\x00"):
+            raise ValueError("Configuration values must be single-line")
+        return value
+
+
+class SearchSettings(BaseModel):
+    search_enabled: bool
+
+
+def _mode(expected: str) -> None:
+    from .server import APIError
+
+    if get_settings().deploy_mode != expected:
+        raise APIError(404, "not_found", "Not found")
+
+
+def _quoted(value: str) -> str:
+    return "'" + value.replace("\\", "\\\\").replace("'", "\\'") + "'"
+
+
+def write_env(values: dict[str, str], path: Path) -> None:
+    """Replace only the supplied entries and preserve all other lines verbatim."""
+    original = path.read_text(encoding="utf-8") if path.exists() else ""
+    lines = original.splitlines(keepends=True)
+    updated = []
+    remaining = dict(values)
+    pattern = re.compile(r"^\s*(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*=")
+    for line in lines:
+        match = pattern.match(line)
+        key = match.group(1) if match else None
+        if key in values:
+            if key in remaining:
+                updated.append(f"{key}={_quoted(remaining.pop(key))}\n")
+        else:
+            updated.append(line)
+    if remaining and updated and not updated[-1].endswith(("\n", "\r")):
+        updated[-1] += "\n"
+    updated.extend(f"{key}={_quoted(value)}\n" for key, value in remaining.items())
+    path.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, name = tempfile.mkstemp(dir=path.parent, prefix=".model-settings-")
+    try:
+        with os.fdopen(descriptor, "w", encoding="utf-8", newline="") as output:
+            if os.name == "posix":
+                os.fchmod(output.fileno(), 0o600)
+            output.write("".join(updated))
+        os.replace(name, path)
+    finally:
+        if os.path.exists(name):
+            os.unlink(name)
+
+
+@settings_router.get("/settings")
+def get_model_settings() -> dict:
+    _mode("local")
+    provider = setting("MODEL_PROVIDER", "RECOMMEND_PROVIDER", default="gemini").lower()
+    profile = product_profile()
+    legacy_key = {"deepseek":"DEEPSEEK_API_KEY", "gemini":"GEMINI_API_KEY", "compatible":"RECOMMEND_API_KEY"}.get(provider, "")
+    key = setting("MODEL_API_KEY", legacy_key) if legacy_key else setting("MODEL_API_KEY")
+    return {"provider":provider, "base_url":setting("MODEL_BASE_URL", "RECOMMEND_BASE_URL"),
+            "model":profile.model if profile else setting("MODEL_NAME"), "api_key_set":bool(key),
+            "configured":profile is not None, "verified":is_verified(),
+            "search_enabled":get_settings().search_provider != "none"}
+
+
+@settings_router.put("/settings/search")
+def put_search_settings(request: SearchSettings) -> dict:
+    _mode("local")
+    provider = "deepseek" if request.search_enabled else "none"
+    with _SETTINGS_LOCK:
+        write_env({"SEARCH_PROVIDER": provider}, ROOT / ".env")
+        os.environ["SEARCH_PROVIDER"] = provider
+    return {"search_enabled": request.search_enabled}
+
+
+@settings_router.put("/settings")
+def put_model_settings(request: ModelSettings) -> dict:
+    _mode("local")
+    values = {_KEYS[key]:value for key, value in request.model_dump().items()}
+    with _SETTINGS_LOCK:
+        write_env(values, ROOT / ".env")
+        os.environ.update(values)
+        reload_product_profile()
+        return get_model_settings()
+
+
+@settings_router.post("/settings/test")
+def test_model_settings() -> dict:
+    from .llm import make_client, probe_capabilities
+    from .server import APIError
+
+    _mode("local")
+    with _SETTINGS_LOCK:
+        profile = product_profile()
+        if profile is None:
+            raise APIError(409, "llm_not_configured", "A model must be configured first")
+        try:
+            result = probe_capabilities(make_client(profile))
+        except Exception as error:
+            set_verified(False)
+            raise APIError(502, "model_unavailable", "The configured model is unavailable") from error
+        ok = bool(result.get("chat") and result.get("tool_calling") and result.get("multi_turn_tool"))
+        set_verified(ok)
+        return {"ok":ok, "chat":bool(result.get("chat")), "tool_calling":bool(result.get("tool_calling")),
+                "latency_ms":result.get("latency_ms", 0),
+                "detail":"ok" if ok else "one or more capability checks failed"}

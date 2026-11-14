@@ -7,8 +7,8 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
-from ..catalog import GAMES, GAMES_BY_ID, catalog_view
-from ..config import lang_name
+from ..database import get_games, get_games_by_id, catalog_view
+from ..setting import lang_name
 from ..harness.prompts import load_yaml, render
 from ..harness.tools import RunCtx
 from ..llm import LLMClient
@@ -58,15 +58,15 @@ class RecommendResult(BaseModel):
 
 def hard_filter(req: RecommendRequest) -> list[dict]:
     excluded = set(req.exclude)
-    return [game for game in GAMES if game["game_id"] not in excluded and req.players in game["players"]
+    return [game for game in get_games() if game["game_id"] not in excluded and req.players in game["players"]
             and (req.has_host or not game["requires_host"])
             and (req.has_dedicated_components or not game["requires_dedicated_components"])]
 
 
 def render_request(req: RecommendRequest) -> str:
     data = req.model_dump()
-    data["exclude_names"] = [GAMES_BY_ID[game_id]["text"][req.language]["name"]
-                             for game_id in req.exclude if game_id in GAMES_BY_ID]
+    data["exclude_names"] = [get_games_by_id()[game_id]["text"][req.language]["name"]
+                             for game_id in req.exclude if game_id in get_games_by_id()]
     return render("request_block", r=data)
 
 

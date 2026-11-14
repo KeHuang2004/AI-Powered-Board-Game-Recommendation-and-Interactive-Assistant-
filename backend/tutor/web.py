@@ -9,8 +9,8 @@ from urllib.parse import urlsplit
 import httpx
 from rank_bm25 import BM25Plus
 
-from .. import appdb, rulebook
-from ..config import get_settings, setting
+from .. import database
+from ..setting import get_settings, setting
 
 
 class SearchBackend(Protocol):
@@ -99,7 +99,7 @@ def get_backend() -> SearchBackend | None:
 
 
 def save_page(game_id: str, page: dict, lang: str) -> None:
-    with closing(appdb.connect()) as connection, connection:
+    with closing(database.connect_runtime()) as connection, connection:
         connection.execute(
             "INSERT INTO web_cache (game_id, url, title, text, fetched_at, lang) VALUES (?, ?, ?, ?, ?, ?) "
             "ON CONFLICT(game_id, url) DO UPDATE SET title=excluded.title, text=excluded.text, "
@@ -109,7 +109,7 @@ def save_page(game_id: str, page: dict, lang: str) -> None:
 
 
 def cached_pages(game_id: str) -> list[dict]:
-    with closing(appdb.connect()) as connection:
+    with closing(database.connect_runtime()) as connection:
         rows = connection.execute("SELECT url, title, text FROM web_cache WHERE game_id=? ORDER BY url",
                                   (game_id,)).fetchall()
     return [dict(row) for row in rows]
@@ -118,18 +118,18 @@ def cached_pages(game_id: str) -> list[dict]:
 def search_cached_and_rulebook(game_id: str, query: str, k: int = 3) -> list[dict]:
     pages = cached_pages(game_id)
     if not pages:
-        return rulebook.search(game_id, query, k)
-    book = rulebook.read(game_id)
+        return database.search_rulebook(game_id, query, k)
+    book = database.read_rulebook(game_id)
     chunks = [{"chunk": index, "text": text} for index, text in
-              enumerate(rulebook.chunk_text(book["text"]))] if book else []
+              enumerate(database.chunk_text(book["text"]))] if book else []
     for page in pages:
         chunks.extend({"chunk": index, "text": text, "source": "web", "url": page["url"],
                        "title": page["title"]}
-                      for index, text in enumerate(rulebook.chunk_text(page["text"])))
-    corpus = [rulebook._tokens(chunk["text"]) for chunk in chunks]
+                      for index, text in enumerate(database.chunk_text(page["text"])))
+    corpus = [database.tokenize(chunk["text"]) for chunk in chunks]
     if k <= 0 or not corpus or not any(corpus):
         return []
-    scores = BM25Plus(corpus).get_scores(rulebook._tokens(query))
+    scores = BM25Plus(corpus).get_scores(database.tokenize(query))
     indices = sorted(range(len(chunks)), key=lambda index: (-float(scores[index]), index))[:k]
     return [{**chunks[index], "score": float(scores[index])} for index in indices]
 

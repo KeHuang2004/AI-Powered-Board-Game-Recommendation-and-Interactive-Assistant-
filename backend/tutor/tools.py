@@ -6,8 +6,8 @@ from datetime import UTC, datetime
 
 from pydantic import BaseModel, Field, field_validator
 
-from .. import rulebook
-from ..catalog import GAMES_BY_ID, game_view
+from .. import database
+from ..database import get_games_by_id, game_view
 from ..harness.prompts import load_yaml
 from ..harness.tools import RunCtx, Tool, ToolInputError, ToolRegistry
 from . import web
@@ -119,19 +119,19 @@ def advance_step(args: AdvanceStep, ctx: RunCtx) -> dict:
 def get_game(args: GetGame, ctx: RunCtx) -> dict:
     if args.game_id != ctx.game_id:
         raise ToolInputError(load_yaml("tutor_errors")["wrong_game"])
-    return {"game": game_view(GAMES_BY_ID[args.game_id], ctx.lang)}
+    return {"game": game_view(get_games_by_id()[args.game_id], ctx.lang)}
 
 
 def lookup_rulebook(args: LookupRulebook, ctx: RunCtx) -> dict:
     if not ctx.game_id:
         raise ToolInputError(load_yaml("tutor_errors")["missing_rulebook"])
-    has_book = bool(GAMES_BY_ID[ctx.game_id].get("rulebook"))
+    has_book = bool(get_games_by_id()[ctx.game_id].get("rulebook"))
     pages = [] if ctx.meta.get("run_id") else web.cached_pages(ctx.game_id)
     if pages:
         return {"passages": web.search_cached_and_rulebook(ctx.game_id, args.query, 3)}
     if not has_book:
         raise ToolInputError(load_yaml("tutor_errors")["missing_rulebook"])
-    return {"passages": rulebook.search(ctx.game_id, args.query, 3)}
+    return {"passages": database.search_rulebook(ctx.game_id, args.query, 3)}
 
 
 def web_search(args: WebSearch, ctx: RunCtx) -> list[dict]:

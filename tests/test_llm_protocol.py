@@ -5,7 +5,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from backend.config import Profile
+from backend.setting import Profile
 from backend.llm import (
     CallCtx,
     CodexCLIClient,

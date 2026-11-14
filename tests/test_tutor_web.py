@@ -6,8 +6,8 @@ import httpx
 import pytest
 from fastapi.testclient import TestClient
 
-from backend import appdb, config
-from backend.catalog import GAMES_BY_ID
+from backend import database, setting
+from backend.database import get_games_by_id
 from backend.harness.prompts import render
 from backend.harness.tools import RunCtx, Tool
 from backend.llm import MockClient, ToolCall
@@ -24,7 +24,7 @@ def isolated(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
                        "DEPLOY_MODE": "local", "PLAN_CACHE": "1", "DEBUG": "1",
                        "APP_DB_PATH": str(tmp_path / "app.db"), "TRACE_FILE": str(tmp_path / "trace.jsonl")}.items():
         monkeypatch.setenv(key, value)
-    monkeypatch.setattr(config, "_verified", True)
+    monkeypatch.setattr(setting, "_verified", True)
 
     def no_network(*args, **kwargs):
         raise AssertionError("Test attempted a network request")
@@ -42,7 +42,7 @@ def stream_events(response) -> list[tuple[str, dict]]:
 
 
 def non_rulebook_game() -> str:
-    return next(game_id for game_id, game in GAMES_BY_ID.items() if not game.get("rulebook"))
+    return next(game_id for game_id, game in get_games_by_id().items() if not game.get("rulebook"))
 
 
 def test_disabled_templates_and_submit_schema_match_pre_d9b(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -96,7 +96,7 @@ def test_deepseek_timeout_does_not_expose_key(monkeypatch: pytest.MonkeyPatch) -
 def test_web_prompts_include_rules_version_without_changing_disabled_context(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    game = GAMES_BY_ID["500-rummy"]
+    game = get_games_by_id()["500-rummy"]
     assert game["text"]["zh"]["extra"]["rules_version"]
     enabled = plan.prepare_plan(game, "en", 4)
     assert '"rules_version"' in enabled.messages[-1]["content"]
@@ -125,13 +125,13 @@ def test_plan_search_fetch_cache_and_second_session_lookup(
         {"tool_calls": [{"id": "f", "name": "fetch_page", "arguments": '{"url":"https://example.test/rules"}'}]},
         {"tool_calls": [{"id": "p", "name": "submit_lesson_plan", "arguments": json.dumps(fixture)}]},
     ]
-    monkeypatch.setattr("backend.api.make_client", lambda _profile: MockClient(script=script))
+    monkeypatch.setattr("backend.server.make_client", lambda _profile: MockClient(script=script))
     client = TestClient(app)
     body = {"game_id": game_id, "lang": "en", "players": 4}
     first = stream_events(client.post("/api/sessions", json=body))
     first_view = next(data for name, data in first if name == "session")
     assert first_view["current"]["src"] == "web"
-    with appdb.connect() as connection:
+    with database.connect_runtime() as connection:
         row = connection.execute("SELECT game_id, url, title, text FROM web_cache").fetchone()
     assert row["game_id"] == game_id and row["url"] == "https://example.test/rules"
     assert "Set up" in row["text"]
@@ -151,7 +151,7 @@ def test_plan_search_fetch_cache_and_second_session_lookup(
         {"tool_calls": [{"id": "l", "name": "lookup_rulebook", "arguments": '{"query":"setup game"}'}]},
         {"content": "Set up the game. [[web]]"},
     ]
-    monkeypatch.setattr("backend.api.make_client", lambda _profile: MockClient(script=message_script))
+    monkeypatch.setattr("backend.server.make_client", lambda _profile: MockClient(script=message_script))
     events = stream_events(client.post(f"/api/sessions/{second_id}/message", json={"text": "How do we start?"}))
     lookup = next(data for name, data in events if name == "tool")
     assert lookup["name"] == "lookup_rulebook" and lookup["result"]["passages"][0]["source"] == "web"
@@ -171,18 +171,18 @@ def test_plan_sources_survive_session_and_plan_cache(monkeypatch: pytest.MonkeyP
         {"tool_calls": [{"id": "f", "name": "fetch_page", "arguments": '{"url":"https://example.test/rules"}'}]},
         {"tool_calls": [{"id": "p", "name": "submit_lesson_plan", "arguments": json.dumps(item)}]},
     ]
-    prepared = plan.prepare_plan(GAMES_BY_ID[game_id], "en", 4)
+    prepared = plan.prepare_plan(get_games_by_id()[game_id], "en", 4)
     lesson = plan.resolve_plan(prepared, MockClient(script=script))
     saved = session.create_session(game_id, "en", ["A", "B", "C", "D"], "t1", lesson)
     loaded = session.load_session(saved.session_id)
-    cached = plan.prepare_plan(GAMES_BY_ID[game_id], "en", 4).cached
+    cached = plan.prepare_plan(get_games_by_id()[game_id], "en", 4).cached
     assert cached and cached._web_sources == loaded.plan._web_sources
     reply = session.message(loaded, "Explain", MockClient(script=[{"content": "Rules. [[web]]"}]))
     assert reply["message"]["sources"] == [{"title": "Example game rules", "url": "https://example.test/rules"}]
 
 
 def test_existing_rulebook_plan_does_not_expose_web_tools(tmp_path: Path) -> None:
-    prepared = plan.prepare_plan(GAMES_BY_ID["uno"], "en", 4)
+    prepared = plan.prepare_plan(get_games_by_id()["uno"], "en", 4)
     assert prepared.has_rulebook and not prepared.web_enabled
     plan.resolve_plan(prepared, MockClient())
     trace = json.loads((tmp_path / "trace.jsonl").read_text().splitlines()[-1])
@@ -221,7 +221,7 @@ def test_lookup_limit_forces_plan_submission_and_bounds_corrections(
             requests.append((tool_choice, [tool["function"]["name"] for tool in tools], sources))
             return super().chat(messages, tools=tools, tool_choice=tool_choice, **kwargs)
 
-    monkeypatch.setattr("backend.api.make_client", lambda _profile: RecordingClient(script=script))
+    monkeypatch.setattr("backend.server.make_client", lambda _profile: RecordingClient(script=script))
     result = stream_events(TestClient(app).post("/api/sessions", json={
         "game_id": non_rulebook_game(), "lang": "en", "players": 4,
     }))
@@ -231,7 +231,7 @@ def test_lookup_limit_forces_plan_submission_and_bounds_corrections(
     assert requests[2:] == [(forced, ["submit_lesson_plan"], ["dataset", "general", "web"])] * (retries + 1)
     assert any(name == "session" for name, _ in result) is opens
     assert any(name == "error" and data["code"] == "session_creation_failed" for name, data in result) is not opens
-    with appdb.connect() as connection:
+    with database.connect_runtime() as connection:
         assert [row["url"] for row in connection.execute("SELECT url FROM web_cache")] == [
             "https://example.test/rules",
         ]
@@ -299,7 +299,7 @@ def test_search_exposed_in_each_play_phase(mode: str, phase: str) -> None:
 
 def test_rulebook_and_cached_pages_are_ranked_together(monkeypatch: pytest.MonkeyPatch) -> None:
     game_id = non_rulebook_game()
-    monkeypatch.setattr(web.rulebook, "read", lambda _game_id: {"text": "Official turn order and scoring."})
+    monkeypatch.setattr(web.database, "read_rulebook", lambda _game_id: {"text": "Official turn order and scoring."})
     web.save_page(game_id, {"url": "https://example.test/rules", "title": "Web rules",
                             "content": "Setup requires the unique scarlet token."}, "en")
     passages = web.search_cached_and_rulebook(game_id, "scarlet token", 2)
@@ -319,7 +319,7 @@ def test_cache_upserts_per_game_and_url() -> None:
 def test_settings_switch_changes_only_search_provider(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
-    monkeypatch.setattr(config, "ROOT", tmp_path)
+    monkeypatch.setattr(setting, "ROOT", tmp_path)
     monkeypatch.setenv("SEARCH_PROVIDER", "none")
     (tmp_path / ".env").write_text("OTHER=preserved\n", encoding="utf-8")
     client = TestClient(app)
@@ -354,11 +354,11 @@ def test_offline_cache_is_available_to_product_but_isolated_from_experiments(
     assert result["events"][0]["name"] == "lookup_rulebook"
     assert result["message"]["sources"][0]["url"] == "https://example.test/rules"
     assert not any(event["name"] in {"web_search", "fetch_page"} for event in result["events"])
-    prepared = plan.prepare_plan(GAMES_BY_ID[game_id], "en", 4)
+    prepared = plan.prepare_plan(get_games_by_id()[game_id], "en", 4)
     assert prepared.web_enabled and not prepared.search_enabled
     lesson = plan.resolve_plan(prepared, MockClient())
     assert lesson.setup[0].src == "web"
-    experimental = plan.prepare_plan(GAMES_BY_ID[game_id], "en", 4, experiment=True)
+    experimental = plan.prepare_plan(get_games_by_id()[game_id], "en", 4, experiment=True)
     assert not experimental.web_enabled and "rules_version" not in experimental.messages[-1]["content"]
     assert "Previously fetched web pages" not in session.system_text(record, experiment=True)
     experiment_record = session.create_session(game_id, "en", ["B"], "t0", None)

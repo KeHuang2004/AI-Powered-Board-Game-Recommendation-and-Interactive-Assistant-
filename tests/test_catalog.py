@@ -8,9 +8,9 @@ from shutil import copyfile
 import pytest
 from openpyxl import load_workbook
 
-from backend import catalog
-from backend.build_catalog import import_extra
-from backend.catalog_db import DATABASE_PATH, load_games
+from backend import database
+from backend.database import import_extra
+from backend.database import DATABASE_PATH, load_games
 
 SOURCE_DIR = DATABASE_PATH.parent.parent / "sourcedata"
 
@@ -58,7 +58,7 @@ def test_translation_file_is_imported(tmp_path: Path) -> None:
             "SELECT setup_items, aliases, translated FROM game_extra WHERE game_id='uno' AND locale='en'"
         ).fetchone()
         assert result == ("cards", '["Alias one", "Alias two"]', 1)
-        assert copy.execute("SELECT count(*) FROM game_extra WHERE locale='en' AND translated=0").fetchone()[0] == len(catalog.GAMES) - 1
+        assert copy.execute("SELECT count(*) FROM game_extra WHERE locale='en' AND translated=0").fetchone()[0] == len(database.get_games()) - 1
 
 
 @pytest.mark.parametrize(("cell", "value", "message"), [
@@ -86,7 +86,7 @@ def test_v1_snapshot_remains_readable(tmp_path: Path) -> None:
         source.backup(target)
         target.executescript("DROP TABLE game_extra; DROP TABLE rulebooks; PRAGMA user_version=1;")
     games = load_games(path)
-    assert len(games) == len(catalog.GAMES)
+    assert len(games) == len(database.get_games())
     assert all("rulebook" not in game and "extra" not in game["text"]["zh"] for game in games)
     assert games[0]["text"]["en"]["core_rules"] == load_games()[0]["text"]["en"]["core_rules"]
 
@@ -96,7 +96,7 @@ def test_v1_snapshot_remains_readable(tmp_path: Path) -> None:
     ([6, 2, 3, 2, 4], "2-4,6"), ([1, 100], "1,100"),
 ])
 def test_compress_counts(counts: list[int], expected: str) -> None:
-    assert catalog.compress_counts(counts) == expected
+    assert database.compress_counts(counts) == expected
 
 
 @pytest.mark.parametrize(("query", "lang", "game_id"), [
@@ -109,18 +109,18 @@ def test_compress_counts(counts: list[int], expected: str) -> None:
     ("方舟动物园", "zh", "ark-nova"),
 ])
 def test_name_search(query: str, lang: str, game_id: str) -> None:
-    assert game_id in {game["game_id"] for game in catalog.search_names(query, lang)}
+    assert game_id in {game["game_id"] for game in database.search_names(query, lang)}
 
 
 def test_localized_views_have_contract_fields() -> None:
-    game = catalog.get("uno")
+    game = database.get("uno")
     assert game is not None
     catalog_fields = {"id", "name", "players", "best", "needs_host", "special_components",
                       "tags", "tier", "blurb", "why", "win", "setup"}
     game_fields = catalog_fields | {"core_rules", "detailed_rules", "conditions", "interaction", "has_rulebook"}
     for language in ("en", "zh"):
-        assert set(catalog.catalog_view(game, language)) == catalog_fields
-        view = catalog.game_view(game, language)
+        assert set(database.catalog_view(game, language)) == catalog_fields
+        view = database.game_view(game, language)
         assert set(view) == game_fields
         assert view["has_rulebook"] is True
         assert view["tags"] == game["text"][language]["categories"]

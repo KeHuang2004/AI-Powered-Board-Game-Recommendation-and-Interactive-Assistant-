@@ -4,10 +4,10 @@ from __future__ import annotations
 from pydantic import BaseModel, Field
 from rank_bm25 import BM25Okapi
 
-from ..catalog import GAMES, GAMES_BY_ID, catalog_view, game_view
+from ..database import get_games, get_games_by_id, catalog_view, game_view
 from ..harness.tools import RunCtx, Tool
 from ..llm import LLMClient
-from ..rulebook import _tokens
+from ..database import tokenize
 from .common import RecommendRequest, RecommendResult
 
 
@@ -24,17 +24,17 @@ class GetGame(BaseModel):
 
 
 def _index(lang: str) -> BM25Okapi:
-    return BM25Okapi([_tokens(" ".join([game["text"][lang]["name"], game["text"][lang]["summary"],
+    return BM25Okapi([tokenize(" ".join([game["text"][lang]["name"], game["text"][lang]["summary"],
                                         game["text"][lang]["catalog_reason"],
-                                        *game["text"][lang]["categories"]])) for game in GAMES])
+                                        *game["text"][lang]["categories"]])) for game in get_games()])
 
 
 _INDEX = {language: _index(language) for language in ("en", "zh")}
 
 
 def search_games(args: SearchGames, ctx: RunCtx) -> dict:
-    scores = _INDEX[ctx.lang].get_scores(_tokens(args.text)) if args.text else None
-    indexed = [(index, game) for index, game in enumerate(GAMES)
+    scores = _INDEX[ctx.lang].get_scores(tokenize(args.text)) if args.text else None
+    indexed = [(index, game) for index, game in enumerate(get_games())
                if (args.players is None or args.players in game["players"])
                and (not args.exclude_needs_host or not game["requires_host"])
                and (not args.exclude_special_components or not game["requires_dedicated_components"])]
@@ -43,7 +43,7 @@ def search_games(args: SearchGames, ctx: RunCtx) -> dict:
 
 
 def get_game(args: GetGame, ctx: RunCtx) -> dict:
-    return {"game": game_view(GAMES_BY_ID[args.game_id], ctx.lang)}
+    return {"game": game_view(get_games_by_id()[args.game_id], ctx.lang)}
 
 
 def tools() -> list[Tool]:

@@ -4,22 +4,18 @@ from __future__ import annotations
 import json
 import logging
 import unicodedata
-from pathlib import Path
 from typing import Literal
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field, model_validator
 
-from .auth import authorize_request
-from .catalog import GAMES
-from .config import get_settings, is_verified, product_profile, setting
-from .harness.context import build_messages
-from .harness.loop import call_model
-from .harness.prompts import load_yaml
-from .harness.trace import Trace
-from .llm import CallCtx, make_client
-
-BASE_DIR = Path(__file__).resolve().parent.parent
+from ..database import get_games, get_games_by_id
+from ..setting import product_profile
+from ..harness.context import build_messages
+from ..harness.loop import call_model
+from ..harness.prompts import load_yaml
+from ..harness.trace import Trace
+from ..llm import CallCtx, make_client
 
 logger = logging.getLogger(__name__)
 
@@ -28,8 +24,7 @@ def normalize_name(name: str) -> str:
     return " ".join(unicodedata.normalize("NFKC", name).casefold().split())
 
 
-GAMES_BY_ID = {game["game_id"]: game for game in GAMES}
-GAMES_BY_NAME = {normalize_name(game["text"]["en"]["name"]): game for game in GAMES}
+GAMES_BY_NAME = {normalize_name(game["text"]["en"]["name"]): game for game in get_games()}
 
 
 class GameSummary(BaseModel):
@@ -73,7 +68,7 @@ class ExplainResponse(GameSummary):
 
 def resolve_game(game_id: str | None = None, name: str | None = None) -> dict:
     game = (
-        GAMES_BY_ID.get(game_id.strip())
+        get_games_by_id().get(game_id.strip())
         if game_id and game_id.strip()
         else GAMES_BY_NAME.get(normalize_name(name or ""))
     )
@@ -82,43 +77,20 @@ def resolve_game(game_id: str | None = None, name: str | None = None) -> dict:
     return game
 
 
-app = FastAPI(
-    title="Board Game Rules Explanation API",
-    version="0.1.0",
-    description="Explains core rules from a JSON game catalog using the configured model.",
-    dependencies=[Depends(authorize_request)],
-)
+router = APIRouter()
 
 
-@app.get("/rules")
+@router.get("/rules")
 def home():
     return {"service": "Board Game Rules API", "docs": "/docs"}
 
 
-@app.get("/health")
-def health():
-    settings = product_profile()
-    config = get_settings()
-    return {
-        "status": "ok",
-        "games_loaded": len(GAMES),
-        "llm_configured": settings is not None,
-        "model_provider": settings.provider if settings else None,
-        "model": settings.model or None if settings else None,
-        "mode": config.deploy_mode,
-        "strategies": {"recommend": config.recommender, "tutor": config.tutor, "grounding": config.grounding},
-        "provider_setting": setting("MODEL_PROVIDER", "RECOMMEND_PROVIDER", default="gemini").lower(),
-        "verified": True if config.deploy_mode == "server" else is_verified(),
-        "search_enabled": config.search_provider != "none",
-    }
-
-
-@app.get("/games", response_model=list[GameSummary])
+@router.get("/games", response_model=list[GameSummary])
 def list_games():
-    return [{"game_id": g["game_id"], "name": g["text"]["en"]["name"]} for g in GAMES]
+    return [{"game_id": g["game_id"], "name": g["text"]["en"]["name"]} for g in get_games()]
 
 
-@app.get("/games/{game_id}/core-rules", response_model=CoreRulesResponse)
+@router.get("/games/{game_id}/core-rules", response_model=CoreRulesResponse)
 def get_core_rules(game_id: str):
     game = resolve_game(game_id=game_id)
     return {
@@ -128,7 +100,7 @@ def get_core_rules(game_id: str):
     }
 
 
-@app.post("/rules/explain", response_model=ExplainResponse)
+@router.post("/rules/explain", response_model=ExplainResponse)
 def explain_rules(request: ExplainRequest):
     game = resolve_game(game_id=request.game_id, name=request.name)
     core = game["text"]["en"]["core_rules"]
@@ -198,9 +170,3 @@ def explain_rules(request: ExplainRequest):
         "method": method,
         "model": model,
     }
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run("backend.rules_api:app", host="127.0.0.1", port=8001, reload=True)

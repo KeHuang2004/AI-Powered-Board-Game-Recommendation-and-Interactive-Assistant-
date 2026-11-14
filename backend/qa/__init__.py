@@ -1,1 +1,0 @@
-"""Grounded rules question answering."""

@@ -12,8 +12,7 @@ from typing import Any
 
 from ulid import ULID
 
-from ..config import ROOT, get_settings, product_secret_redactor
-from ..usage import record_tokens
+from ..setting import ROOT, get_settings, product_secret_redactor
 from .prompts import metadata
 
 FORBIDDEN_KEYS = {"authorization", "headers", "request_headers", "api_key", "apikey", "search_api_key",
@@ -71,7 +70,6 @@ class Trace:
 
     def add_llm(self, messages: list[dict], result: Any, *, temperature: float | None = None,
                 tools: list[dict] | None = None) -> None:
-        record_tokens(result.usage.input_tokens, result.usage.output_tokens)
         span = {"type": "llm", "messages_hash": messages_hash(messages),
                 "usage": result.usage.model_dump(), "latency_ms": result.latency_ms,
                 "tool_calls": [call.model_dump() for call in result.tool_calls],

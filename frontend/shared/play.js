@@ -227,7 +227,6 @@ async function createPlay(names) {
     }
   } catch (error) {
     if (request.signal.aborted) return;
-    if (window.needsLogin?.()) { showScreen('login'); return showAppError(error); }
     showScreen('detail');
     if (error.code === 'llm_not_configured') requirementNotice();
     else showAppError(error, () => createPlay(names));

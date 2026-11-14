@@ -1,8 +1,8 @@
 """Shared implementation for the three harness recommendation conditions."""
 from __future__ import annotations
 
-from ..catalog import GAMES, GAMES_BY_ID
-from ..config import get_settings
+from ..database import get_games, get_games_by_id
+from ..setting import get_settings
 from ..harness.context import build_messages
 from ..harness.loop import run_loop
 from ..harness.tools import RunCtx, Tool, ToolRegistry
@@ -32,9 +32,9 @@ def recommend(req: RecommendRequest, eligible: list[dict], client: LLMClient, ct
     ctx.audit = strategy == "s0"
     ordered_eligible = ordered_games(eligible, order)
     ctx.allowed_ids = [game["game_id"] for game in ordered_eligible]
-    items = GAMES if strategy == "s0" else eligible
+    items = get_games() if strategy == "s0" else eligible
     variables = {"lang_name": language_name, "request_block": render_request(req), "n_picks": ctx.n_picks,
-                 "catalog_lines": "\n".join(catalog_lines(items, req.language, order)), "total": len(GAMES)}
+                 "catalog_lines": "\n".join(catalog_lines(items, req.language, order)), "total": len(get_games())}
     messages = build_messages("recommend_system", ctx.template, variables)
     terminal = Tool(name="submit_recommendations", params=SubmitRecommendations, handler=submit,
                     terminal=True, validator=validate_picks)
@@ -59,7 +59,7 @@ def recommend(req: RecommendRequest, eligible: list[dict], client: LLMClient, ct
     submission = SubmitRecommendations.model_validate(loop.submitted)
     selected = []
     for pick in submission.picks:
-        game = GAMES_BY_ID.get(pick.game_id)
+        game = get_games_by_id().get(pick.game_id)
         if game is None:
             selected.append({"game_id": pick.game_id, "reason": pick.fit_reason, "caveat": pick.caveat,
                              "unresolved": True})

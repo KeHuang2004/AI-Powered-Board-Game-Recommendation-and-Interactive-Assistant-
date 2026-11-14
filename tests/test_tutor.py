@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-from backend import appdb, config
+from backend import database, setting
 from backend.harness.tools import RunCtx
 from backend.llm import MockClient, ToolCall
 from backend.server import app
@@ -16,7 +16,7 @@ from backend.tutor.state import SessionState
 
 @pytest.fixture(autouse=True)
 def isolated(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
-    monkeypatch.setattr(config, "_verified", True)
+    monkeypatch.setattr(setting, "_verified", True)
     for key, value in {"MODEL_PROVIDER":"mock", "TUTOR":"t1", "DEBUG":"1", "PLAN_CACHE":"1",
                        "APP_DB_PATH":str(tmp_path / "app.db"), "TRACE_FILE":str(tmp_path / "trace.jsonl")}.items():
         monkeypatch.setenv(key, value)
@@ -62,13 +62,13 @@ def test_disabled_plan_cache_still_writes(client: TestClient, monkeypatch: pytes
     _, first = create(client)
     _, second = create(client)
     assert first[0][1]["stage"] == second[0][1]["stage"] == "planning"
-    with appdb.connect() as connection:
+    with database.connect_runtime() as connection:
         assert connection.execute("SELECT count(*) FROM plan_cache").fetchone()[0] == 1
 
 
 def test_next_and_jump_do_not_invoke_model(client: TestClient, monkeypatch: pytest.MonkeyPatch) -> None:
     sid, _ = create(client)
-    monkeypatch.setattr("backend.api.make_client", lambda profile: pytest.fail("Unexpected model call"))
+    monkeypatch.setattr("backend.server.make_client", lambda profile: pytest.fail("Unexpected model call"))
     jump = client.post(f"/api/sessions/{sid}/jump", json={"phase":"first_round"})
     assert jump.status_code == 200 and jump.json()["state"]["phase"] == "first_round"
     total = jump.json()["state"]["total_steps"]
@@ -167,7 +167,7 @@ def test_system_differences_are_only_mode_branch_and_plan(client: TestClient, mo
     sid0, _ = create(client)
     t0 = session.system_text(session.load_session(sid0))
     t1 = session.system_text(session.load_session(sid1))
-    template = Path("prompts/runtime/tutor_system.j2").read_text(encoding="utf-8")
+    template = Path("prompts/runtime/agent_harness/tutor/tutor_system.j2").read_text(encoding="utf-8")
     t1_line = next(line for line in template.splitlines() if line.startswith("- Follow the lesson plan"))
     t0_line = next(line for line in template.splitlines() if line.startswith("- Guide them through"))
     t0 = t0.replace(t0_line, "")
@@ -283,10 +283,10 @@ def test_plan_source_labels_require_evidence(source: str, evidence: str) -> None
 
 
 def test_failed_plan_does_not_claim_a_fallback(tmp_path: Path) -> None:
-    from backend.catalog import GAMES_BY_ID
+    from backend.database import get_games_by_id
     from backend.tutor.plan import prepare_plan, resolve_plan
 
-    prepared = prepare_plan(GAMES_BY_ID["uno"], "en", 4)
+    prepared = prepare_plan(get_games_by_id()["uno"], "en", 4)
     with pytest.raises(RuntimeError, match="Lesson plan"):
         resolve_plan(prepared, MockClient(script=[{"content":"no"}] * 3))
     trace = json.loads((tmp_path / "trace.jsonl").read_text().splitlines()[-1])

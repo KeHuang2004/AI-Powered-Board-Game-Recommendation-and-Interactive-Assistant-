@@ -32,5 +32,5 @@ def test_browser_opens_english_home_after_startup(monkeypatch):
 
 def test_missing_catalog_help(monkeypatch, tmp_path):
     monkeypatch.setattr(start, "ROOT", tmp_path)
-    with pytest.raises(SystemExit, match="python -m backend.build_catalog"):
+    with pytest.raises(SystemExit, match="python -m backend.database"):
         start.main(["--no-browser"])

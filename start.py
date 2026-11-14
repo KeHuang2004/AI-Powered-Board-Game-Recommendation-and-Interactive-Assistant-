@@ -39,7 +39,7 @@ def main(argv: list[str] | None = None) -> None:
     if not 1 <= args.port <= 65535:
         parser.error("端口必须在 1–65535 之间")
     if not (ROOT / "data/database/boardgames.sqlite3").is_file():
-        raise SystemExit("缺少游戏目录库，请在项目目录运行 python -m backend.build_catalog")
+        raise SystemExit("缺少游戏目录库，请在项目目录运行 python -m backend.database")
     server = uvicorn.Server(uvicorn.Config("backend.server:app", host=args.host, port=args.port))
     if not args.no_browser:
         Thread(target=open_when_ready, args=(server, args.host, args.port), daemon=True).start()

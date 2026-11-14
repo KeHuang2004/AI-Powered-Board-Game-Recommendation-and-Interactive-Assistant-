@@ -4,6 +4,8 @@
 
 玩局是 EE6405 的小组课程项目。它帮助玩家按聚会条件挑选桌游、了解规则，并跟着助手开始第一局。项目内置 **235 款中英文桌游资料**，网页和 API 由同一个 FastAPI 服务在本机提供。
 
+网站启动后可直接使用，无需登录。
+
 ## 可以做什么
 
 | 功能 | 使用方式 |
@@ -23,7 +25,6 @@
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 ```
 
 如果已经有 Conda 环境，激活后用该环境的 `python` 代替 `.\.venv\Scripts\python.exe` 即可。
@@ -34,13 +35,11 @@ if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-[ -f .env ] || cp .env.example .env
 ```
 
 首次运行如果想先用无密钥模式，请在根目录 `.env` 里修改这三项：
 
 ```dotenv
-DEPLOY_MODE=local
 MODEL_PROVIDER=mock
 SEARCH_PROVIDER=none
 ```
@@ -68,7 +67,7 @@ SEARCH_PROVIDER=none
 | `gemini` | 填写 `MODEL_NAME` 和 `MODEL_API_KEY`，通过 Gemini 的 OpenAI 兼容接口调用。 |
 | `compatible` | 填写 `MODEL_NAME`、`MODEL_API_KEY` 和 `MODEL_BASE_URL`。保留接口所需的路径前缀，例如 `/v1`。带玩需要支持工具调用的 Chat Completions 接口。 |
 
-使用真实模型时，请填写账号已开通的模型名，并将密钥填在本机的 `.env`。项目兼容 `DEEPSEEK_API_KEY`、`GEMINI_API_KEY` 和 `RECOMMEND_*` 等旧字段。在同一配置来源中，显式设置的 `MODEL_*` 优先于对应的旧字段，空值也算显式设置。完整选项见 [.env.example](.env.example)。
+使用真实模型时，请填写账号已开通的模型名，并将密钥填在本机的 `.env`。项目兼容 `DEEPSEEK_API_KEY`、`GEMINI_API_KEY` 和 `RECOMMEND_*` 等旧字段。在同一配置来源中，显式设置的 `MODEL_*` 优先于对应的旧字段，空值也算显式设置。可用选项集中在根目录的 `.env`。以 `##` 开头的可选项使用程序默认值，启用时去掉行首注释。
 
 **联网搜索独立配置。** `SEARCH_PROVIDER=none` 关闭新的搜索请求。`SEARCH_PROVIDER=mock` 用示例网页演示搜索和来源卡片。`SEARCH_PROVIDER=deepseek` 需要账号可用的搜索服务，优先使用 `SEARCH_API_KEY`，其次尝试 `MODEL_API_KEY` 或旧的 `DEEPSEEK_API_KEY`。
 
@@ -82,10 +81,28 @@ SEARCH_PROVIDER=none
 | 路径 | 职责 |
 | --- | --- |
 | [frontend/](frontend/) | 英文和中文页面，共用 JavaScript 和 CSS |
-| [backend/server.py](backend/server.py) 和 [backend/api.py](backend/api.py) | 网页入口、推荐、游戏详情与带玩接口 |
-| [backend/config.py](backend/config.py) 和 [backend/llm.py](backend/llm.py) | 全局模型配置及供应商接口适配 |
-| [backend/harness/](backend/harness/)、[backend/tutor/](backend/tutor/) 和 [backend/qa/](backend/qa/) | 模型和工具编排、带玩计划、会话状态及规则问答 |
-| [prompts/runtime/](prompts/runtime/) | 提示词模板及工具说明 |
+| [backend/setting.py](backend/setting.py) | 读取 `.env`，提供模型和搜索设置接口 |
+| [backend/llm.py](backend/llm.py) | 模型客户端、供应商接口适配和 Mock 回复 |
+| [backend/server.py](backend/server.py) | FastAPI 入口、路由注册及带玩接口 |
+| [backend/database.py](backend/database.py) | 构建和读取目录、连接运行库，并用 BM25 检索规则书 |
+| [recommend_service.py](backend/recommend/recommend_service.py) | 游戏推荐与换一批接口 |
+| [quick_guide_service.py](backend/quickguide/quick_guide_service.py) | 目录规则和 AI 快速指南接口 |
+| [backend/harness/](backend/harness/) 和 [backend/tutor/](backend/tutor/) | 模型和工具编排、带玩计划、会话状态及规则问答 |
+| [prompts/runtime/](prompts/runtime/) | 提示词模板与工具定义 |
+
+### 提示词目录
+
+```text
+prompts/runtime/
+  recommend/          推荐排序、请求和输出示例
+  quickguide/         规则讲解提示词和讲解风格
+  agent_harness/
+    tutor/            首局计划、对话和规则书上下文
+    probe/            模型能力探测
+  shared/             工具定义、校验文案和文本工具协议
+```
+
+加载器按文件名在这些目录中查找模板，因此不同子目录的模板文件名也需唯一。
 
 ## 数据与 SQLite
 
@@ -98,7 +115,7 @@ SEARCH_PROVIDER=none
 更新目录时，保留已有游戏 ID，在 `game_ids.json` 为每款新游戏追加唯一 ID 和中英文名称，并同步更新两份 JSON 和 Excel。英文扩展字段按游戏 ID 补入 `translations.en.json`，然后运行：
 
 ```bash
-python -m backend.build_catalog
+python -m backend.database
 ```
 
 导入程序在替换目录库前会检查双语名称、共用字段、人数、Excel 标签和数据库完整性。重建成功后重启应用，即可加载新版数据库。
@@ -115,7 +132,6 @@ python -m backend.build_catalog
 | `GET /games` 和 `GET /games/{game_id}/core-rules` | 列出游戏及读取目录核心规则 |
 | `GET /api/games/{game_id}?lang=zh` | 读取指定语言的详情和规则书可用状态 |
 | `POST /rules/explain` | 用 `mode: "llm"` 生成讲解，或用 `mode: "raw"` 读取目录规则 |
-| `POST /api/qa` | 提问指定游戏的规则 |
 | `POST /api/sessions` 和 `POST /api/sessions/{session_id}/message` | 创建带玩会话或发送消息，使用服务端事件流（SSE） |
 | `GET /api/sessions/{session_id}` | 恢复会话状态和聊天记录 |
 | `POST /api/sessions/{session_id}/next`、`/jump` 或 `/tools/{name}` | 使用同一会话路径前缀推进步骤、跳转阶段或执行工具 |
@@ -146,13 +162,11 @@ python -m backend.build_catalog
 ## 开发与贡献
 
 ```bash
-python -m pip install -r requirements-dev.txt
+python -m pip install -r requirements.txt pytest ruff
 python -m pytest -q
 ruff check backend tests start.py
 ```
 
-自动测试使用模拟模型。Windows Python 3.11 上，设置接口使用的 `os.fchmod` 可能导致配置写入测试失败。本地可直接编辑 `.env`。
+自动测试使用模拟模型。
 
-如果修改数据，请把对应源文件和重建后的目录库放在同一个 Pull Request 中。提交前排除 `.env`、`accounts.yaml`、`data/app.db`、`data/traces/` 和虚拟环境。问题反馈和代码修改可以通过 [GitHub 仓库](https://github.com/KeHuang2004/AI-Powered-Board-Game-Recommendation-and-Interactive-Assistant-) 提出。
-
-更多细节见[演示步骤](docs/demo_flow.md)、[架构说明](docs/architecture.md)、[技术决策](docs/decisions.md)和[早期冷启动验收](docs/coldstart.md)。
+如果修改数据，请把对应源文件和重建后的目录库放在同一个 Pull Request 中。问题反馈和代码修改可以通过 [GitHub 仓库](https://github.com/KeHuang2004/AI-Powered-Board-Game-Recommendation-and-Interactive-Assistant-) 提出。

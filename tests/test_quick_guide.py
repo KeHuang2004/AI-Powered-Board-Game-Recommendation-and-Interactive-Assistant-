@@ -1,23 +1,19 @@
-"""Source-policy Q&A and the team's original explanation interface."""
+"""Regression tests for the quick-start guide and retired QA endpoint."""
 import json
 from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
 
-from backend import config
-from backend.catalog import GAMES
+from backend import setting
 from backend.harness.prompts import load_yaml, render
-from backend.harness.tools import RunCtx
-from backend.llm import MockClient
-from backend.qa.answer import QAAnswer, answer, validate_answer
 from backend.server import app
 
 
 @pytest.fixture(autouse=True)
 def isolated(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
-    monkeypatch.setattr(config, "_verified", True)
-    for key, value in {"MODEL_PROVIDER":"mock", "GROUNDING":"g2", "DEBUG":"1",
+    monkeypatch.setattr(setting, "_verified", True)
+    for key, value in {"MODEL_PROVIDER":"mock", "DEBUG":"1",
                        "APP_DB_PATH":str(tmp_path / "app.db"), "TRACE_FILE":str(tmp_path / "trace.jsonl")}.items():
         monkeypatch.setenv(key, value)
 
@@ -79,71 +75,12 @@ def test_legacy_unconfigured_and_provider_failure(monkeypatch: pytest.MonkeyPatc
         def chat(self, *args: object, **kwargs: object):
             raise RuntimeError("private failure")
 
-    monkeypatch.setattr("backend.rules_api.make_client", lambda profile: Failing())
+    monkeypatch.setattr("backend.quickguide.quick_guide_service.make_client", lambda profile: Failing())
     response = client.post("/rules/explain", json={"game_id":"uno", "mode":"llm"})
     assert response.status_code == 502 and response.json()["detail"] == "Model request failed"
 
 
-@pytest.mark.parametrize("grounding", ["g1", "g2", "g3"])
-def test_qa_api_works_in_mock(grounding: str, monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setenv("GROUNDING", grounding)
-    response = TestClient(app).post("/api/qa", json={"game_id":"uno", "lang":"en", "question":"How do I play?"})
-    assert response.status_code == 200
-    assert set(response.json()) == {"analysis", "answer", "answerable_from_sources", "claims"}
-
-
-def test_g1_validates_sources_and_nonempty_claims() -> None:
-    ctx = RunCtx(kind="qa", template="qa_user", strategy="g1", lang="en")
-    bad_source = QAAnswer.model_validate({"analysis":"test", "answer":"x", "answerable_from_sources":True,
-                                          "claims":[{"text":"x", "src":"general"}]})
-    assert validate_answer(bad_source, ctx)
-    missing = bad_source.model_copy(update={"claims":[]})
-    assert validate_answer(missing, ctx)
-    unknown = missing.model_copy(update={"answerable_from_sources":False})
-    assert validate_answer(unknown, ctx) == []
-
-
-def test_g1_invalid_claim_retries(tmp_path: Path) -> None:
-    def submit(src: str) -> dict:
-        arguments = {"analysis":"test", "answer":"answer", "answerable_from_sources":True,
-                     "claims":[{"text":"claim", "src":src}]}
-        return {"tool_calls":[{"id":"x", "name":"submit_answer", "arguments":json.dumps(arguments)}]}
-
-    result = answer("uno", "en", "Question?", "g1", MockClient(script=[submit("general"), submit("dataset")]))
-    assert result.claims[0].src == "dataset"
-    trace = json.loads((tmp_path / "trace.jsonl").read_text().splitlines()[-1])
-    assert trace["interventions"]["validation_fail"] == 1
-
-
-def test_only_g3_injects_rulebook() -> None:
-    class Capture(MockClient):
-        def __init__(self) -> None:
-            super().__init__()
-            self.messages: list[dict] = []
-
-        def chat(self, messages: list[dict], **kwargs: object):
-            self.messages = messages
-            return super().chat(messages, **kwargs)
-
-    for grounding in ("g1", "g2", "g3"):
-        client = Capture()
-        answer("uno", "en", "Question?", grounding, client)
-        user = client.messages[1]["content"]
-        assert ("<rulebook>" in user) == (grounding == "g3")
-    no_book = next(game for game in GAMES if not game.get("rulebook"))
-    client = Capture()
-    answer(no_book["game_id"], "en", "Question?", "g3", client)
-    assert "<rulebook>" not in client.messages[1]["content"]
-
-
-def test_qa_unconfigured_and_unknown_game(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_standalone_qa_route_is_removed() -> None:
     client = TestClient(app)
-    monkeypatch.setenv("MODEL_PROVIDER", "catalog")
-    response = client.post("/api/qa", json={"game_id":"uno", "lang":"en", "question":"?"})
-    assert response.status_code == 409 and response.json()["error"]["code"] == "llm_not_configured"
-    monkeypatch.setenv("MODEL_PROVIDER", "mock")
-    assert client.post("/api/qa", json={"game_id":"unknown", "lang":"en", "question":"?"}).status_code == 404
-
-
-
-
+    assert "/api/qa" not in client.get("/openapi.json").json()["paths"]
+    assert client.post("/api/qa", json={"game_id":"uno", "lang":"en", "question":"?"}).status_code == 405

@@ -7,9 +7,9 @@ import time
 
 from pydantic import BaseModel
 
-from ..catalog import GAMES, catalog_view
+from ..database import get_games, catalog_view
 from ..llm import LLMClient
-from ..rulebook import estimate_tokens
+from ..database import estimate_tokens
 from .context import build_messages
 from .loop import LoopResult, run_loop
 from .tools import RunCtx, Tool, ToolRegistry
@@ -65,7 +65,7 @@ def probe_capabilities(client: LLMClient, long_context: bool = False) -> dict:
               "model_returned": results[-1].model_returned if results else "",
               "detail": "ok" if chat_ok and tool_ok and multi_ok else "one or more capability checks failed"}
     if long_context:
-        lines = [json.dumps(catalog_view(game, "en"), ensure_ascii=False) for game in GAMES]
+        lines = [json.dumps(catalog_view(game, "en"), ensure_ascii=False) for game in get_games()]
         long_result = _run(client, "probe_long_user", nonce, lines=lines)
         estimate = estimate_tokens(nonce + "\n" + "\n".join(lines))
         reported = long_result.results[0].usage.input_tokens if long_result.results else 0

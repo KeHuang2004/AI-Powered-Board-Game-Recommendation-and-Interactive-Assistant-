@@ -8,9 +8,10 @@ from pathlib import Path
 import yaml
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
-from ..config import ROOT
+from ..setting import ROOT
 
 PROMPT_DIR = ROOT / "prompts" / "runtime"
+_PROMPT_GROUPS = ("recommend", "quickguide", "agent_harness/tutor", "agent_harness/probe", "shared")
 _ENV = Environment(loader=FileSystemLoader(PROMPT_DIR), undefined=StrictUndefined,
                    trim_blocks=True, lstrip_blocks=True, autoescape=False)
 
@@ -19,7 +20,14 @@ def _path(name: str, suffix: str = ".j2") -> Path:
     path = Path(name)
     if path.name != str(path):
         raise ValueError("Prompt name must not contain a path")
-    return PROMPT_DIR / (name if path.suffix else name + suffix)
+    filename = name if path.suffix else name + suffix
+    matches = [PROMPT_DIR / group / filename for group in _PROMPT_GROUPS
+               if (PROMPT_DIR / group / filename).is_file()]
+    if not matches:
+        raise FileNotFoundError(f"Prompt not found: {filename}")
+    if len(matches) != 1:
+        raise ValueError(f"Duplicate prompt name: {filename}")
+    return matches[0]
 
 
 def metadata(name: str) -> dict[str, str]:
@@ -35,7 +43,7 @@ def metadata(name: str) -> dict[str, str]:
 def render(name: str, **variables: object) -> str:
     path = _path(name)
     metadata(path.name)
-    return _ENV.get_template(path.name).render(**variables).strip()
+    return _ENV.get_template(path.relative_to(PROMPT_DIR).as_posix()).render(**variables).strip()
 
 
 def load_yaml(name: str) -> dict:

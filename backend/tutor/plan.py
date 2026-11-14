@@ -11,9 +11,9 @@ from typing import Literal
 
 from pydantic import BaseModel, PrivateAttr
 
-from .. import appdb, rulebook
-from ..catalog import game_view
-from ..config import get_settings, lang_name
+from .. import database
+from ..database import game_view
+from ..setting import get_settings, lang_name
 from ..harness.context import build_messages
 from ..harness.loop import run_loop
 from ..harness.prompts import load_yaml, metadata, render
@@ -68,7 +68,7 @@ def _submit(plan: LessonPlan, ctx: RunCtx) -> dict:
 
 
 def rulebook_text(game_id: str) -> str | None:
-    context = rulebook.context_for(game_id)
+    context = database.rulebook_context(game_id)
     if context is None:
         return None
     return render("rulebook_context", is_excerpt=context["is_excerpt"], text=context["text"])
@@ -138,7 +138,7 @@ def prepare_plan(game: dict, lang: str, players: int, model_profile: str = "prod
     digest = hashlib.sha256(json.dumps([hashes, messages], ensure_ascii=False, sort_keys=True).encode()).hexdigest()
     cached = None
     if get_settings().plan_cache:
-        with closing(appdb.connect()) as connection:
+        with closing(database.connect_runtime()) as connection:
             row = connection.execute(
                 "SELECT plan_json FROM plan_cache WHERE game_id=? AND lang=? AND players=? "
                 "AND model_profile=? AND prompt_hash=?", (game["game_id"], lang, players, model_profile, digest)
@@ -202,7 +202,7 @@ def resolve_plan(prepared: PreparedPlan, client: LLMClient, *, meta: dict | None
         raise RuntimeError("Lesson plan could not be generated")
     plan = LessonPlan.model_validate(result.submitted)
     plan._web_sources = list(web_sources.values())
-    with closing(appdb.connect()) as connection, connection:
+    with closing(database.connect_runtime()) as connection, connection:
         connection.execute(
             "INSERT INTO plan_cache VALUES (?, ?, ?, ?, ?, ?, ?) "
             "ON CONFLICT(game_id, lang, players, model_profile, prompt_hash) DO UPDATE "

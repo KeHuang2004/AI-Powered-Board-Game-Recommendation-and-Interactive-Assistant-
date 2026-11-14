@@ -2,7 +2,7 @@
 
 **English** · [简体中文](README.zh.md)
 
-Game Night is an EE6405 course project that helps a group choose a board game, understand its rules, and start a guided first game. It includes a bilingual catalog of **235 games** and runs locally as a single FastAPI service serving both the web UI and the API.
+Game Night is an EE6405 course project that helps a group choose a board game, understand its rules, and start a guided first game. It includes a bilingual catalog of **235 games** and runs locally as a single FastAPI service serving both the web UI and the API. The website opens directly without an application login.
 
 ## What you can do
 
@@ -23,7 +23,6 @@ Use **Python 3.11–3.14**. Run the commands from the checkout that contains thi
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 ```
 
 If you already use a Conda environment, activate it and use its `python` in place of `.\.venv\Scripts\python.exe`.
@@ -34,13 +33,11 @@ If you already use a Conda environment, activate it and use its `python` in plac
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-[ -f .env ] || cp .env.example .env
 ```
 
 For a first run without an API key, edit these entries in the root `.env`:
 
 ```dotenv
-DEPLOY_MODE=local
 MODEL_PROVIDER=mock
 SEARCH_PROVIDER=none
 ```
@@ -68,7 +65,7 @@ Recommendation, AI rule explanation, and the Agent Harness all use the model set
 | `gemini` | Set `MODEL_NAME` and `MODEL_API_KEY`. Uses Gemini's OpenAI-compatible endpoint. |
 | `compatible` | Set `MODEL_NAME`, `MODEL_API_KEY`, and `MODEL_BASE_URL`, including the required URL prefix such as `/v1`. Use a Chat Completions endpoint with tool calling for guided play. |
 
-For a real provider, use a model enabled for your account and enter the key in your local `.env`. Legacy settings such as `DEEPSEEK_API_KEY`, `GEMINI_API_KEY`, and `RECOMMEND_*` are still recognized. Within the same configuration source, an explicitly set `MODEL_*` field takes priority over its legacy equivalent, even when blank. [.env.example](.env.example) lists the available settings.
+For a real provider, use a model enabled for your account and enter the key in your local `.env`. Legacy settings such as `DEEPSEEK_API_KEY`, `GEMINI_API_KEY`, and `RECOMMEND_*` are still recognized. Within the same configuration source, an explicitly set `MODEL_*` field takes priority over its legacy equivalent, even when blank. The root `.env` contains the available settings. Optional entries beginning with `##` use application defaults until uncommented.
 
 **Search is configured separately.** `SEARCH_PROVIDER=none` disables new searches. `SEARCH_PROVIDER=mock` uses a sample page to demonstrate search and source cards. `SEARCH_PROVIDER=deepseek` requires access to the configured search service. It uses `SEARCH_API_KEY` first, then attempts `MODEL_API_KEY` or the legacy `DEEPSEEK_API_KEY`.
 
@@ -82,23 +79,41 @@ For a real provider, use a model enabled for your account and enter the key in y
 | Path | Responsibility |
 | --- | --- |
 | [frontend/](frontend/) | English and Chinese HTML pages with shared JavaScript and CSS |
-| [backend/server.py](backend/server.py) and [backend/api.py](backend/api.py) | Web entry point, recommendations, game details, and guided-play APIs |
-| [backend/config.py](backend/config.py) and [backend/llm.py](backend/llm.py) | Shared model configuration and provider adapters |
-| [backend/harness/](backend/harness/), [backend/tutor/](backend/tutor/), and [backend/qa/](backend/qa/) | Model and tool orchestration, lesson plans, session state, and rule Q&A |
-| [prompts/runtime/](prompts/runtime/) | Prompt templates and tool descriptions |
+| [backend/setting.py](backend/setting.py) | Loads `.env` and serves model and search settings |
+| [backend/llm.py](backend/llm.py) | Model clients, provider adapters, and Mock responses |
+| [backend/server.py](backend/server.py) | FastAPI entry point, route registration, and guided-play endpoints |
+| [backend/database.py](backend/database.py) | Catalog construction and reads, runtime SQLite access, and BM25 rulebook retrieval |
+| [recommend_service.py](backend/recommend/recommend_service.py) | Recommendation and refinement endpoints |
+| [quick_guide_service.py](backend/quickguide/quick_guide_service.py) | Catalog rules and AI quick-start endpoints |
+| [backend/harness/](backend/harness/) and [backend/tutor/](backend/tutor/) | Model and tool orchestration, lesson plans, session state, and rule Q&A |
+| [prompts/runtime/](prompts/runtime/) | Prompt templates and tool definitions |
+
+### Prompt layout
+
+```text
+prompts/runtime/
+  recommend/          Recommendation ranking, request, and output examples
+  quickguide/         Rule explanation prompts and guide styles
+  agent_harness/
+    tutor/            First-game planning, chat, and rulebook context
+    probe/            Model capability checks
+  shared/             Tool definitions, validation messages, and text tool protocol
+```
+
+The loader resolves templates by filename across these folders. Keep filenames unique across the prompt tree.
 
 ## Data and SQLite
 
 - [`data/database/boardgames.sqlite3`](data/database/boardgames.sqlite3) is the catalog loaded at startup. Its [schema](data/database/schema.sql) defines shared game records, localized text, playable and recommended headcounts, tags, localized extra fields, and rulebooks.
 - [`data/sourcedata/`](data/sourcedata/) holds the English and Chinese JSON, the Excel workbook for extra fields, the stable bilingual ID map, English extra-field translations, and three PDFs for UNO, Blackjack, and Texas Hold’em.
-- `data/app.db` is generated at runtime for recommendations, sessions, caches, and usage. `data/traces/` holds model-call traces.
+- `data/app.db` is generated at runtime for recommendations, sessions, and caches. `data/traces/` holds model-call traces.
 
 The questionnaire accepts **1–21 people**. The highest supported count in this catalog is **21** for Blood on the Clocktower. Cartographers supports **2–15** in this catalog. Playable headcount is a filter, while recommended headcount helps rank eligible games. The 60 games added in this release have bilingual core and detailed rules. Their English extra fields, such as setup items and win conditions, still need translations.
 
 To update the catalog, keep existing game IDs, append a stable ID and both names for each new game in `game_ids.json`, and update both JSON files and the Excel workbook together. Add English extra fields to `translations.en.json` by game ID. Then run:
 
 ```bash
-python -m backend.build_catalog
+python -m backend.database
 ```
 
 The builder checks bilingual names, shared metadata, player counts, Excel tags, and database integrity before replacing the catalog. Restart the application to load the rebuilt database.
@@ -115,7 +130,6 @@ The [OpenAPI UI](http://127.0.0.1:8001/docs) lists the full request schemas. The
 | `GET /games` and `GET /games/{game_id}/core-rules` | List games and read stored core rules |
 | `GET /api/games/{game_id}?lang=en` | Fetch localized game details and rulebook availability |
 | `POST /rules/explain` | Generate a guide with `mode: "llm"` or read stored rules with `mode: "raw"` |
-| `POST /api/qa` | Ask a rule question for a specific game |
 | `POST /api/sessions` and `POST /api/sessions/{session_id}/message` | Start guided play or send a message using server-sent events (SSE) |
 | `GET /api/sessions/{session_id}` | Restore session state and history |
 | `POST /api/sessions/{session_id}/next`, `/jump`, or `/tools/{name}` | Advance a step, jump to a phase, or run a panel tool using the same session URL prefix |
@@ -146,13 +160,11 @@ If the page shows catalog ranking or a guide error, check the model provider, na
 ## Development and contributions
 
 ```bash
-python -m pip install -r requirements-dev.txt
+python -m pip install -r requirements.txt pytest ruff
 python -m pytest -q
 ruff check backend tests start.py
 ```
 
-The automated tests use mock model responses. On Windows Python 3.11, the settings-write tests may fail because the settings endpoint uses `os.fchmod`. For local configuration on that platform, edit `.env` directly.
+The automated tests use mock model responses.
 
-For a data change, include the relevant source files and the rebuilt catalog in the same pull request. Keep `.env`, `accounts.yaml`, `data/app.db`, `data/traces/`, and virtual environments out of Git. Report issues or propose changes through the [GitHub repository](https://github.com/KeHuang2004/AI-Powered-Board-Game-Recommendation-and-Interactive-Assistant-).
-
-See the [demo walkthrough](docs/demo_flow.md), [architecture notes](docs/architecture.md), [technical decisions](docs/decisions.md), and [earlier cold-start verification](docs/coldstart.md) for more detail.
+For a data change, include the relevant source files and the rebuilt catalog in the same pull request. Report issues or propose changes through the [GitHub repository](https://github.com/KeHuang2004/AI-Powered-Board-Game-Recommendation-and-Interactive-Assistant-).

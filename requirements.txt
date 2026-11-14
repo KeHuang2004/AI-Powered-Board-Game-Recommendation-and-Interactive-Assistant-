@@ -11,4 +11,3 @@ openai
 jinja2
 pyyaml
 python-ulid
-bcrypt

@@ -5,7 +5,7 @@ import pytest
 import yaml
 from pydantic import BaseModel
 
-from backend.config import Profile
+from backend.setting import Profile
 from backend.harness.loop import run_loop
 from backend.harness.prompts import render
 from backend.harness.tools import RunCtx, Tool, ToolRegistry

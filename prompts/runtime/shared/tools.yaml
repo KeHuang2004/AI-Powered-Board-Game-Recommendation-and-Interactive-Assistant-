@@ -28,11 +28,8 @@ web_search: Search the web for relevant game rules and return result titles, URL
   and snippets.
 fetch_page: Fetch a web page as Markdown and cache it for the current game. The result
   includes its URL and title.
-submit_answer: Submit your answer to the rules question. Call exactly once. Write
-  your brief reasoning in "analysis" first.
 _params_by_template:
   recommend_user: backend.recommend.common:SubmitRecommendations
   recommend_user_s3: backend.recommend.common:SubmitRecommendations
   plan_user: backend.tutor.plan:LessonPlan
-  qa_user: backend.qa.answer:QAAnswer
 probe_echo: Return the exact supplied value so the assistant can repeat it.

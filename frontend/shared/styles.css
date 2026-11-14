@@ -39,14 +39,14 @@ html[lang="en"] .option-card { line-height: 1.35; }
 [hidden] { display: none !important; }
 input, textarea, select { font: inherit; color: var(--ink); }
 input:focus-visible, textarea:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid #ff8e5d; outline-offset: 3px; }
-.free-text-input, .refine-row textarea, .stacked-form input, .player-form input,
+.free-text-input, .refine-row textarea, .player-form input,
 .chat-compose textarea, .tool-section input, .tool-section select {
   width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 13px 14px; background: #fffdf9;
 }
 .free-text-input { min-height: 145px; resize: vertical; grid-column: 1 / -1; }
 .game-caveat { display: block; font-size: 11px; line-height: 1.5; margin-top: 8px; opacity: .8; }
 .refine-box { margin-top: 35px; border: 1px solid #e4dfd5; border-radius: 16px; padding: 22px; background: #fffdf8; }
-.refine-box label, .player-form label, .chat-form label, .stacked-form label, .tool-section label { display: block; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
+.refine-box label, .player-form label, .chat-form label, .tool-section label { display: block; font-size: 13px; font-weight: 800; margin-bottom: 9px; }
 .refine-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
 .refine-row textarea { flex: 1 1 220px; min-width: 0; overflow: hidden; resize: none; }
 .player-form { margin-top: 22px; padding: 20px; border: 1px solid #e5dfd3; border-radius: 14px; background: #fffdf8; }
@@ -195,9 +195,6 @@ input:focus-visible, textarea:focus-visible, select:focus-visible, summary:focus
 }
 .language-setting h3 { margin: 0 0 6px; font-size: 18px; }
 .language-setting p { margin: 0; color: #615e6a; font-size: 14px; }
-.stacked-form { display: flex; flex-direction: column; align-items: stretch; gap: 7px; margin-top: 28px; padding: 28px; border: 1px solid #e7e2d8; border-radius: var(--radius); background: #fffdf9; }
-.stacked-form label:not(:first-child) { margin-top: 12px; }
-.stacked-form > .primary-button { align-self: flex-start; margin-top: 20px; }
 .play-wrap { max-width: 1540px; margin: 0 auto; padding: 30px clamp(24px, 5vw, 78px) 75px; }
 .play-header, .play-heading, .tools-header, .chat-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .play-heading { margin: 38px 0 28px; align-items: end; }
@@ -343,7 +340,6 @@ input:focus-visible, textarea:focus-visible, select:focus-visible, summary:focus
   .refine-row textarea { flex-basis: 100%; }
   .form-wrap { padding-top: 30px; }
   .form-wrap > .text-button { margin-bottom: 30px; }
-  .stacked-form { padding: 20px; }
   .play-wrap { padding: 24px 20px 70px; }
   .play-heading { margin: 28px 0 20px; }
   .play-heading h2 { font-size: 40px; }

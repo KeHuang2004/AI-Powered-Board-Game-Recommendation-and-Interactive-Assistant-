@@ -5,8 +5,8 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-from backend.catalog import GAMES
-from backend.config import product_profile
+from backend.database import get_games
+from backend.setting import product_profile
 from backend.harness.prompts import render
 from backend.harness.tools import RunCtx
 from backend.llm import MockClient, make_client
@@ -129,7 +129,7 @@ def test_team_validation_retry(sample_request: RecommendRequest) -> None:
 
 def test_catalog_views_match_and_s1_enum_follows_order(sample_request: RecommendRequest) -> None:
     eligible = hard_filter(sample_request)
-    full = {json.loads(line)["id"]:line for line in catalog_lines(GAMES, "en", 41)}
+    full = {json.loads(line)["id"]:line for line in catalog_lines(get_games(), "en", 41)}
     filtered = catalog_lines(eligible, "en", 41)
     assert all(full[json.loads(line)["id"]] == line for line in filtered)
 
@@ -209,11 +209,11 @@ def test_fallback_and_team_respect_excluded_games(sample_request: RecommendReque
 def test_audit_invalid_id_uses_safe_http_presentation(
     sample_request: RecommendRequest, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
-    from backend import server
+    from backend.recommend import recommend_service
 
     ids = [game["game_id"] for game in hard_filter(sample_request)[:2]] + ["missing-id"]
     monkeypatch.setenv("RECOMMENDER", "s0")
-    monkeypatch.setattr(server, "make_client", lambda profile: MockClient(script=[response_for(ids)]))
+    monkeypatch.setattr(recommend_service, "make_client", lambda profile: MockClient(script=[response_for(ids)]))
     response = TestClient(app).post("/recommend", json=sample_request.model_dump())
     assert response.status_code == 200 and response.json()["fallback"] is True
     assert all("name" in item for item in response.json()["recommendations"])
@@ -224,12 +224,12 @@ def test_audit_invalid_id_uses_safe_http_presentation(
 def test_model_client_initialization_failure_falls_back(
     sample_request: RecommendRequest, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
-    from backend import server
+    from backend.recommend import recommend_service
 
     def fail(profile: object) -> None:
         raise RuntimeError("private initialization detail")
 
-    monkeypatch.setattr(server, "make_client", fail)
+    monkeypatch.setattr(recommend_service, "make_client", fail)
     response = TestClient(app).post("/recommend", json=sample_request.model_dump())
     assert response.status_code == 200 and response.json()["fallback"] is True
     trace = (tmp_path / "trace.jsonl").read_text()
